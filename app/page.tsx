@@ -3,8 +3,8 @@ import ContactForm from "./components/ContactForm";
 
 const NAV_LINKS = [
   { label: "Diensten", href: "#diensten" },
+  { label: "Werkwijze", href: "#werkwijze" },
   { label: "Over ons", href: "#over-ons" },
-  { label: "Portfolio", href: "#portfolio" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -12,6 +12,7 @@ const DIENSTEN = [
   {
     icon: "📋",
     title: "Slimme planning",
+    stat: "Tot 80% minder planningsstress",
     description:
       "Minder gedoe met roosters, monteurs en deadlines. AI houdt overzicht over je projecten, signaleert knelpunten en helpt je agenda realistisch te houden.",
     items: ["Automatische projectplanning", "Bezettingsoverzicht monteurs", "Vertragingen vroegtijdig signaleren", "Koppeling met bestaande agenda's"],
@@ -19,6 +20,7 @@ const DIENSTEN = [
   {
     icon: "📄",
     title: "Offertes & administratie",
+    stat: "Offerte in minuten, niet in uren",
     description:
       "Offertes maken kost tijd die je liever in je werk steekt. Wij bouwen tools die dat grotendeels uit handen nemen: snel, consistent en zonder tikfouten.",
     items: ["Automatisch offertes opstellen", "Werkbonnen digitaal verwerken", "Facturen & nacalculatie", "Koppeling met boekhoudpakket"],
@@ -26,10 +28,27 @@ const DIENSTEN = [
   {
     icon: "🏗️",
     title: "Inkoop & materiaal",
+    stat: "Gemiddeld 15% lagere inkoopkosten",
     description:
       "Nooit meer misgrijpen of te veel bestellen. AI houdt je materiaalstromen bij, vergelijkt prijzen en geeft aan wanneer je moet bijbestellen.",
     items: ["Materiaalverbruik bijhouden", "Inkooplijsten automatisch genereren", "Prijsvergelijking leveranciers", "Voorraadbeheer op locatie"],
   },
+];
+
+const STAPPEN = [
+  { nr: "01", title: "Kennismaking", desc: "We bespreken jouw situatie, waar tijd verloren gaat en wat het meest oplevert om te automatiseren." },
+  { nr: "02", title: "Analyse", desc: "We brengen je processen in kaart en bepalen samen welke AI-tool het meeste verschil maakt." },
+  { nr: "03", title: "Bouwen", desc: "We bouwen de oplossing op maat. Je wordt op de hoogte gehouden en kunt tussentijds feedback geven." },
+  { nr: "04", title: "Oplevering", desc: "De tool wordt live gezet en we lopen er samen doorheen zodat jij en je team ermee overweg kunnen." },
+  { nr: "05", title: "Doorontwikkeling", desc: "We blijven beschikbaar voor vragen, aanpassingen en uitbreidingen. Je staat er niet alleen voor." },
+];
+
+const FAQS = [
+  { q: "Wat kost zoiets?", a: "Dat hangt af van wat je nodig hebt. Een eenvoudige automatisering start rond de €1.500. Complexere tools of meerdere koppelingen kosten meer. We kijken altijd eerst wat het oplevert voordat we een prijs noemen." },
+  { q: "Hoe lang duurt het voordat ik iets heb?", a: "De meeste tools zijn binnen 2 tot 6 weken live. We werken in korte cycli zodat je snel resultaat ziet, niet na maanden." },
+  { q: "Moet ik technisch zijn om het te gebruiken?", a: "Nee. We bouwen tools die gewoon werken, ook voor mensen die niks van techniek weten. Je monteurs hoeven alleen een simpel formulier in te vullen op hun telefoon." },
+  { q: "Wat als het niet werkt zoals verwacht?", a: "Dan lossen we het op. We leveren pas op als jij tevreden bent, en daarna blijven we beschikbaar voor aanpassingen." },
+  { q: "Werkt dit ook met mijn bestaande software?", a: "In de meeste gevallen wel. We koppelen aan veelgebruikte pakketten zoals Exact, AFAS, SimplicTe en andere boekhoud- of plansoftware." },
 ];
 
 const PORTFOLIO_ITEMS = [
@@ -189,6 +208,7 @@ export default function Home() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-600/5 to-amber-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="text-4xl mb-4">{d.icon}</div>
+                <div className="text-xs font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full px-3 py-1 inline-block mb-3">{d.stat}</div>
                 <h3 className="text-xl font-bold mb-3">{d.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed mb-6">{d.description}</p>
                 <ul className="space-y-2">
@@ -310,6 +330,80 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* ── WERKWIJZE ── */}
+      <section id="werkwijze" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Zo werken{" "}
+              <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
+                wij
+              </span>
+            </h2>
+            <p className="text-white/50 text-lg max-w-xl mx-auto">
+              Van eerste gesprek tot werkende tool. Geen verrassingen, gewoon duidelijkheid.
+            </p>
+          </div>
+          <div className="relative">
+            {/* Verbindingslijn */}
+            <div className="hidden md:block absolute top-8 left-[calc(10%+1rem)] right-[calc(10%+1rem)] h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
+            <div className="grid md:grid-cols-5 gap-6">
+              {STAPPEN.map((s) => (
+                <div key={s.nr} className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-orange-500/15 border border-orange-500/30 flex items-center justify-center text-orange-400 font-bold text-lg mb-4 relative z-10">
+                    {s.nr}
+                  </div>
+                  <h4 className="font-bold mb-2">{s.title}</h4>
+                  <p className="text-white/40 text-sm leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Veelgestelde{" "}
+              <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
+                vragen
+              </span>
+            </h2>
+            <p className="text-white/50 text-lg">De vragen die je waarschijnlijk ook hebt.</p>
+          </div>
+          <div className="space-y-3">
+            {FAQS.map((faq) => (
+              <details
+                key={faq.q}
+                className="group rounded-2xl border border-white/10 bg-white/[0.03] hover:border-orange-500/30 transition-colors"
+              >
+                <summary className="flex items-center justify-between px-6 py-5 cursor-pointer list-none font-semibold text-white/90 group-hover:text-white transition-colors">
+                  {faq.q}
+                  <span className="text-orange-400 text-xl group-open:rotate-45 transition-transform duration-200 shrink-0 ml-4">+</span>
+                </summary>
+                <p className="px-6 pb-5 text-white/50 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHATSAPP FLOATING BUTTON ── */}
+      <a
+        href="https://wa.me/31624505863"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] transition-all shadow-lg shadow-black/30 hover:shadow-[#25D366]/40 hover:scale-110 duration-200 flex items-center justify-center"
+        aria-label="WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </a>
 
       {/* ── CONTACT ── */}
       <section id="contact" className="py-24 px-6">
