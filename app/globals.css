@@ -97,3 +97,20 @@ body {
 .grid-fade {
   animation: gridFade 1.5s ease-out forwards;
 }
+
+/* Subtiele blueprint-rasterlijnen voor sectoridentiteit (planning/bouwtekening) */
+.blueprint {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Verberg de scrollbalk bij swipebare cases op mobiel */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
