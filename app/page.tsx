@@ -185,6 +185,65 @@ export default function Home() {
         </div>
       </div>
 
+      {/* ── WAAROM ── */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
+              Waarom Leadz Systems
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Geen standaard<br />oplossingen.
+            </h2>
+            <p className="text-white/50 text-lg">Drie redenen waarom bedrijven voor ons kiezen.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                nr: "01",
+                icon: "🧩",
+                title: "Op maat, niet van de plank",
+                desc: "Geen one-size-fits-all. Wij bouwen tools die perfect aansluiten bij hoe jouw bedrijf werkt — niet andersom.",
+                tag: "100% op maat",
+              },
+              {
+                nr: "02",
+                icon: "⚡",
+                title: "Snel live, niet over maanden",
+                desc: "Door slim gebruik van AI en moderne tools is jouw oplossing in weken klaar. Geen lange trajecten, maar snel resultaat.",
+                tag: "Weken, niet maanden",
+              },
+              {
+                nr: "03",
+                icon: "🤝",
+                title: "Menselijk en technisch",
+                desc: "Wij spreken jouw taal. Complexe technologie vertaald naar begrijpelijke oplossingen, met persoonlijk contact van A tot Z.",
+                tag: "Jouw taal, onze tech",
+              },
+            ].map((item) => (
+              <div
+                key={item.nr}
+                className="relative group p-8 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-orange-500/30 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden"
+              >
+                {/* Groot achtergrond nummer */}
+                <span className="absolute top-4 right-5 text-7xl font-black text-white/[0.04] select-none group-hover:text-white/[0.07] transition-colors">
+                  {item.nr}
+                </span>
+                {/* Icoon */}
+                <div className="w-12 h-12 rounded-xl bg-orange-500/15 border border-orange-500/20 flex items-center justify-center text-2xl mb-6">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed mb-6">{item.desc}</p>
+                <span className="inline-block px-3 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-xs font-medium">
+                  {item.tag}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── DIENSTEN ── */}
       <section id="diensten" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
