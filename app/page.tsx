@@ -1,105 +1,45 @@
 import Image from "next/image";
 import ContactForm from "./components/ContactForm";
-
-const NAV_LINKS = [
-  { label: "Diensten", href: "#diensten" },
-  { label: "Werkwijze", href: "#werkwijze" },
-  { label: "Over ons", href: "#over-ons" },
-  { label: "Contact", href: "#contact" },
-];
-
-const DIENSTEN = [
-  {
-    icon: "📋",
-    title: "Slimme planning",
-    stat: "Tot 80% minder planningsstress",
-    description:
-      "Minder gedoe met roosters, monteurs en deadlines. AI houdt overzicht over je projecten, signaleert knelpunten en helpt je agenda realistisch te houden.",
-    items: ["Automatische projectplanning", "Bezettingsoverzicht monteurs", "Vertragingen vroegtijdig signaleren", "Koppeling met bestaande agenda's"],
-  },
-  {
-    icon: "📄",
-    title: "Offertes & administratie",
-    stat: "Offerte in minuten, niet in uren",
-    description:
-      "Offertes maken kost tijd die je liever in je werk steekt. Wij bouwen tools die dat grotendeels uit handen nemen: snel, consistent en zonder tikfouten.",
-    items: ["Automatisch offertes opstellen", "Werkbonnen digitaal verwerken", "Facturen & nacalculatie", "Koppeling met boekhoudpakket"],
-  },
-  {
-    icon: "🏗️",
-    title: "Inkoop & materiaal",
-    stat: "Gemiddeld 15% lagere inkoopkosten",
-    description:
-      "Nooit meer misgrijpen of te veel bestellen. AI houdt je materiaalstromen bij, vergelijkt prijzen en geeft aan wanneer je moet bijbestellen.",
-    items: ["Materiaalverbruik bijhouden", "Inkooplijsten automatisch genereren", "Prijsvergelijking leveranciers", "Voorraadbeheer op locatie"],
-  },
-];
-
-const STAPPEN = [
-  { nr: "01", title: "Kennismaking", desc: "We bespreken jouw situatie, waar tijd verloren gaat en wat het meest oplevert om te automatiseren." },
-  { nr: "02", title: "Analyse", desc: "We brengen je processen in kaart en bepalen samen welke AI-tool het meeste verschil maakt." },
-  { nr: "03", title: "Bouwen", desc: "We bouwen de oplossing op maat. Je wordt op de hoogte gehouden en kunt tussentijds feedback geven." },
-  { nr: "04", title: "Oplevering", desc: "De tool wordt live gezet en we lopen er samen doorheen zodat jij en je team ermee overweg kunnen." },
-  { nr: "05", title: "Doorontwikkeling", desc: "We blijven beschikbaar voor vragen, aanpassingen en uitbreidingen. Je staat er niet alleen voor." },
-];
-
-const FAQS = [
-  { q: "Wat kost zoiets?", a: "Dat hangt af van wat je nodig hebt. Een eenvoudige automatisering start rond de €1.500. Complexere tools of meerdere koppelingen kosten meer. We kijken altijd eerst wat het oplevert voordat we een prijs noemen." },
-  { q: "Hoe lang duurt het voordat ik iets heb?", a: "De meeste tools zijn binnen 2 tot 6 weken live. We werken in korte cycli zodat je snel resultaat ziet, niet na maanden." },
-  { q: "Moet ik technisch zijn om het te gebruiken?", a: "Nee. We bouwen tools die gewoon werken, ook voor mensen die niks van techniek weten. Je monteurs hoeven alleen een simpel formulier in te vullen op hun telefoon." },
-  { q: "Wat als het niet werkt zoals verwacht?", a: "Dan lossen we het op. We leveren pas op als jij tevreden bent, en daarna blijven we beschikbaar voor aanpassingen." },
-  { q: "Werkt dit ook met mijn bestaande software?", a: "In de meeste gevallen wel. We koppelen aan veelgebruikte pakketten zoals Exact, AFAS, SimplicTe en andere boekhoud- of plansoftware." },
-];
-
-const PORTFOLIO_ITEMS = [
-  {
-    tag: "Planning",
-    title: "Projectplanner voor installatiebedrijf",
-    description: "AI-tool die op basis van beschikbare monteurs, materiaal en looptijd automatisch een realistische projectplanning opstelt.",
-    stack: ["Python", "Claude API", "Make.com"],
-  },
-  {
-    tag: "Offertes",
-    title: "Automatische offertegenerator",
-    description: "Tool die op basis van een klantomschrijving en prijslijst binnen minuten een volledige offerte opstelt, inclusief materiaal en arbeid.",
-    stack: ["Next.js", "OpenAI", "Supabase"],
-  },
-  {
-    tag: "Administratie",
-    title: "Digitale werkbonverwerker",
-    description: "Monteurs vullen een simpel formulier in op hun telefoon. De rest regelt het systeem zelf: factuur, urenstaat en nacalculatie.",
-    stack: ["Node.js", "Claude API", "Make.com"],
-  },
-];
+import Nav from "./components/Nav";
+import { SITE, DIENSTEN, STAPPEN, FAQS, PORTFOLIO_ITEMS, WAAROM } from "./lib/content";
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": `${SITE.url}/#business`,
+        name: SITE.name,
+        description:
+          "AI-tools voor aannemers en installatiebedrijven: slimme planning, automatische offertes, digitale werkbonnen en materiaalbeheer.",
+        url: SITE.url,
+        email: SITE.email,
+        telephone: SITE.phoneIntl,
+        areaServed: SITE.region,
+        address: { "@type": "PostalAddress", addressCountry: "NL" },
+        founder: { "@type": "Person", name: "Jesse" },
+        knowsAbout: ["AI-automatisering", "Bouw", "Installatietechniek", "Offertes", "Projectplanning"],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: FAQS.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#111418] text-white overflow-x-hidden">
-      {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-6">
-        <div className="flex items-center justify-between gap-8 px-5 py-3 rounded-full bg-[#1a1d22]/90 backdrop-blur-md border border-white/10 shadow-lg shadow-black/30 w-full max-w-3xl">
-          <span className="text-base font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent whitespace-nowrap">
-            Leadz Systems
-          </span>
-          <div className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm text-white/60 hover:text-white transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-          <a
-            href="#contact"
-            className="text-sm px-5 py-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold whitespace-nowrap shadow-md shadow-orange-500/20"
-          >
-            Neem contact op
-          </a>
-        </div>
-      </nav>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+
+      <Nav />
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-center justify-center px-6 pt-24 overflow-hidden">
@@ -139,11 +79,11 @@ export default function Home() {
           </h1>
 
           <p
-            className="text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed fade-in-up"
+            className="text-xl text-white/75 max-w-2xl mx-auto mb-10 leading-relaxed fade-in-up"
             style={{ animationDelay: "0.45s" }}
           >
-            Leadz Systems bouwt AI-tools voor aannemers en installatiebedrijven.
-            Planning, offertes, inkoop en administratie: wij automatiseren wat jouw tijd kost.
+            Offertes 's avonds uittypen, werkbonnen die kwijtraken, monteurs zonder materiaal op de bouw.
+            Leadz Systems bouwt slimme tools die dat uit handen nemen, zodat jij je op het werk kunt richten.
           </p>
 
           <div
@@ -158,7 +98,7 @@ export default function Home() {
             </a>
             <a
               href="#diensten"
-              className="px-8 py-4 rounded-full border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all font-medium text-white/80 hover:scale-105 duration-200"
+              className="px-8 py-4 rounded-full border border-white/15 hover:border-white/35 hover:bg-white/5 transition-all font-medium text-white/90 hover:scale-105 duration-200"
             >
               Bekijk onze diensten →
             </a>
@@ -179,7 +119,7 @@ export default function Home() {
               <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
                 {s.num}
               </div>
-              <div className="text-sm text-white/40 mt-1">{s.label}</div>
+              <div className="text-sm text-white/55 mt-1">{s.label}</div>
             </div>
           ))}
         </div>
@@ -195,46 +135,22 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Geen standaard<br />oplossingen.
             </h2>
-            <p className="text-white/50 text-lg">Drie redenen waarom bedrijven voor ons kiezen.</p>
+            <p className="text-white/65 text-lg">Drie redenen waarom bouw- en installatiebedrijven voor ons kiezen.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                nr: "01",
-                icon: "🧩",
-                title: "Op maat, niet van de plank",
-                desc: "Geen one-size-fits-all. Wij bouwen tools die perfect aansluiten bij hoe jouw bedrijf werkt — niet andersom.",
-                tag: "100% op maat",
-              },
-              {
-                nr: "02",
-                icon: "⚡",
-                title: "Snel live, niet over maanden",
-                desc: "Door slim gebruik van AI en moderne tools is jouw oplossing in weken klaar. Geen lange trajecten, maar snel resultaat.",
-                tag: "Weken, niet maanden",
-              },
-              {
-                nr: "03",
-                icon: "🤝",
-                title: "Menselijk en technisch",
-                desc: "Wij spreken jouw taal. Complexe technologie vertaald naar begrijpelijke oplossingen, met persoonlijk contact van A tot Z.",
-                tag: "Jouw taal, onze tech",
-              },
-            ].map((item) => (
+            {WAAROM.map((item) => (
               <div
                 key={item.nr}
                 className="relative group p-8 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-orange-500/30 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden"
               >
-                {/* Groot achtergrond nummer */}
-                <span className="absolute top-4 right-5 text-7xl font-black text-white/[0.04] select-none group-hover:text-white/[0.07] transition-colors">
+                <span className="absolute top-4 right-5 text-7xl font-black text-white/[0.06] select-none group-hover:text-white/[0.09] transition-colors">
                   {item.nr}
                 </span>
-                {/* Icoon */}
                 <div className="w-12 h-12 rounded-xl bg-orange-500/15 border border-orange-500/20 flex items-center justify-center text-2xl mb-6">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-6">{item.desc}</p>
+                <p className="text-white/65 text-sm leading-relaxed mb-6">{item.desc}</p>
                 <span className="inline-block px-3 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-xs font-medium">
                   {item.tag}
                 </span>
@@ -254,31 +170,35 @@ export default function Home() {
                 doen
               </span>
             </h2>
-            <p className="text-white/50 text-lg max-w-xl mx-auto">
-              Van strategie tot werkende oplossing: wij begeleiden het hele traject.
+            <p className="text-white/65 text-lg max-w-xl mx-auto">
+              Van strategie tot werkende tool op de bouw: wij begeleiden het hele traject.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {DIENSTEN.map((d) => (
-              <div
+              <a
                 key={d.title}
-                className="group relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-orange-500/40 hover:bg-white/[0.06] transition-all duration-300"
+                href={`/diensten/${d.slug}`}
+                className="group relative p-8 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-orange-500/40 hover:bg-white/[0.06] transition-all duration-300 flex flex-col"
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-600/5 to-amber-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="text-4xl mb-4">{d.icon}</div>
-                <div className="text-xs font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full px-3 py-1 inline-block mb-3">{d.stat}</div>
+                <div className="text-xs font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full px-3 py-1 inline-block self-start mb-3">{d.stat}</div>
                 <h3 className="text-xl font-bold mb-3">{d.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-6">{d.description}</p>
-                <ul className="space-y-2">
+                <p className="text-white/65 text-sm leading-relaxed mb-6">{d.description}</p>
+                <ul className="space-y-2 mb-6">
                   {d.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-white/60">
+                    <li key={item} className="flex items-center gap-2 text-sm text-white/70">
                       <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
-              </div>
+                <span className="mt-auto text-sm font-semibold text-orange-400 group-hover:text-orange-300 transition-colors">
+                  Meer over deze dienst →
+                </span>
+              </a>
             ))}
           </div>
         </div>
@@ -311,17 +231,17 @@ export default function Home() {
                 voorstellen
               </span>
             </h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-5">
-              Mijn naam is Jesse, oprichter van <strong className="text-white">Leadz Systems</strong>. Ik bouw AI-tools voor bedrijven in de bouw en installatietechniek.
+            <p className="text-white/80 text-lg leading-relaxed mb-5">
+              Mijn naam is Jesse, oprichter van <strong className="text-white">Leadz Systems</strong>. Ik bouw slimme tools voor aannemers en installatiebedrijven.
             </p>
-            <p className="text-white/70 text-lg leading-relaxed mb-5">
-              Ik zie dagelijks hoeveel tijd er in deze sector verloren gaat aan administratie, offertes en planning. Werk dat niks oplevert, maar wel tijd kost die je liever in je project steekt.
+            <p className="text-white/80 text-lg leading-relaxed mb-5">
+              Ik zie dagelijks hoeveel tijd er verdwijnt in offertes, werkbonnen en planning. Werk dat moet gebeuren, maar dat je liever niet 's avonds op de bank doet.
             </p>
-            <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Daar heb ik wat op bedacht. Geen dure softwarepakketten, geen maandenlange trajecten. Gewoon slimme tools die direct werken en jou tijd besparen.
+            <p className="text-white/80 text-lg leading-relaxed mb-8">
+              Daar heb ik wat op bedacht. Geen dure pakketten waar je je werkwijze omheen moet buigen, maar tools die aansluiten op jouw werkbon, jouw prijslijst en jouw groothandel.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
-              {["OpenAI / Claude API", "Python & Node.js", "Next.js", "Make.com / n8n", "Supabase", "Vector databases"].map((tech) => (
+              {["Exact", "AFAS", "Snelstart", "Bouw7", "Technische Unie", "Make.com / n8n"].map((tech) => (
                 <span
                   key={tech}
                   className="px-3 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-300 text-sm"
@@ -341,8 +261,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PORTFOLIO ── */}
-      <section id="portfolio" className="py-24 px-6">
+      {/* ── CASES ── */}
+      <section id="cases" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -351,7 +271,7 @@ export default function Home() {
                 werk
               </span>
             </h2>
-            <p className="text-white/50 text-lg max-w-xl mx-auto">
+            <p className="text-white/65 text-lg max-w-xl mx-auto">
               Voorbeelden van wat we bouwen. Elk project is uniek, elke oplossing op maat.
             </p>
           </div>
@@ -371,10 +291,10 @@ export default function Home() {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold mb-3">{p.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed flex-1">{p.description}</p>
+                <p className="text-white/65 text-sm leading-relaxed flex-1">{p.description}</p>
                 <div className="flex flex-wrap gap-2 mt-6">
                   {p.stack.map((s) => (
-                    <span key={s} className="px-2 py-1 rounded bg-white/5 text-white/40 text-xs">
+                    <span key={s} className="px-2 py-1 rounded bg-white/5 text-white/55 text-xs">
                       {s}
                     </span>
                   ))}
@@ -383,12 +303,11 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="text-center text-white/30 text-sm mt-8">
+          <p className="text-center text-white/45 text-sm mt-8">
             * Voorbeeldprojecten ter illustratie van onze werkwijze
           </p>
         </div>
       </section>
-
 
       {/* ── WERKWIJZE ── */}
       <section id="werkwijze" className="py-24 px-6">
@@ -400,7 +319,7 @@ export default function Home() {
                 wij
               </span>
             </h2>
-            <p className="text-white/50 text-lg max-w-xl mx-auto">
+            <p className="text-white/65 text-lg max-w-xl mx-auto">
               Van eerste gesprek tot werkende tool. Geen verrassingen, gewoon duidelijkheid.
             </p>
           </div>
@@ -414,7 +333,7 @@ export default function Home() {
                     {s.nr}
                   </div>
                   <h4 className="font-bold mb-2">{s.title}</h4>
-                  <p className="text-white/40 text-sm leading-relaxed">{s.desc}</p>
+                  <p className="text-white/55 text-sm leading-relaxed">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -432,7 +351,7 @@ export default function Home() {
                 vragen
               </span>
             </h2>
-            <p className="text-white/50 text-lg">De vragen die je waarschijnlijk ook hebt.</p>
+            <p className="text-white/65 text-lg">De vragen die je waarschijnlijk ook hebt.</p>
           </div>
           <div className="space-y-3">
             {FAQS.map((faq) => (
@@ -444,7 +363,7 @@ export default function Home() {
                   {faq.q}
                   <span className="text-orange-400 text-xl group-open:rotate-45 transition-transform duration-200 shrink-0 ml-4">+</span>
                 </summary>
-                <p className="px-6 pb-5 text-white/50 text-sm leading-relaxed">{faq.a}</p>
+                <p className="px-6 pb-5 text-white/65 text-sm leading-relaxed">{faq.a}</p>
               </details>
             ))}
           </div>
@@ -453,13 +372,15 @@ export default function Home() {
 
       {/* ── WHATSAPP FLOATING BUTTON ── */}
       <a
-        href="https://wa.me/31624505863"
+        href={`https://wa.me/${SITE.whatsapp}`}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Stuur Leadz Systems een WhatsApp-bericht"
+        title="Stuur ons een WhatsApp-bericht"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] transition-all shadow-lg shadow-black/30 hover:shadow-[#25D366]/40 hover:scale-110 duration-200 flex items-center justify-center"
-        aria-label="WhatsApp"
       >
-        <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7">
+        <span className="sr-only">Stuur Leadz Systems een WhatsApp-bericht</span>
+        <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7" aria-hidden="true" focusable="false">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
       </a>
@@ -474,7 +395,7 @@ export default function Home() {
                 contact op
               </span>
             </h2>
-            <p className="text-white/60 text-lg leading-relaxed mb-8">
+            <p className="text-white/75 text-lg leading-relaxed mb-8">
               Herken je de problemen? Stuur een bericht en we kijken samen wat haalbaar is.
               Geen verplichtingen, gewoon een eerlijk gesprek.
             </p>
@@ -484,8 +405,8 @@ export default function Home() {
                   📧
                 </div>
                 <div>
-                  <div className="text-sm text-white/40">E-mail</div>
-                  <div className="text-white/80">info@leadzystems.nl</div>
+                  <div className="text-sm text-white/55">E-mail</div>
+                  <a href={`mailto:${SITE.email}`} className="text-white/90 hover:text-orange-400 transition-colors">{SITE.email}</a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -493,8 +414,8 @@ export default function Home() {
                   📞
                 </div>
                 <div>
-                  <div className="text-sm text-white/40">Telefoon</div>
-                  <a href="tel:0624505863" className="text-white/80 hover:text-orange-400 transition-colors">06 24 50 58 63</a>
+                  <div className="text-sm text-white/55">Telefoon</div>
+                  <a href={`tel:${SITE.phoneIntl}`} className="text-white/90 hover:text-orange-400 transition-colors">{SITE.phone}</a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -502,8 +423,8 @@ export default function Home() {
                   📍
                 </div>
                 <div>
-                  <div className="text-sm text-white/40">Locatie</div>
-                  <div className="text-white/80">Nederland</div>
+                  <div className="text-sm text-white/55">Locatie</div>
+                  <div className="text-white/90">{SITE.region}</div>
                 </div>
               </div>
             </div>
@@ -519,13 +440,13 @@ export default function Home() {
           <span className="text-lg font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
             Leadz Systems
           </span>
-          <p className="text-white/30 text-sm">
+          <p className="text-white/45 text-sm">
             © {new Date().getFullYear()} Leadz Systems. Alle rechten voorbehouden.
           </p>
-          <div className="flex gap-6">
-            {NAV_LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-white/30 hover:text-white/60 transition-colors">
-                {l.label}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {DIENSTEN.map((d) => (
+              <a key={d.slug} href={`/diensten/${d.slug}`} className="text-sm text-white/45 hover:text-white/80 transition-colors">
+                {d.title}
               </a>
             ))}
           </div>
