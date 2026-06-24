@@ -114,3 +114,82 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* ─────────────────────────────────────────────────────────
+   UPLINKED-STIJL TESTPAGINA (/uplinked) — oranje variant
+   Alles scoped onder .ul-root zodat de hoofdsite ongemoeid blijft
+   ───────────────────────────────────────────────────────── */
+.ul-root {
+  --ul-bg: #ffffff;
+  --ul-ink: #0c0a09;
+  --ul-muted: #57534e;
+  --ul-line: #ece9e4;
+  --ul-accent: #ff5c1a;
+  --ul-accent-2: #ff8a3d;
+  --ul-accent-soft: #fff1ea;
+  background: var(--ul-bg);
+  color: var(--ul-ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Zachte gradient-mesh achtergrond achter de hero */
+.ul-mesh {
+  background:
+    radial-gradient(45% 45% at 15% 10%, rgba(255, 92, 26, 0.16) 0%, transparent 60%),
+    radial-gradient(40% 40% at 85% 5%, rgba(255, 138, 61, 0.14) 0%, transparent 55%),
+    radial-gradient(55% 50% at 50% 0%, rgba(255, 92, 26, 0.08) 0%, transparent 70%);
+}
+
+/* Marker-gradient tekst, zoals het "dat laat zien" accent */
+.ul-mark {
+  background: linear-gradient(120deg, var(--ul-accent) 0%, var(--ul-accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Scroll-reveal: begint onzichtbaar, .is-visible komt er via JS bij */
+.ul-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ul-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes ulFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.ul-float { animation: ulFloat 6s ease-in-out infinite; }
+.ul-float-slow { animation: ulFloat 9s ease-in-out infinite; }
+
+@keyframes ulShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.ul-shimmer {
+  background: linear-gradient(90deg, var(--ul-accent) 0%, var(--ul-accent-2) 35%, #ffd9c2 50%, var(--ul-accent-2) 65%, var(--ul-accent) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ulShimmer 4s linear infinite;
+}
+
+@keyframes ulPulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(255, 92, 26, 0.45); }
+  70% { box-shadow: 0 0 0 16px rgba(255, 92, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 92, 26, 0); }
+}
+.ul-pulse { animation: ulPulseRing 2.4s ease-out infinite; }
+
+@keyframes ulMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ul-marquee { animation: ulMarquee 28s linear infinite; }

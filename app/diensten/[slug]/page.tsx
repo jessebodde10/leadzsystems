@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Nav from "../../components/Nav";
 import { SITE, DIENSTEN } from "../../lib/content";
 
 export function generateStaticParams() {
@@ -41,55 +40,62 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
   };
 
   return (
-    <div className="min-h-screen bg-[#111418] text-white overflow-x-hidden pb-16 md:pb-0">
+    <div className="ul-root min-h-screen overflow-x-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
 
-      <Nav />
+      {/* ── NAV ── */}
+      <header className="sticky top-0 z-50 border-b border-[var(--ul-line)] bg-white/80 backdrop-blur-md">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <a href="/" className="flex items-center gap-2 font-semibold tracking-tight">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white">L</span>
+            <span className="text-[17px]">Leadz Systems</span>
+          </a>
+          <div className="hidden items-center gap-8 md:flex">
+            <a href="/#hoe" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Hoe het werkt</a>
+            <a href="/#functies" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Functies</a>
+            <a href="/#prijzen" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Prijzen</a>
+            <a href="/#contact" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Contact</a>
+          </div>
+          <a href="/#contact" className="rounded-full bg-[var(--ul-ink)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5">
+            Plan een scan
+          </a>
+        </nav>
+      </header>
 
       {/* ── HERO ── */}
-      <section className="relative pt-36 md:pt-40 pb-16 md:pb-20 px-6 overflow-hidden">
-        <div className="absolute inset-0 blueprint opacity-50 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-3xl mx-auto relative">
-          <a href="/#diensten" className="text-sm text-white/60 hover:text-white transition-colors">← Alle diensten</a>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white/80 text-sm font-medium mt-6 mb-6">
+      <section className="ul-mesh relative px-6 pt-16 pb-16 md:pt-24">
+        <div className="mx-auto max-w-3xl">
+          <a href="/#functies" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">← Alle diensten</a>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-1.5 text-sm font-medium text-[var(--ul-muted)] shadow-sm">
             <span className="text-lg">{dienst.icon}</span>
             {dienst.title}
           </div>
-          <h1 className="text-[2.5rem] leading-[1.08] md:text-6xl font-bold mb-6">{dienst.metaTitle.split("|")[0].trim()}</h1>
-          <p className="text-lg md:text-xl text-white/75 leading-8 mb-8">{dienst.heroLead}</p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="/#contact"
-              className="px-7 py-4 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold text-center shadow-lg shadow-orange-500/25"
-            >
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.08] tracking-tight md:text-5xl">{dienst.metaTitle.split("|")[0].trim()}</h1>
+          <p className="mt-5 text-lg text-[var(--ul-muted)] md:text-xl">{dienst.heroLead}</p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5">
               Plan een gratis scan
             </a>
-            <a
-              href={`https://wa.me/${SITE.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-7 py-4 rounded-full border border-white/15 hover:border-white/35 hover:bg-white/5 transition-all font-medium text-center text-white/90"
-            >
+            <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 text-center font-medium transition-colors hover:bg-[var(--ul-accent-soft)]">
               Stel een vraag via WhatsApp
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── HERKENBAAR ── (lichter werkvlak) */}
-      <section className="py-16 md:py-24 px-6 bg-[#15191e] border-y border-white/5">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">Komt dit bekend voor?</h2>
-          <p className="text-white/70 text-lg leading-8 mb-8">Dit zijn de situaties waar wij wat aan doen.</p>
-          <div className="space-y-3">
+      {/* ── HERKENBAAR ── */}
+      <section className="border-y border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/40 px-6 py-20">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Komt dit bekend voor?</h2>
+          <p className="mt-3 text-lg text-[var(--ul-muted)]">Dit zijn de situaties waar wij wat aan doen.</p>
+          <div className="mt-8 space-y-3">
             {dienst.herkenbaar.map((h) => (
-              <div key={h} className="flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-[#1a1f25]">
-                <span className="text-orange-400 text-2xl leading-none shrink-0">&ldquo;</span>
-                <p className="text-white/85 text-[0.95rem] leading-7">{h}</p>
+              <div key={h} className="flex items-start gap-4 rounded-2xl border border-[var(--ul-line)] bg-white p-5">
+                <span className="text-2xl leading-none text-[var(--ul-accent)]">&ldquo;</span>
+                <p className="leading-7 text-[var(--ul-ink)]/85">{h}</p>
               </div>
             ))}
           </div>
@@ -97,38 +103,34 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── OPLOSSING ── */}
-      <section className="py-16 md:py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Wat wij{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">bouwen</span>
-            </h2>
-            <p className="text-white/70 text-lg max-w-xl mx-auto leading-8">{dienst.stat}.</p>
+      <section className="px-6 py-20 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">De oplossing</p>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Wat wij bouwen</h2>
+            <p className="mt-4 text-[var(--ul-muted)]">{dienst.stat}.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-3">
             {dienst.oplossing.map((o, i) => (
-              <div key={o.title} className="p-8 rounded-2xl border border-white/10 bg-[#15191e]">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/15 border border-orange-500/20 flex items-center justify-center text-orange-400 font-bold mb-5">
-                  {i + 1}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{o.title}</h3>
-                <p className="text-white/70 text-[0.95rem] leading-7">{o.desc}</p>
+              <div key={o.title} className="rounded-2xl border border-[var(--ul-line)] bg-white p-8 transition-shadow hover:shadow-lg">
+                <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] font-semibold text-white">{i + 1}</div>
+                <h3 className="text-lg font-semibold">{o.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-[var(--ul-muted)]">{o.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── KOPPELINGEN ── (lichter werkvlak) */}
-      <section className="py-16 md:py-20 px-6 bg-[#15191e] border-y border-white/5">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-2">Werkt met jouw software</h2>
-          <p className="text-white/70 text-lg leading-8 mb-8">We koppelen aan de pakketten en groothandels die je al gebruikt.</p>
-          <div className="flex flex-wrap justify-center gap-3">
+      {/* ── KOPPELINGEN ── */}
+      <section className="border-y border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/40 px-6 py-16">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-semibold tracking-tight">Werkt met jouw software</h2>
+          <p className="mt-2 text-lg text-[var(--ul-muted)]">We koppelen aan de pakketten en groothandels die je al gebruikt.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             {dienst.koppelingen.map((k) => (
-              <span key={k} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white/80 text-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+              <span key={k} className="inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-2 text-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ul-accent)]" />
                 {k}
               </span>
             ))}
@@ -137,22 +139,16 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── ANDERE DIENSTEN ── */}
-      <section className="py-16 md:py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center">Andere diensten</h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <section className="px-6 py-20 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-8 text-center text-2xl font-semibold tracking-tight">Andere diensten</h2>
+          <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
             {andere.map((d) => (
-              <a
-                key={d.slug}
-                href={`/diensten/${d.slug}`}
-                className="group p-7 rounded-2xl border border-white/10 bg-[#15191e] hover:border-orange-500/40 hover:bg-[#1a1f25] transition-all"
-              >
-                <div className="text-3xl mb-4">{d.icon}</div>
-                <h3 className="text-lg font-bold mb-2">{d.title}</h3>
-                <p className="text-white/70 text-[0.95rem] leading-7 mb-4">{d.description}</p>
-                <span className="text-sm font-semibold text-orange-400 group-hover:text-orange-300 transition-colors">
-                  Lees meer →
-                </span>
+              <a key={d.slug} href={`/diensten/${d.slug}`} className="group rounded-2xl border border-[var(--ul-line)] bg-white p-7 transition-all hover:-translate-y-1 hover:border-[var(--ul-accent)]/40 hover:shadow-xl">
+                <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-[var(--ul-accent-soft)] text-2xl">{d.icon}</div>
+                <h3 className="text-lg font-semibold">{d.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-[var(--ul-muted)]">{d.description}</p>
+                <span className="mt-4 inline-block text-sm font-semibold text-[var(--ul-accent)]">Lees meer →</span>
               </a>
             ))}
           </div>
@@ -160,72 +156,47 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-12 md:py-16 px-6">
-        <div className="max-w-4xl mx-auto p-10 md:p-12 rounded-3xl border border-orange-500/25 bg-gradient-to-br from-orange-600/15 to-amber-600/5 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Benieuwd wat dit voor jou oplevert?</h2>
-          <p className="text-white/75 text-lg leading-8 mb-8">Plan een gratis scan. Geen verkooppraatje, gewoon eerlijk kijken waar het tijd bespaart.</p>
-          <a
-            href="/#contact"
-            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold shadow-lg shadow-orange-500/25"
-          >
-            Plan een gesprek
-          </a>
+      <section className="px-6 pb-24">
+        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-[var(--ul-ink)] px-8 py-16 text-center text-white">
+          <div className="ul-mesh pointer-events-none absolute inset-0 opacity-60" />
+          <div className="relative">
+            <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">Benieuwd wat dit voor jou oplevert?</h2>
+            <p className="mx-auto mt-4 max-w-xl text-white/70">Plan een gratis scan. Geen verkooppraatje, gewoon eerlijk kijken waar het tijd bespaart.</p>
+            <a href="/#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-8 py-4 font-medium shadow-lg shadow-orange-500/30 transition-transform hover:-translate-y-0.5">
+              Plan een gesprek
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* ── WHATSAPP FLOATING (desktop) ── */}
-      <a
-        href={`https://wa.me/${SITE.whatsapp}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Stuur Leadz Systems een WhatsApp-bericht"
-        title="Stuur ons een WhatsApp-bericht"
-        className="hidden md:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] transition-all shadow-lg shadow-black/30 hover:scale-110 duration-200 items-center justify-center"
-      >
-        <span className="sr-only">Stuur Leadz Systems een WhatsApp-bericht</span>
-        <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7" aria-hidden="true" focusable="false">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-      </a>
-
-      {/* ── MOBIELE STICKY CTA-BALK ── */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-50 flex gap-2 p-3 bg-[#111418]/95 backdrop-blur-md border-t border-white/10">
-        <a href={`tel:${SITE.phoneIntl}`} className="flex-1 py-3 rounded-full border border-white/15 text-white/90 font-medium text-center text-sm">
-          📞 Bellen
-        </a>
-        <a href="/#contact" className="flex-[1.4] py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 font-semibold text-center text-sm shadow-md shadow-orange-500/20">
-          Plan gratis scan
-        </a>
-        <a
-          href={`https://wa.me/${SITE.whatsapp}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Stuur een WhatsApp-bericht"
-          className="w-12 shrink-0 rounded-full bg-[#25D366] flex items-center justify-center"
-        >
-          <span className="sr-only">Stuur een WhatsApp-bericht</span>
-          <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-        </a>
-      </div>
-
       {/* ── FOOTER ── */}
-      <footer className="border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <a href="/" className="text-lg font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
+      <footer className="border-t border-[var(--ul-line)] py-12">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
+          <a href="/" className="flex items-center gap-2 font-semibold">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white">L</span>
             Leadz Systems
           </a>
-          <p className="text-white/45 text-sm">© {new Date().getFullYear()} Leadz Systems. Alle rechten voorbehouden.</p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {DIENSTEN.map((d) => (
-              <a key={d.slug} href={`/diensten/${d.slug}`} className="text-sm text-white/45 hover:text-white/80 transition-colors">
+              <a key={d.slug} href={`/diensten/${d.slug}`} className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">
                 {d.title}
               </a>
             ))}
           </div>
+          <p className="text-sm text-[var(--ul-muted)]">© 2026 Leadz Systems</p>
         </div>
       </footer>
+
+      {/* ── FLOATING KNOPPEN ── */}
+      <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Stuur een WhatsApp-bericht" className="fixed bottom-6 right-6 z-50 hidden h-14 w-14 place-items-center rounded-full bg-[#25D366] shadow-lg shadow-black/20 transition-transform hover:-translate-y-1 md:grid">
+        <svg viewBox="0 0 24 24" className="h-7 w-7" fill="white" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a3 3 0 00-1 2.3c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.4-.2z" /></svg>
+      </a>
+      <a href={`tel:${SITE.phoneIntl}`} aria-label={`Bel ${SITE.phone}`} className="fixed bottom-6 left-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] shadow-lg shadow-orange-500/30 md:hidden">
+        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="white" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
+      </a>
+      <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Stuur een WhatsApp-bericht" className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] shadow-lg shadow-black/30 md:hidden">
+        <svg viewBox="0 0 24 24" className="h-7 w-7" fill="white" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a3 3 0 00-1 2.3c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.4-.2z" /></svg>
+      </a>
     </div>
   );
 }
