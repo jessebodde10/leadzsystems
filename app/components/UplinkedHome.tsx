@@ -117,7 +117,7 @@ export default function UplinkedHome() {
           </div>
           <div className="hidden md:block">
             <a href="#contact" className="rounded-full bg-[var(--ul-ink)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5">
-              Plan een scan
+              Plan een gesprek
             </a>
           </div>
           <button onClick={() => setMenu((v) => !v)} aria-label="Menu" className="md:hidden">
@@ -134,7 +134,7 @@ export default function UplinkedHome() {
               </a>
             ))}
             <a href="#contact" onClick={() => setMenu(false)} className="mt-2 block rounded-full bg-[var(--ul-ink)] px-5 py-3 text-center font-medium text-white">
-              Plan een scan
+              Plan een gesprek
             </a>
           </div>
         )}
@@ -156,7 +156,7 @@ export default function UplinkedHome() {
           </p>
           <div className="ul-reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5">
-              Plan een gratis scan
+              Plan een vrijblijvend gesprek
               <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </a>
             <a href="#hoe" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 font-medium transition-colors hover:bg-[var(--ul-accent-soft)]">
@@ -375,7 +375,7 @@ export default function UplinkedHome() {
         <div className="ul-reveal grid gap-8 overflow-hidden rounded-3xl border border-[var(--ul-line)] bg-white md:grid-cols-2">
           {/* Links: uitleg + contactgegevens */}
           <div className="ul-mesh relative p-8 md:p-12">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Plan een gratis scan</h2>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Plan een vrijblijvend gesprek</h2>
             <p className="mt-4 text-[var(--ul-muted)]">
               We kijken samen waar in jouw bedrijf de meeste tijd verdwijnt en wat het oplevert om dat te
               automatiseren. Geen verkooppraatje, gewoon een eerlijk gesprek.
@@ -455,7 +455,7 @@ export default function UplinkedHome() {
                   type="submit"
                   className="w-full rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-6 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5"
                 >
-                  Verstuur en plan een scan
+                  Verstuur en plan een gesprek
                 </button>
               </form>
             )}

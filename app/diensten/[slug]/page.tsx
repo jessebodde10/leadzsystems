@@ -60,7 +60,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
             <a href="/#contact" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Contact</a>
           </div>
           <a href="/#contact" className="rounded-full bg-[var(--ul-ink)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5">
-            Plan een scan
+            Plan een gesprek
           </a>
         </nav>
       </header>
@@ -68,8 +68,8 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       {/* ── HERO ── */}
       <section className="ul-mesh relative px-6 pt-16 pb-16 md:pt-24">
         <div className="mx-auto max-w-3xl">
-          <a href="/#functies" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">← Alle diensten</a>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-1.5 text-sm font-medium text-[var(--ul-muted)] shadow-sm">
+          <a href="/#functies" className="block w-fit text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">← Alle diensten</a>
+          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-1.5 text-sm font-medium text-[var(--ul-muted)] shadow-sm">
             <span className="text-lg">{dienst.icon}</span>
             {dienst.title}
           </div>
@@ -77,7 +77,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
           <p className="mt-5 text-lg text-[var(--ul-muted)] md:text-xl">{dienst.heroLead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5">
-              Plan een gratis scan
+              Plan een vrijblijvend gesprek
             </a>
             <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 text-center font-medium transition-colors hover:bg-[var(--ul-accent-soft)]">
               Stel een vraag via WhatsApp
@@ -161,7 +161,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
           <div className="ul-mesh pointer-events-none absolute inset-0 opacity-60" />
           <div className="relative">
             <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">Benieuwd wat dit voor jou oplevert?</h2>
-            <p className="mx-auto mt-4 max-w-xl text-white/70">Plan een gratis scan. Geen verkooppraatje, gewoon eerlijk kijken waar het tijd bespaart.</p>
+            <p className="mx-auto mt-4 max-w-xl text-white/70">Plan een vrijblijvend gesprek. Geen verkooppraatje, gewoon eerlijk kijken waar het tijd bespaart.</p>
             <a href="/#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-8 py-4 font-medium shadow-lg shadow-orange-500/30 transition-transform hover:-translate-y-0.5">
               Plan een gesprek
             </a>
