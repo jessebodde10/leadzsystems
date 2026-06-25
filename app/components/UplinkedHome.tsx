@@ -116,7 +116,7 @@ export default function UplinkedHome() {
   return (
     <div className="ul-root min-h-screen overflow-x-hidden">
       {/* ── NAV ── */}
-      <header className="sticky top-0 z-50 border-b border-[var(--ul-line)] bg-white/80 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--ul-line)] bg-white/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight">
             <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white">L</span>
@@ -153,6 +153,9 @@ export default function UplinkedHome() {
           </div>
         )}
       </header>
+
+      {/* Spacer voor fixed nav */}
+      <div className="h-[73px]" />
 
       {/* ── HERO ── */}
       <section id="top" className="ul-mesh relative">
