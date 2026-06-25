@@ -13,6 +13,7 @@ const NAV = [
   { label: "Diensten", href: "#diensten" },
   { label: "Werkwijze", href: "#werkwijze" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Prijzen", href: "#prijzen" },
   { label: "Over ons", href: "#over" },
   { label: "Contact", href: "#contact" },
 ];
@@ -540,7 +541,7 @@ export default function UplinkedHome() {
               Leadz Systems
             </div>
             <p className="mt-4 max-w-xs text-sm text-[var(--ul-muted)]">
-              Slimme AI-software en automatisering voor het MKB. Minder handwerk, meer resultaat.
+              Slimme AI-software en automatisering voor het MKB. Software die werkt, processen die lopen.
             </p>
           </div>
           <div>
