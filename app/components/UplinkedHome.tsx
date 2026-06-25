@@ -119,7 +119,7 @@ export default function UplinkedHome() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--ul-line)] bg-white/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#top" className="flex items-center">
-            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-10 w-auto object-contain" priority unoptimized />
+            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[38px] w-auto object-contain" priority unoptimized />
           </a>
           <div className="hidden items-center gap-8 md:flex">
             {NAV.map((n) => (
