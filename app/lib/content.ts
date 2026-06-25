@@ -138,11 +138,12 @@ export const STAPPEN = [
 ];
 
 export const FAQS = [
-  { q: "Wat kost zoiets?", a: "Dat hangt af van wat je nodig hebt. Een eenvoudige automatisering of website start rond de €1.500. Grotere webapps, meerdere koppelingen of doorlopend onderhoud kosten meer. We kijken altijd eerst wat het oplevert voordat we een prijs noemen." },
-  { q: "Hoe lang duurt het voordat ik iets heb?", a: "De meeste projecten zijn binnen 2 tot 6 weken live. We werken in korte cycli zodat je snel resultaat ziet, niet pas na maanden." },
-  { q: "Moet ik technisch zijn?", a: "Nee. Wij regelen de techniek en leveren iets op dat jij en je team gewoon kunnen gebruiken. Waar nuttig kun je content of instellingen zelf beheren." },
-  { q: "Wat als het niet werkt zoals verwacht?", a: "Dan lossen we het op. We leveren pas op als jij tevreden bent, en daarna blijven we beschikbaar voor aanpassingen." },
-  { q: "Werkt dit ook met mijn bestaande software?", a: "In de meeste gevallen wel. We koppelen aan veelgebruikte pakketten zoals Moneybird, Exact, HubSpot en Microsoft 365, en aan tools als Slack en Google Workspace." },
+  { q: "Wat doet Leadz Systems precies?", a: "We bouwen software op maat voor het MKB: van AI-automatiseringen die repetitief werk overnemen, tot websites, web-apps en koppelingen tussen systemen. Geen standaardpakketten, maar oplossingen gebouwd rond hoe jij werkt." },
+  { q: "Voor welke bedrijven is dit geschikt?", a: "Vooral voor MKB-bedrijven met 2 tot 50 medewerkers die merken dat processen te veel handwerk kosten of systemen niet goed op elkaar aansluiten. Branche maakt niet uit: als er werk te automatiseren valt, kunnen wij helpen." },
+  { q: "Hoe snel zie ik resultaat?", a: "De meeste projecten zijn binnen 2 tot 6 weken live. We beginnen altijd met de oplossing die het meeste oplevert, zodat je snel iets werkends hebt en niet pas na maanden." },
+  { q: "Wat maakt jullie anders dan andere bureaus?", a: "We zijn klein, werken direct en denken mee. Geen accountmanager ertussen, geen offerte van twintig pagina's. Je werkt direct met degene die ook bouwt, en we leveren pas op als jij tevreden bent." },
+  { q: "Hoe begin ik?", a: "Met een vrijblijvend gesprek van 30 minuten. We kijken samen waar de meeste tijd of omzet blijft liggen en of we daar iets zinnigs aan kunnen doen. Geen verplichtingen, gewoon eerlijk advies." },
+  { q: "Werken jullie per project of doorlopend?", a: "Beide. Je kunt kiezen voor een eenmalig project (één oplossing, vaste prijs) of een doorlopend partnerschap waarbij we blijven doorontwikkelen en je altijd iemand hebt die meekijkt." },
 ];
 
 // PORTFOLIO — echte, live projecten. De previews tonen de site zelf via een iframe.
