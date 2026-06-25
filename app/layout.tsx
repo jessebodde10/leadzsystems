@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "Leadz Systems — AI-software & automatisering voor het MKB";
+const title = "Leadz Systems | AI-software & automatisering voor het MKB";
 const description =
   "Leadz Systems bouwt slimme AI-software en automatiseringen op maat voor het MKB: workflow-automatisering, websites en web-apps, en koppelingen met heldere dashboards. Minder handwerk, meer resultaat.";
 
