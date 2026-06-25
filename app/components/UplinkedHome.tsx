@@ -18,10 +18,9 @@ const NAV = [
 ];
 
 const PROOF = [
-  { naam: "Procesautomatisering", cijfer: "Uren/week", tekst: "minder tijd kwijt aan offertes, e-mail en administratie" },
-  { naam: "Snelle oplevering", cijfer: "2–6 weken", tekst: "van eerste gesprek tot een werkende oplossing live" },
-  { naam: "Eén overzicht", cijfer: "Alle data", tekst: "je systemen gekoppeld in één actueel dashboard" },
-  { naam: "Altijd op maat", cijfer: "100%", tekst: "gebouwd rond jouw processen, niet andersom" },
+  { cijfer: "50+", tekst: "tools en systemen waar we direct mee koppelen" },
+  { cijfer: "3 weken", tekst: "gemiddelde doorlooptijd van idee tot live" },
+  { cijfer: "100%", tekst: "tevredenheidsgarantie. We stoppen pas als jij blij bent" },
 ];
 
 const STAPPEN = [
@@ -161,10 +160,6 @@ export default function UplinkedHome() {
           </div>
         </div>
 
-        {/* Interactieve mockup: automatiseringen-board */}
-        <div className="ul-reveal mx-auto max-w-5xl px-6 pb-20">
-          <AutomationMockup />
-        </div>
       </section>
 
       {/* ── LOGOBALK / KOPPELINGEN ── */}
@@ -277,18 +272,13 @@ export default function UplinkedHome() {
       </section>
 
       {/* ── RESULTATEN ── */}
-      <section className="bg-[var(--ul-ink)] py-24 text-white">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="ul-reveal mx-auto max-w-2xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent-2)]">Resultaat</p>
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Wat het je oplevert</h2>
-          </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2">
+      <section className="border-t border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/30 py-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="mt-6 grid gap-5 sm:grid-cols-3">
             {PROOF.map((p, i) => (
-              <div key={i} className="ul-reveal rounded-2xl border border-white/10 bg-white/[0.04] p-7" style={{ transitionDelay: `${i * 70}ms` }}>
-                <p className="text-4xl font-semibold ul-shimmer md:text-5xl">{p.cijfer}</p>
-                <p className="mt-2 text-white/80">{p.tekst}</p>
-                <p className="mt-4 text-sm text-white/50">{p.naam}</p>
+              <div key={i} className="ul-reveal rounded-2xl border border-[var(--ul-line)] bg-white p-8 text-center shadow-sm" style={{ transitionDelay: `${i * 70}ms` }}>
+                <p className="text-5xl font-bold text-[var(--ul-accent)] md:text-6xl">{p.cijfer}</p>
+                <p className="mt-3 text-sm leading-6 text-[var(--ul-muted)]">{p.tekst}</p>
               </div>
             ))}
           </div>
