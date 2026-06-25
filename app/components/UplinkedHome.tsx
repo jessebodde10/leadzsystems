@@ -579,14 +579,6 @@ export default function UplinkedHome() {
       >
         <svg viewBox="0 0 24 24" className="h-7 w-7" fill="white" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a3 3 0 00-1 2.3c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.4-.2z" /></svg>
       </a>
-      {/* Mobiel: bel linksonder, WhatsApp rechtsonder */}
-      <a
-        href={`tel:${SITE.phoneIntl}`}
-        aria-label={`Bel ${SITE.phone}`}
-        className="fixed bottom-6 left-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] shadow-lg shadow-indigo-500/30 md:hidden"
-      >
-        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="white" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
-      </a>
       <a
         href={`https://wa.me/${SITE.whatsapp}`}
         target="_blank"
