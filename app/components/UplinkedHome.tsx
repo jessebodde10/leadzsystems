@@ -32,24 +32,56 @@ const STAPPEN = [
 
 const PRIJZEN = [
   {
-    naam: "Project",
-    maand: 1500,
-    jaar: 1500,
-    eenmalig: true,
-    omschrijving: "Eén concrete oplossing, snel live.",
-    features: ["Eén automatisering, website of koppeling", "Op maat rond jouw werkwijze", "Oplevering binnen 2 tot 4 weken", "Persoonlijke begeleiding bij livegang"],
-    cta: "Plan een gesprek",
+    naam: "Starter",
+    prijs: 250,
+    setup: 2500,
+    omschrijving: "Jouw eerste oplossing live. Eén automatisering, website of koppeling op maat.",
+    features: [
+      "1 automatisering, website of koppeling",
+      "Tot 3 systemen gekoppeld",
+      "Oplevering binnen 2 tot 4 weken",
+      "Hosting en onderhoud",
+      "Maandelijkse rapportage",
+      "E-mail support",
+    ],
+    cta: "Start je project",
     populair: false,
+    custom: false,
   },
   {
-    naam: "Partner",
-    maand: 149,
-    jaar: 119,
-    eenmalig: false,
-    omschrijving: "Doorlopende ontwikkeling en onderhoud.",
-    features: ["Meerdere oplossingen en koppelingen", "Doorontwikkeling en aanpassingen", "Voorrang bij vragen en storingen", "Periodieke check op nieuwe kansen", "Onbeperkt gebruikers"],
-    cta: "Plan een gesprek",
+    naam: "Growth",
+    prijs: 350,
+    setup: 3500,
+    omschrijving: "Meer koppelingen, AI-workflows en een oplossing die écht meegroeit met jouw bedrijf.",
+    features: [
+      "Meerdere automatiseringen en koppelingen",
+      "Tot 7 systemen gekoppeld",
+      "Realtime inzicht in je data",
+      "Hosting en onderhoud",
+      "AI-workflows en slimme notificaties",
+      "Wekelijkse rapportages",
+      "Prioriteit support en kwartaalgesprek",
+    ],
+    cta: "Start je project",
     populair: true,
+    custom: false,
+  },
+  {
+    naam: "Custom",
+    prijs: null,
+    setup: null,
+    omschrijving: "Complexe automatisering, meerdere oplossingen of specifieke wensen. We denken graag mee.",
+    features: [
+      "Onbeperkt koppelingen",
+      "Onbeperkt automatiseringen",
+      "Maatwerk AI-integraties",
+      "Dedicated ontwikkelaar",
+      "SLA met uptime garantie",
+      "24/7 telefoon support",
+    ],
+    cta: "Neem contact op",
+    populair: false,
+    custom: true,
   },
 ];
 
@@ -75,7 +107,7 @@ function useReveal() {
 
 export default function UplinkedHome() {
   useReveal();
-  const [jaarlijks, setJaarlijks] = useState(true);
+  // jaarlijks toggle verwijderd — vaste prijzen per tier
   const [open, setOpen] = useState<number | null>(0);
   const [menu, setMenu] = useState(false);
   const [form, setForm] = useState({ naam: "", email: "", bericht: "" });
@@ -332,34 +364,35 @@ export default function UplinkedHome() {
       </section>
 
       {/* ── PRIJZEN ── */}
-      <section id="prijzen" className="ul-mesh py-24">
-        <div className="mx-auto max-w-5xl px-6">
+      <section id="prijzen" className="border-t border-[var(--ul-line)] bg-white py-24">
+        <div className="mx-auto max-w-6xl px-6">
           <div className="ul-reveal mx-auto max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Prijzen</p>
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Geen verborgen kosten, geen verrassingen</h2>
-            <p className="mt-4 text-[var(--ul-muted)]">We kijken altijd eerst wat het oplevert voordat we een prijs noemen.</p>
-
-            <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white p-1">
-              <button onClick={() => setJaarlijks(false)} className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${!jaarlijks ? "bg-[var(--ul-ink)] text-white" : "text-[var(--ul-muted)]"}`}>Maandelijks</button>
-              <button onClick={() => setJaarlijks(true)} className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${jaarlijks ? "bg-[var(--ul-ink)] text-white" : "text-[var(--ul-muted)]"}`}>
-                Jaarlijks <span className="text-[var(--ul-accent)]">-20%</span>
-              </button>
-            </div>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Transparante, vaste prijzen</h2>
+            <p className="mt-4 text-[var(--ul-muted)]">Geen verborgen kosten, geen uurtje-factuurtje. We werken met een eenmalige setup en een vast maandbedrag.</p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {PRIJZEN.map((p) => (
-              <div key={p.naam} className={`ul-reveal relative rounded-3xl border bg-white p-8 ${p.populair ? "border-[var(--ul-accent)] shadow-xl shadow-indigo-500/10" : "border-[var(--ul-line)]"}`}>
+              <div key={p.naam} className={`ul-reveal relative flex flex-col rounded-3xl border bg-white p-8 ${p.populair ? "border-[var(--ul-accent)] shadow-xl shadow-indigo-500/10" : "border-[var(--ul-line)]"}`}>
                 {p.populair && (
-                  <span className="absolute -top-3 left-8 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-3 py-1 text-xs font-semibold text-white">Meest gekozen</span>
+                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-4 py-1 text-xs font-semibold text-white">Meest gekozen</span>
                 )}
-                <h3 className="text-lg font-semibold">{p.naam}</h3>
-                <p className="mt-1 text-sm text-[var(--ul-muted)]">{p.omschrijving}</p>
-                <div className="mt-5 flex items-end gap-1">
-                  <span className="text-4xl font-semibold">€{p.eenmalig ? p.maand : jaarlijks ? p.jaar : p.maand}</span>
-                  <span className="mb-1 text-sm text-[var(--ul-muted)]">{p.eenmalig ? "eenmalig" : "/maand"}</span>
-                </div>
-                <ul className="mt-6 space-y-3">
+                <p className="text-xs font-bold uppercase tracking-widest text-[var(--ul-accent)]">{p.naam}</p>
+                {p.custom ? (
+                  <h3 className="mt-3 text-4xl font-bold text-[var(--ul-ink)]">Op maat</h3>
+                ) : (
+                  <>
+                    <div className="mt-3 flex items-end gap-1">
+                      <span className="text-5xl font-bold text-[var(--ul-ink)]">€{p.prijs}</span>
+                      <span className="mb-1.5 text-sm text-[var(--ul-muted)]">/maand</span>
+                    </div>
+                    <p className="mt-1 text-sm text-[var(--ul-accent)]">Eenmalige setup: € {p.setup?.toLocaleString("nl-NL")}</p>
+                  </>
+                )}
+                <p className="mt-3 text-sm leading-6 text-[var(--ul-muted)]">{p.omschrijving}</p>
+                <hr className="my-6 border-[var(--ul-line)]" />
+                <ul className="flex-1 space-y-3">
                   {p.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm">
                       <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[var(--ul-accent)]" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 13l4 4L19 7" /></svg>
@@ -367,10 +400,15 @@ export default function UplinkedHome() {
                     </li>
                   ))}
                 </ul>
-                <a href="#contact" className={`mt-7 block rounded-full px-6 py-3 text-center font-medium transition-transform hover:-translate-y-0.5 ${p.populair ? "bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white shadow-lg shadow-indigo-500/25" : "bg-[var(--ul-ink)] text-white"}`}>{p.cta}</a>
+                <a href="#contact" className={`mt-7 block rounded-full px-6 py-3.5 text-center font-medium transition-transform hover:-translate-y-0.5 ${p.populair ? "bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white shadow-lg shadow-indigo-500/25" : "bg-[var(--ul-ink)] text-white"}`}>{p.cta} ›</a>
               </div>
             ))}
           </div>
+
+          <p className="mt-8 text-center text-sm text-[var(--ul-muted)]">
+            Alle prijzen zijn excl. BTW. Setup is eenmalig. Maandabonnement opzegbaar per kwartaal.{" "}
+            <a href="#contact" className="font-medium text-[var(--ul-accent)] hover:underline">Vragen? Stuur ons een bericht.</a>
+          </p>
         </div>
       </section>
 
