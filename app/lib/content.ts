@@ -3,8 +3,8 @@
 export const SITE = {
   name: "Leadz Systems",
   // Productiedomein — pas dit aan als de definitieve domeinnaam anders is.
-  url: "https://leadzystems.nl",
-  email: "info@leadzystems.nl",
+  url: "https://leadzsystems.nl",
+  email: "info@leadzsystems.nl",
   phone: "06 24 50 58 63",
   phoneIntl: "+31624505863",
   whatsapp: "31624505863",

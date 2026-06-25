@@ -64,7 +64,7 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: "#fb923c" }}>Leadz Systems</div>
-          <div style={{ display: "flex", fontSize: 26, color: "rgba(255,255,255,0.5)" }}>leadzystems.nl</div>
+          <div style={{ display: "flex", fontSize: 26, color: "rgba(255,255,255,0.5)" }}>leadzsystems.nl</div>
         </div>
       </div>
     ),

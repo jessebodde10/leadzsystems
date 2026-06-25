@@ -389,7 +389,7 @@ export default function TestPage() {
                 <div className="w-10 h-10 rounded-md bg-[#ffe95c] flex items-center justify-center">📧</div>
                 <div>
                   <div className="text-sm text-[#1a3300]/50">E-mail</div>
-                  <div className="font-medium">info@leadzystems.nl</div>
+                  <div className="font-medium">info@leadzsystems.nl</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
