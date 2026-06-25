@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { SITE, DIENSTEN, FAQS, PORTFOLIO_ITEMS } from "../lib/content";
 
@@ -111,8 +112,6 @@ export default function UplinkedHome() {
   // jaarlijks toggle verwijderd — vaste prijzen per tier
   const [open, setOpen] = useState<number | null>(0);
   const [menu, setMenu] = useState(false);
-  const [form, setForm] = useState({ naam: "", email: "", bericht: "" });
-  const [sent, setSent] = useState(false);
 
   return (
     <div className="ul-root min-h-screen overflow-x-hidden">
@@ -440,96 +439,45 @@ export default function UplinkedHome() {
       </section>
 
       {/* ── CONTACT ── */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="ul-reveal grid gap-8 overflow-hidden rounded-3xl border border-[var(--ul-line)] bg-white md:grid-cols-2">
-          {/* Links: uitleg + contactgegevens */}
-          <div className="ul-mesh relative p-8 md:p-12">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Plan een vrijblijvend gesprek</h2>
-            <p className="mt-4 text-[var(--ul-muted)]">
-              We kijken samen waar in jouw bedrijf de meeste tijd of omzet blijft liggen en wat het oplevert om dat
-              aan te pakken. Geen verkooppraatje, gewoon een eerlijk gesprek.
-            </p>
-            <div className="mt-8 space-y-3">
-              <a href={`tel:${SITE.phoneIntl}`} className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-[var(--ul-accent-soft)] text-[var(--ul-accent)]">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
-                </span>
-                <span><span className="block text-xs text-[var(--ul-muted)]">Bel direct</span><span className="font-medium">{SITE.phone}</span></span>
-              </a>
-              <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-[#e7f9ee] text-[#25D366]">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a3 3 0 00-1 2.3c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.4-.2z" /></svg>
-                </span>
-                <span><span className="block text-xs text-[var(--ul-muted)]">App ons</span><span className="font-medium">WhatsApp</span></span>
-              </a>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-[var(--ul-accent-soft)] text-[var(--ul-accent)]">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16v12H4z" /><path d="M4 7l8 6 8-6" /></svg>
-                </span>
-                <span><span className="block text-xs text-[var(--ul-muted)]">Mail ons</span><span className="font-medium">{SITE.email}</span></span>
-              </a>
-            </div>
-          </div>
-
-          {/* Rechts: formulier */}
-          <div className="p-8 md:p-12">
-            {sent ? (
-              <div className="flex h-full min-h-[280px] flex-col items-center justify-center text-center">
-                <div className="mb-4 grid h-14 w-14 place-items-center rounded-full bg-[var(--ul-accent-soft)] text-2xl text-[var(--ul-accent)]">✓</div>
-                <h3 className="text-xl font-semibold">Bericht ontvangen</h3>
-                <p className="mt-2 text-[var(--ul-muted)]">We nemen zo snel mogelijk contact met je op.</p>
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-                className="space-y-4"
-              >
-                <div>
-                  <label className="mb-1.5 block text-sm font-medium">Naam</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.naam}
-                    onChange={(e) => setForm({ ...form, naam: e.target.value })}
-                    placeholder="Jouw naam"
-                    className="w-full rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-[var(--ul-accent)]"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-sm font-medium">E-mailadres</label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="jouw@email.nl"
-                    className="w-full rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-[var(--ul-accent)]"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-sm font-medium">Waar loop je tegenaan?</label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={form.bericht}
-                    onChange={(e) => setForm({ ...form, bericht: e.target.value })}
-                    placeholder="Vertel kort over je bedrijf en waar de meeste tijd verloren gaat..."
-                    className="w-full resize-none rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-[var(--ul-accent)]"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-6 py-3.5 font-medium text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5"
-                >
-                  Verstuur en plan een gesprek
-                </button>
-              </form>
-            )}
-          </div>
+      <section id="contact" className="mx-auto max-w-5xl px-6 pb-24">
+        <div className="ul-reveal mb-10 text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Plan een gesprek</p>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Klaar om slimmer te werken?</h2>
+          <p className="mt-4 text-[var(--ul-muted)]">Plan direct een vrijblijvend gesprek om de mogelijkheden voor jouw bedrijf te bespreken.</p>
         </div>
+
+        {/* Calendly widget */}
+        <div className="ul-reveal overflow-hidden rounded-3xl border border-[var(--ul-line)] bg-white shadow-sm">
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/leadzsystems-info?hide_gdpr_banner=1"
+            style={{ minWidth: "320px", height: "700px" }}
+          />
+        </div>
+
+        {/* Contactgegevens */}
+        <div className="ul-reveal mt-8 flex flex-wrap justify-center gap-4">
+          <a href={`tel:${SITE.phoneIntl}`} className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-5 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-[var(--ul-accent-soft)] text-[var(--ul-accent)]">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
+            </span>
+            <span><span className="block text-xs text-[var(--ul-muted)]">Bel direct</span><span className="font-medium">{SITE.phone}</span></span>
+          </a>
+          <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-5 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-[#e7f9ee] text-[#25D366]">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a3 3 0 00-1 2.3c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.4-.2z" /></svg>
+            </span>
+            <span><span className="block text-xs text-[var(--ul-muted)]">App ons</span><span className="font-medium">WhatsApp</span></span>
+          </a>
+          <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-5 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-[var(--ul-accent-soft)] text-[var(--ul-accent)]">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16v12H4z" /><path d="M4 7l8 6 8-6" /></svg>
+            </span>
+            <span><span className="block text-xs text-[var(--ul-muted)]">Mail ons</span><span className="font-medium">{SITE.email}</span></span>
+          </a>
+        </div>
+
+        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
       </section>
 
       {/* ── FOOTER ── */}
