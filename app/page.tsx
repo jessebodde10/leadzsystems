@@ -10,14 +10,15 @@ export default function Home() {
         "@id": `${SITE.url}/#business`,
         name: SITE.name,
         description:
-          "AI-tools voor aannemers en installatiebedrijven: slimme planning, automatische offertes, digitale werkbonnen en materiaalbeheer.",
+          "AI-software en automatisering op maat voor het MKB: workflow-automatisering, websites en web-apps, en koppelingen tussen systemen met heldere dashboards.",
         url: SITE.url,
         email: SITE.email,
         telephone: SITE.phoneIntl,
         areaServed: SITE.region,
         address: { "@type": "PostalAddress", addressCountry: "NL" },
+        identifier: { "@type": "PropertyValue", name: "KvK", value: SITE.kvk },
         founder: { "@type": "Person", name: "Jesse" },
-        knowsAbout: ["AI-automatisering", "Bouw", "Installatietechniek", "Offertes", "Projectplanning"],
+        knowsAbout: ["AI-automatisering", "Softwareontwikkeling", "Webapplicaties", "Systeemintegraties", "Dashboards"],
       },
       {
         "@type": "FAQPage",

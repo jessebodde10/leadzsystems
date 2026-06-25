@@ -1,74 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { SITE, DIENSTEN } from "../lib/content";
+import { useEffect, useRef, useState } from "react";
+import { SITE, DIENSTEN, FAQS, PORTFOLIO_ITEMS } from "../lib/content";
 
 /* ──────────────────────────────────────────────────────────────
-   Hoofd-homepage in uplinked-stijl (oranje variant).
+   Hoofd-homepage in uplinked-stijl (indigo accent).
    Alle styling scoped onder .ul-root in globals.css.
    ────────────────────────────────────────────────────────────── */
 
 const NAV = [
-  { label: "Hoe het werkt", href: "#hoe" },
-  { label: "Functies", href: "#functies" },
+  { label: "Diensten", href: "#diensten" },
+  { label: "Werkwijze", href: "#werkwijze" },
+  { label: "Portfolio", href: "#portfolio" },
   { label: "Over ons", href: "#over" },
-  { label: "Prijzen", href: "#prijzen" },
   { label: "Contact", href: "#contact" },
 ];
 
 const PROOF = [
-  { naam: "Mark — installatiebedrijf", cijfer: "9 uur per week", tekst: "minder avondwerk aan offertes en werkbonnen" },
-  { naam: "Dennis — aannemer", cijfer: "15% lager", tekst: "inkoopkosten door slimmer bestellen per project" },
-  { naam: "Rico — dakdekkersbedrijf", cijfer: "0 keer", tekst: "een monteur zonder materiaal op de bouw dit kwartaal" },
-  { naam: "Patrick — elektra", cijfer: "2 dagen", tekst: "sneller factureren na oplevering van een klus" },
+  { naam: "Procesautomatisering", cijfer: "Uren/week", tekst: "minder tijd kwijt aan offertes, e-mail en administratie" },
+  { naam: "Snelle oplevering", cijfer: "2–6 weken", tekst: "van eerste gesprek tot een werkende oplossing live" },
+  { naam: "Eén overzicht", cijfer: "Alle data", tekst: "je systemen gekoppeld in één actueel dashboard" },
+  { naam: "Altijd op maat", cijfer: "100%", tekst: "gebouwd rond jouw processen, niet andersom" },
 ];
 
 const STAPPEN = [
-  { nr: "1", titel: "Vertel hoe je werkt", duur: "30 minuten", desc: "We lopen mee met je offertes, werkbonnen en planning. Geen vragenlijst, gewoon kijken hoe het nú gaat." },
-  { nr: "2", titel: "Wij bouwen op maat", duur: "2 tot 6 weken", desc: "Een tool rond jouw werkwijze: jouw prijslijst, jouw werkbon, jouw groothandel. Geen pakket van de plank." },
-  { nr: "3", titel: "Live op de bouw", duur: "1 dag", desc: "We zetten het live en lopen er samen doorheen, ook met je monteurs op locatie op hun telefoon." },
-  { nr: "4", titel: "Blijft meegroeien", duur: "doorlopend", desc: "De tool leert mee en we breiden uit waar dat loont. Je staat er niet alleen voor." },
-];
-
-const FUNCTIES = [
-  { icon: "📄", titel: "Offerte uit een spraaknotitie", desc: "Spreek de situatie in vanuit de meterkast; binnen minuten ligt er een nette offerte met je eigen prijzen." },
-  { icon: "📋", titel: "Planning die klopt", desc: "Monteurs, busjes en materiaal automatisch ingepland, inclusief reistijd en uitloop. Seint als het knelt." },
-  { icon: "🏗️", titel: "Materiaal op het juiste moment", desc: "Verbruik per project bijgehouden, bestellijst klaar voordat iets opraakt, beste prijs tussen groothandels." },
-  { icon: "🧾", titel: "Werkbon op de telefoon", desc: "Uren, materiaal en meerwerk ter plekke ingevuld. Niets raakt meer kwijt, de factuur volgt vanzelf." },
-  { icon: "🔌", titel: "Koppelt aan je pakket", desc: "Exact, AFAS, Snelstart, Bouw7 en groothandels als Technische Unie en Rexel. Geen dubbel werk meer." },
-  { icon: "🤝", titel: "Taal van de bouw", desc: "We praten over werkbonnen en meerwerk, niet over algoritmes. Persoonlijk van eerste gesprek tot oplevering." },
+  { nr: "1", titel: "Intake gesprek", desc: "We beginnen met een vrijblijvend gesprek om te begrijpen wat je wil aanpakken, welke systemen je gebruikt en wat het meeste oplevert." },
+  { nr: "2", titel: "Ontwerp & voorstel", desc: "We leveren een helder voorstel met technische aanpak en vaste prijs. Pas als jij akkoord geeft, starten we." },
+  { nr: "3", titel: "Bouwen & testen", desc: "Wij bouwen je oplossing op maat, koppelen alle systemen en testen alles uitgebreid met jou erbij." },
+  { nr: "4", titel: "Live & onderhoud", desc: "Je oplossing gaat live. Wij zorgen voor hosting, updates en monitoring. Maand na maand, zonder gedoe." },
 ];
 
 const PRIJZEN = [
   {
-    naam: "Start",
+    naam: "Project",
     maand: 1500,
     jaar: 1500,
     eenmalig: true,
-    omschrijving: "Eén concrete automatisering, snel live.",
-    features: ["Eén tool op maat (bijv. digitale werkbon)", "Eén koppeling naar je pakket", "Oplevering binnen 2 tot 4 weken", "Persoonlijke begeleiding bij livegang"],
+    omschrijving: "Eén concrete oplossing, snel live.",
+    features: ["Eén automatisering, website of koppeling", "Op maat rond jouw werkwijze", "Oplevering binnen 2 tot 4 weken", "Persoonlijke begeleiding bij livegang"],
     cta: "Plan een gesprek",
     populair: false,
   },
   {
-    naam: "Groei",
+    naam: "Partner",
     maand: 149,
     jaar: 119,
     eenmalig: false,
-    omschrijving: "Meerdere tools die samenwerken, doorlopend onderhouden.",
-    features: ["Meerdere tools en koppelingen", "Doorontwikkeling en aanpassingen", "Voorrang bij vragen en storingen", "Kwartaalcheck op nieuwe besparingen", "Onbeperkt monteurs toevoegen"],
+    omschrijving: "Doorlopende ontwikkeling en onderhoud.",
+    features: ["Meerdere oplossingen en koppelingen", "Doorontwikkeling en aanpassingen", "Voorrang bij vragen en storingen", "Periodieke check op nieuwe kansen", "Onbeperkt gebruikers"],
     cta: "Plan een gesprek",
     populair: true,
   },
-];
-
-const FAQS = [
-  { q: "Moet ik verstand van techniek hebben?", a: "Nee. Op de bouw vullen je monteurs alleen een simpel formulier in op hun telefoon: uren, materiaal en een foto. De rest gebeurt op de achtergrond." },
-  { q: "Hoe snel zie ik resultaat?", a: "De meeste tools draaien binnen 2 tot 6 weken. We werken in korte cycli, dus je ziet snel iets werken in plaats van pas na maanden." },
-  { q: "Werkt dit met mijn huidige software?", a: "In de meeste gevallen wel. We koppelen aan Exact, AFAS, Snelstart en Bouw7, en aan groothandels als Technische Unie en Rexel." },
-  { q: "Wat als het niet doet wat ik wil?", a: "Dan lossen we het op. We leveren pas op als jij tevreden bent en blijven daarna beschikbaar voor aanpassingen." },
-  { q: "Is het iets voor een klein bedrijf?", a: "Juist wel. We werken voor MKB in de bouw en installatietechniek, van eenpitter tot een ploeg van twintig man." },
 ];
 
 /* Voegt .is-visible toe zodra een element in beeld scrollt */
@@ -145,54 +128,53 @@ export default function UplinkedHome() {
         <div className="mx-auto max-w-4xl px-6 pt-20 pb-16 text-center md:pt-28">
           <div className="ul-reveal mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-1.5 text-sm text-[var(--ul-muted)] shadow-sm">
             <span className="h-2 w-2 rounded-full bg-[var(--ul-accent)] ul-pulse" />
-            AI-tools voor bouw &amp; installatietechniek
+            AI-software &amp; automatisering voor het MKB
           </div>
           <h1 className="ul-reveal text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl">
-            Minder papierwerk,<br className="hidden md:block" /> <span className="ul-mark">meer bouwen.</span>
+            Software die werkt.<br className="hidden md:block" /> <span className="ul-mark">Processen die lopen.</span>
           </h1>
           <p className="ul-reveal mx-auto mt-6 max-w-2xl text-lg text-[var(--ul-muted)] md:text-xl">
-            Offertes &apos;s avonds uittypen, werkbonnen die kwijtraken, monteurs zonder materiaal op de bouw. Leadz
-            Systems bouwt slimme tools die dat uit handen nemen, zodat jij je op het werk kunt richten.
+            Leadz Systems bouwt slimme software en automatiseringen op maat, zodat jij je op de groei van je bedrijf kunt richten.
           </p>
           <div className="ul-reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5">
+            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5">
               Plan een vrijblijvend gesprek
               <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </a>
-            <a href="#hoe" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 font-medium transition-colors hover:bg-[var(--ul-accent-soft)]">
-              Hoe het werkt
+            <a href="#diensten" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 font-medium transition-colors hover:bg-[var(--ul-accent-soft)]">
+              Bekijk wat we doen
             </a>
           </div>
 
           {/* Social proof */}
           <div className="ul-reveal mt-12 flex items-center justify-center gap-4">
             <div className="flex -space-x-3">
-              {["#ff5c1a", "#ff8a3d", "#0c0a09", "#57534e"].map((c, i) => (
+              {["#4f46e5", "#6366f1", "#0c0a09", "#57534e"].map((c, i) => (
                 <span key={i} className="grid h-10 w-10 place-items-center rounded-full border-2 border-white text-sm font-semibold text-white shadow" style={{ background: c }}>
-                  {["M", "D", "R", "P"][i]}
+                  {["A", "B", "C", "D"][i]}
                 </span>
               ))}
             </div>
             <p className="text-left text-sm text-[var(--ul-muted)]">
-              <span className="font-semibold text-[var(--ul-ink)]">MKB in de bouw</span> dat slimmer werkt met Leadz
+              <span className="font-semibold text-[var(--ul-ink)]">MKB-ondernemers</span> die slimmer werken met Leadz
             </p>
           </div>
         </div>
 
-        {/* Interactieve mockup: dagplanning-board */}
+        {/* Interactieve mockup: automatiseringen-board */}
         <div className="ul-reveal mx-auto max-w-5xl px-6 pb-20">
-          <PlanningMockup />
+          <AutomationMockup />
         </div>
       </section>
 
       {/* ── LOGOBALK / KOPPELINGEN ── */}
       <section className="border-y border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/40 py-6">
         <div className="mx-auto flex max-w-6xl items-center gap-10 overflow-hidden px-6">
-          <span className="shrink-0 text-sm font-medium text-[var(--ul-muted)]">Koppelt aan</span>
+          <span className="shrink-0 text-sm font-medium text-[var(--ul-muted)]">Werkt met</span>
           <div className="relative flex-1 overflow-hidden">
             <div className="ul-marquee flex w-max gap-12">
               {[...Array(2)].flatMap((_, r) =>
-                ["Exact", "AFAS", "Snelstart", "Bouw7", "Technische Unie", "Rexel", "Moneybird", "Wildkamp"].map((m) => (
+                ["OpenAI", "Claude", "Make", "Zapier", "Moneybird", "HubSpot", "Slack", "Microsoft 365", "Google Workspace", "Stripe"].map((m) => (
                   <span key={`${r}-${m}`} className="whitespace-nowrap text-lg font-semibold text-[var(--ul-ink)]/40">
                     {m}
                   </span>
@@ -203,20 +185,92 @@ export default function UplinkedHome() {
         </div>
       </section>
 
-      {/* ── HOE HET WERKT ── */}
-      <section id="hoe" className="mx-auto max-w-6xl px-6 py-24">
+      {/* ── DIENSTEN ── */}
+      <section id="diensten" className="mx-auto max-w-6xl px-6 py-24">
         <div className="ul-reveal mx-auto max-w-2xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Hoe het werkt</p>
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">In vier stappen van papierwerk naar rust</h2>
-          <p className="mt-4 text-[var(--ul-muted)]">Geen lang traject. We beginnen klein, leveren snel iets werkends en bouwen van daaruit verder.</p>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Diensten</p>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Wat we voor je bouwen</h2>
+          <p className="mt-4 text-[var(--ul-muted)]">Van losse automatisering tot een complete webapplicatie. Altijd op maat, altijd rond hoe jij werkt.</p>
         </div>
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {STAPPEN.map((s, i) => (
-            <div key={s.nr} className="ul-reveal rounded-2xl border border-[var(--ul-line)] bg-white p-6 transition-shadow hover:shadow-lg" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] font-semibold text-white">{s.nr}</div>
-              <h3 className="font-semibold">{s.titel}</h3>
-              <span className="mt-1 inline-block rounded-full bg-[var(--ul-accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--ul-accent)]">{s.duur}</span>
-              <p className="mt-3 text-sm text-[var(--ul-muted)]">{s.desc}</p>
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {DIENSTEN.map((d, i) => (
+            <a
+              key={d.slug}
+              href={`/diensten/${d.slug}`}
+              className="ul-reveal group flex flex-col rounded-2xl border border-[var(--ul-line)] bg-white p-7 transition-all hover:-translate-y-1 hover:border-[var(--ul-accent)]/40 hover:shadow-xl"
+              style={{ transitionDelay: `${i * 70}ms` }}
+            >
+              <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-[var(--ul-accent-soft)] text-2xl transition-transform group-hover:scale-110">{d.icon}</div>
+              <h3 className="text-lg font-semibold">{d.title}</h3>
+              <span className="mt-1 inline-block w-fit rounded-full bg-[var(--ul-accent-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--ul-accent)]">{d.stat}</span>
+              <p className="mt-3 text-sm text-[var(--ul-muted)]">{d.description}</p>
+              <ul className="mt-4 space-y-2">
+                {d.items.slice(0, 3).map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-[var(--ul-ink)]/80">
+                    <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[var(--ul-accent)]" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 13l4 4L19 7" /></svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--ul-accent)]">
+                Lees meer
+                <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ── HOE HET WERKT ── */}
+      <section id="werkwijze" className="border-t border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/30 py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="ul-reveal mx-auto max-w-2xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Werkwijze</p>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Van idee naar live oplossing in 4 stappen</h2>
+            <p className="mt-4 text-[var(--ul-muted)]">We houden het simpel. Jij vertelt ons wat je wil bereiken. Wij zorgen dat het werkt.</p>
+          </div>
+          <div className="ul-reveal relative mt-16">
+            {/* Verbindingslijn achter de cirkels */}
+            <div className="absolute top-7 left-[12.5%] right-[12.5%] hidden h-0.5 bg-[var(--ul-line)] md:block" />
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
+              {STAPPEN.map((s, i) => (
+                <div key={s.nr} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 70}ms` }}>
+                  <div className="relative z-10 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-lg font-semibold text-white shadow-lg shadow-indigo-500/20">
+                    {s.nr}
+                  </div>
+                  <h3 className="mt-5 font-semibold">{s.titel}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--ul-muted)]">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PORTFOLIO ── */}
+      <section id="portfolio" className="mx-auto max-w-6xl px-6 py-24">
+        <div className="ul-reveal mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Portfolio</p>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Een greep uit wat we bouwen</h2>
+          <p className="mt-4 text-[var(--ul-muted)]">Concrete oplossingen voor concrete problemen. Van automatisering tot webapplicatie.</p>
+        </div>
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {PORTFOLIO_ITEMS.map((p, i) => (
+            <div
+              key={p.title}
+              className="ul-reveal ul-preview group flex flex-col overflow-hidden rounded-2xl border border-[var(--ul-line)] bg-white transition-all hover:-translate-y-1 hover:shadow-xl"
+              style={{ transitionDelay: `${i * 70}ms` }}
+            >
+              <LivePreview url={p.url} domain={p.domain} tag={p.tag} />
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-semibold">{p.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-[var(--ul-muted)]">{p.description}</p>
+                <div className="mt-4 flex flex-wrap items-center gap-1.5">
+                  {p.stack.map((s) => (
+                    <span key={s} className="rounded-md bg-[var(--ul-accent-soft)] px-2 py-1 text-[11px] font-medium text-[var(--ul-accent)]">{s}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -227,7 +281,7 @@ export default function UplinkedHome() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="ul-reveal mx-auto max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent-2)]">Resultaat</p>
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Wat het oplevert in de praktijk</h2>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Wat het je oplevert</h2>
           </div>
           <div className="mt-14 grid gap-5 sm:grid-cols-2">
             {PROOF.map((p, i) => (
@@ -238,23 +292,6 @@ export default function UplinkedHome() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── FUNCTIES ── */}
-      <section id="functies" className="mx-auto max-w-6xl px-6 py-24">
-        <div className="ul-reveal mx-auto max-w-2xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ul-accent)]">Functies</p>
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Alles wat je dag vertraagt, geautomatiseerd</h2>
-        </div>
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {FUNCTIES.map((f, i) => (
-            <div key={f.titel} className="ul-reveal group rounded-2xl border border-[var(--ul-line)] bg-white p-7 transition-all hover:-translate-y-1 hover:border-[var(--ul-accent)]/40 hover:shadow-xl" style={{ transitionDelay: `${i * 60}ms` }}>
-              <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-[var(--ul-accent-soft)] text-2xl transition-transform group-hover:scale-110">{f.icon}</div>
-              <h3 className="font-semibold">{f.titel}</h3>
-              <p className="mt-2 text-sm text-[var(--ul-muted)]">{f.desc}</p>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -279,13 +316,13 @@ export default function UplinkedHome() {
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Geen ver-van-je-bed software, maar iemand die meedenkt</h2>
             <div className="mt-5 space-y-4 text-[var(--ul-muted)]">
               <p>
-                Ik ben Jesse, oprichter van Leadz Systems. Ik bouw AI-tools voor de bouw en installatietechniek, niet
-                vanaf een afstand, maar door eerst écht te begrijpen hoe jouw dag eruitziet.
+                Ik ben Jesse, oprichter van Leadz Systems. Ik bouw AI-software en automatiseringen voor het MKB, niet
+                vanaf een afstand, maar door eerst écht te begrijpen hoe jouw bedrijf werkt.
               </p>
               <p>
                 Ik geloof niet in dikke pakketten waar je je werkwijze omheen moet wringen. Ik kijk waar bij jou de
-                meeste tijd verdwijnt, en bouw daar iets concreets voor: jouw werkbon, jouw prijslijst, jouw
-                groothandel. Klein beginnen, snel iets werkends, en van daaruit verder.
+                meeste tijd of omzet blijft liggen, en bouw daar iets concreets voor. Klein beginnen, snel iets
+                werkends, en van daaruit verder.
               </p>
               <p>
                 Korte lijntjes, geen jargon. Van het eerste gesprek tot ver na de oplevering heb je gewoon met mij te
@@ -293,7 +330,7 @@ export default function UplinkedHome() {
               </p>
             </div>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href="#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5">
+              <a href="#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5">
                 Plan een kennismaking
               </a>
               <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 text-center font-medium transition-colors hover:bg-white">
@@ -322,7 +359,7 @@ export default function UplinkedHome() {
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {PRIJZEN.map((p) => (
-              <div key={p.naam} className={`ul-reveal relative rounded-3xl border bg-white p-8 ${p.populair ? "border-[var(--ul-accent)] shadow-xl shadow-orange-500/10" : "border-[var(--ul-line)]"}`}>
+              <div key={p.naam} className={`ul-reveal relative rounded-3xl border bg-white p-8 ${p.populair ? "border-[var(--ul-accent)] shadow-xl shadow-indigo-500/10" : "border-[var(--ul-line)]"}`}>
                 {p.populair && (
                   <span className="absolute -top-3 left-8 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-3 py-1 text-xs font-semibold text-white">Meest gekozen</span>
                 )}
@@ -340,7 +377,7 @@ export default function UplinkedHome() {
                     </li>
                   ))}
                 </ul>
-                <a href="#contact" className={`mt-7 block rounded-full px-6 py-3 text-center font-medium transition-transform hover:-translate-y-0.5 ${p.populair ? "bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white shadow-lg shadow-orange-500/25" : "bg-[var(--ul-ink)] text-white"}`}>{p.cta}</a>
+                <a href="#contact" className={`mt-7 block rounded-full px-6 py-3 text-center font-medium transition-transform hover:-translate-y-0.5 ${p.populair ? "bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white shadow-lg shadow-indigo-500/25" : "bg-[var(--ul-ink)] text-white"}`}>{p.cta}</a>
               </div>
             ))}
           </div>
@@ -377,8 +414,8 @@ export default function UplinkedHome() {
           <div className="ul-mesh relative p-8 md:p-12">
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Plan een vrijblijvend gesprek</h2>
             <p className="mt-4 text-[var(--ul-muted)]">
-              We kijken samen waar in jouw bedrijf de meeste tijd verdwijnt en wat het oplevert om dat te
-              automatiseren. Geen verkooppraatje, gewoon een eerlijk gesprek.
+              We kijken samen waar in jouw bedrijf de meeste tijd of omzet blijft liggen en wat het oplevert om dat
+              aan te pakken. Geen verkooppraatje, gewoon een eerlijk gesprek.
             </p>
             <div className="mt-8 space-y-3">
               <a href={`tel:${SITE.phoneIntl}`} className="flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white px-4 py-3 transition-colors hover:bg-[var(--ul-accent-soft)]">
@@ -453,7 +490,7 @@ export default function UplinkedHome() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-6 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5"
+                  className="w-full rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-6 py-3.5 font-medium text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5"
                 >
                   Verstuur en plan een gesprek
                 </button>
@@ -472,7 +509,7 @@ export default function UplinkedHome() {
               Leadz Systems
             </div>
             <p className="mt-4 max-w-xs text-sm text-[var(--ul-muted)]">
-              Slimme AI-tools voor de bouw en installatietechniek. Minder papierwerk, meer bouwen.
+              Slimme AI-software en automatisering voor het MKB. Minder handwerk, meer resultaat.
             </p>
           </div>
           <div>
@@ -486,15 +523,16 @@ export default function UplinkedHome() {
           <div>
             <p className="mb-3 text-sm font-semibold">Menu</p>
             <div className="flex flex-col gap-2 text-sm text-[var(--ul-muted)]">
-              <a href="#hoe" className="hover:text-[var(--ul-ink)]">Hoe het werkt</a>
+              <a href="#werkwijze" className="hover:text-[var(--ul-ink)]">Werkwijze</a>
+              <a href="#portfolio" className="hover:text-[var(--ul-ink)]">Portfolio</a>
               <a href="#over" className="hover:text-[var(--ul-ink)]">Over ons</a>
-              <a href="#prijzen" className="hover:text-[var(--ul-ink)]">Prijzen</a>
               <a href="#contact" className="hover:text-[var(--ul-ink)]">Contact</a>
             </div>
           </div>
         </div>
-        <div className="mx-auto mt-10 max-w-6xl border-t border-[var(--ul-line)] px-6 pt-6">
+        <div className="mx-auto mt-10 flex max-w-6xl flex-col gap-1 border-t border-[var(--ul-line)] px-6 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-[var(--ul-muted)]">© 2026 Leadz Systems</p>
+          <p className="text-sm text-[var(--ul-muted)]">KvK {SITE.kvk}</p>
         </div>
       </footer>
 
@@ -513,7 +551,7 @@ export default function UplinkedHome() {
       <a
         href={`tel:${SITE.phoneIntl}`}
         aria-label={`Bel ${SITE.phone}`}
-        className="fixed bottom-6 left-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] shadow-lg shadow-orange-500/30 md:hidden"
+        className="fixed bottom-6 left-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] shadow-lg shadow-indigo-500/30 md:hidden"
       >
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="white" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
       </a>
@@ -530,20 +568,66 @@ export default function UplinkedHome() {
   );
 }
 
-/* Hero-mockup: een dagplanning-board, het bouw-equivalent van uplinked's content-kalender */
-function PlanningMockup() {
-  const kaarten = [
-    { tijd: "08:00", titel: "Cv-ketel vervangen", plaats: "Almere", kleur: "var(--ul-accent)", status: "Materiaal compleet" },
-    { tijd: "10:30", titel: "Meterkast uitbreiden", plaats: "Lelystad", kleur: "#0c0a09", status: "Monteur onderweg" },
-    { tijd: "13:00", titel: "Dakgoot herstellen", plaats: "Almere", kleur: "var(--ul-accent-2)", status: "Bon gereed" },
-    { tijd: "15:30", titel: "Spoed: lekkage", plaats: "Zeewolde", kleur: "#dc2626", status: "Ingepland vandaag" },
+/* Live preview: toont de echte site in een browserframe en scrollt 'm langzaam door,
+   zodat het op een korte videotour lijkt. De site wordt op 1280px gerenderd en
+   teruggeschaald naar de kaartbreedte (via ResizeObserver). */
+function LivePreview({ url, domain, tag }: { url: string; domain: string; tag: string }) {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.3);
+  const DESIGN_W = 1280;
+
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const update = () => setScale(el.clientWidth / DESIGN_W);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div className="border-b border-[var(--ul-line)]">
+      {/* Browser-balkje */}
+      <div className="flex items-center gap-2 border-b border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/50 px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-[var(--ul-line)]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[var(--ul-line)]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[var(--ul-line)]" />
+        <span className="ml-auto rounded-full bg-[var(--ul-accent)] px-2 py-0.5 text-[11px] font-medium text-white">{tag}</span>
+      </div>
+      {/* Schaalbare viewport met auto-scrollende iframe */}
+      <div ref={viewportRef} className="relative h-56 overflow-hidden bg-white">
+        <div style={{ width: DESIGN_W, transform: `scale(${scale})`, transformOrigin: "top left" }}>
+          <iframe
+            src={url}
+            title={`Preview van ${domain}`}
+            loading="lazy"
+            scrolling="no"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="ul-reel pointer-events-none border-0"
+            style={{ width: DESIGN_W, height: 2200 }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Hero-mockup: een automatiseringen-board dat laat zien welke processen op de achtergrond draaien */
+function AutomationMockup() {
+  const rijen = [
+    { icon: "📥", titel: "Nieuwe lead → CRM + welkomstmail", kleur: "var(--ul-accent)", status: "Automatisch" },
+    { icon: "📄", titel: "Aanvraag → concept-offerte klaar", kleur: "#0c0a09", status: "Bespaart 20 min" },
+    { icon: "💶", titel: "Factuur betaald → boekhouding bijgewerkt", kleur: "var(--ul-accent-2)", status: "Gekoppeld" },
+    { icon: "📊", titel: "Wekelijkse cijfers → dashboard", kleur: "#16a34a", status: "Elke maandag" },
   ];
   return (
-    <div className="ul-float rounded-2xl border border-[var(--ul-line)] bg-white p-4 shadow-2xl shadow-orange-500/10 md:p-6">
+    <div className="ul-float rounded-2xl border border-[var(--ul-line)] bg-white p-4 shadow-2xl shadow-indigo-500/10 md:p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold">Dagplanning — donderdag 25 juni</p>
-          <p className="text-xs text-[var(--ul-muted)]">4 klussen · 3 monteurs · alles voorzien van materiaal</p>
+          <p className="text-sm font-semibold">Automatiseringen — live</p>
+          <p className="text-xs text-[var(--ul-muted)]">4 processen draaien op de achtergrond, zonder handwerk</p>
         </div>
         <div className="flex gap-1.5">
           <span className="h-3 w-3 rounded-full bg-[var(--ul-line)]" />
@@ -552,12 +636,11 @@ function PlanningMockup() {
         </div>
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
-        {kaarten.map((k, i) => (
+        {rijen.map((k, i) => (
           <div key={i} className="group flex items-center gap-3 rounded-xl border border-[var(--ul-line)] bg-white p-3 transition-all hover:-translate-y-0.5 hover:shadow-md">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg text-xs font-semibold text-white" style={{ background: k.kleur }}>{k.tijd}</span>
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-lg" style={{ background: `color-mix(in srgb, ${k.kleur} 14%, white)` }}>{k.icon}</span>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">{k.titel}</p>
-              <p className="text-xs text-[var(--ul-muted)]">{k.plaats}</p>
             </div>
             <span className="hidden shrink-0 rounded-full bg-[var(--ul-accent-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--ul-accent)] sm:inline">{k.status}</span>
           </div>

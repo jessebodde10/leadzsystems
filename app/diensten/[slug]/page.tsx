@@ -54,9 +54,9 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
             <span className="text-[17px]">Leadz Systems</span>
           </a>
           <div className="hidden items-center gap-8 md:flex">
-            <a href="/#hoe" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Hoe het werkt</a>
-            <a href="/#functies" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Functies</a>
-            <a href="/#prijzen" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Prijzen</a>
+            <a href="/#diensten" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Diensten</a>
+            <a href="/#werkwijze" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Werkwijze</a>
+            <a href="/#portfolio" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Portfolio</a>
             <a href="/#contact" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Contact</a>
           </div>
           <a href="/#contact" className="rounded-full bg-[var(--ul-ink)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5">
@@ -68,15 +68,15 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       {/* ── HERO ── */}
       <section className="ul-mesh relative px-6 pt-16 pb-16 md:pt-24">
         <div className="mx-auto max-w-3xl">
-          <a href="/#functies" className="block w-fit text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">← Alle diensten</a>
+          <a href="/#diensten" className="block w-fit text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">← Alle diensten</a>
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-1.5 text-sm font-medium text-[var(--ul-muted)] shadow-sm">
             <span className="text-lg">{dienst.icon}</span>
             {dienst.title}
           </div>
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.08] tracking-tight md:text-5xl">{dienst.metaTitle.split("|")[0].trim()}</h1>
+          <h1 className="mt-10 text-4xl font-semibold leading-[1.08] tracking-tight md:mt-12 md:text-5xl">{dienst.metaTitle.split("|")[0].trim()}</h1>
           <p className="mt-5 text-lg text-[var(--ul-muted)] md:text-xl">{dienst.heroLead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-orange-500/25 transition-transform hover:-translate-y-0.5">
+            <a href="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-7 py-3.5 font-medium text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5">
               Plan een vrijblijvend gesprek
             </a>
             <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--ul-line)] bg-white px-7 py-3.5 text-center font-medium transition-colors hover:bg-[var(--ul-accent-soft)]">
@@ -126,7 +126,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       <section className="border-y border-[var(--ul-line)] bg-[var(--ul-accent-soft)]/40 px-6 py-16">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-semibold tracking-tight">Werkt met jouw software</h2>
-          <p className="mt-2 text-lg text-[var(--ul-muted)]">We koppelen aan de pakketten en groothandels die je al gebruikt.</p>
+          <p className="mt-2 text-lg text-[var(--ul-muted)]">We koppelen aan de software en tools die je al gebruikt.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {dienst.koppelingen.map((k) => (
               <span key={k} className="inline-flex items-center gap-2 rounded-full border border-[var(--ul-line)] bg-white px-4 py-2 text-sm">
@@ -162,7 +162,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
           <div className="relative">
             <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">Benieuwd wat dit voor jou oplevert?</h2>
             <p className="mx-auto mt-4 max-w-xl text-white/70">Plan een vrijblijvend gesprek. Geen verkooppraatje, gewoon eerlijk kijken waar het tijd bespaart.</p>
-            <a href="/#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-8 py-4 font-medium shadow-lg shadow-orange-500/30 transition-transform hover:-translate-y-0.5">
+            <a href="/#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] px-8 py-4 font-medium shadow-lg shadow-indigo-500/30 transition-transform hover:-translate-y-0.5">
               Plan een gesprek
             </a>
           </div>
@@ -183,7 +183,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
               </a>
             ))}
           </div>
-          <p className="text-sm text-[var(--ul-muted)]">© 2026 Leadz Systems</p>
+          <p className="text-sm text-[var(--ul-muted)]">© 2026 Leadz Systems · KvK {SITE.kvk}</p>
         </div>
       </footer>
 
@@ -191,7 +191,7 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Stuur een WhatsApp-bericht" className="fixed bottom-6 right-6 z-50 hidden h-14 w-14 place-items-center rounded-full bg-[#25D366] shadow-lg shadow-black/20 transition-transform hover:-translate-y-1 md:grid">
         <svg viewBox="0 0 24 24" className="h-7 w-7" fill="white" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a3 3 0 00-1 2.3c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.4-.2z" /></svg>
       </a>
-      <a href={`tel:${SITE.phoneIntl}`} aria-label={`Bel ${SITE.phone}`} className="fixed bottom-6 left-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] shadow-lg shadow-orange-500/30 md:hidden">
+      <a href={`tel:${SITE.phoneIntl}`} aria-label={`Bel ${SITE.phone}`} className="fixed bottom-6 left-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[var(--ul-accent)] to-[var(--ul-accent-2)] shadow-lg shadow-indigo-500/30 md:hidden">
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="white" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
       </a>
       <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Stuur een WhatsApp-bericht" className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] shadow-lg shadow-black/30 md:hidden">

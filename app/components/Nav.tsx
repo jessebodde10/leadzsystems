@@ -25,7 +25,7 @@ export default function Nav() {
 
           <a
             href="/#contact"
-            className="hidden md:inline-block text-sm px-5 py-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold whitespace-nowrap shadow-md shadow-orange-500/20"
+            className="hidden md:inline-block text-sm px-5 py-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold whitespace-nowrap shadow-md shadow-indigo-500/20"
           >
             Neem contact op
           </a>
@@ -64,7 +64,7 @@ export default function Nav() {
             <a
               href="/#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 text-center px-5 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 font-semibold shadow-md shadow-orange-500/20"
+              className="mt-2 text-center px-5 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 font-semibold shadow-md shadow-indigo-500/20"
             >
               Neem contact op
             </a>

@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "Leadz Systems — AI-tools voor bouw & installatietechniek";
+const title = "Leadz Systems — AI-software & automatisering voor het MKB";
 const description =
-  "Leadz Systems bouwt slimme AI-tools voor aannemers en installatiebedrijven: automatische offertes, digitale werkbonnen, planning en materiaalbeheer. Minder papierwerk, meer bouwen.";
+  "Leadz Systems bouwt slimme AI-software en automatiseringen op maat voor het MKB: workflow-automatisering, websites en web-apps, en koppelingen met heldere dashboards. Minder handwerk, meer resultaat.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -25,12 +25,13 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "AI bouw",
-    "AI installatietechniek",
-    "automatische offertes bouw",
-    "digitale werkbon",
-    "projectplanning installatiebedrijf",
-    "administratie automatiseren aannemer",
+    "AI-automatisering MKB",
+    "workflow automatisering",
+    "custom software op maat",
+    "website laten maken",
+    "web-app ontwikkeling",
+    "systeemintegraties",
+    "dashboard bouwen",
     "Leadz Systems",
   ],
   authors: [{ name: "Leadz Systems" }],

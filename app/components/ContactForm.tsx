@@ -60,7 +60,7 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold text-lg shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40"
+        className="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 transition-all font-semibold text-lg shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
       >
         Bericht versturen →
       </button>
