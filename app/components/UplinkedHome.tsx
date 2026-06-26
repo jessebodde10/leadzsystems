@@ -119,7 +119,7 @@ export default function UplinkedHome() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--ul-line)] bg-white/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#top" className="flex items-center">
-            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[22px] w-auto object-contain" priority unoptimized />
+            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[18px] w-auto object-contain" priority unoptimized />
           </a>
           <div className="hidden items-center gap-8 md:flex">
             {NAV.map((n) => (
@@ -484,7 +484,7 @@ export default function UplinkedHome() {
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center">
-              <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[22px] w-auto object-contain" unoptimized />
+              <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[18px] w-auto object-contain" unoptimized />
             </div>
             <p className="mt-4 max-w-xs text-sm text-[var(--ul-muted)]">
               Slimme AI-software en automatisering voor het MKB. Software die werkt, processen die lopen.
