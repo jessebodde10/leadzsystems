@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { SITE, DIENSTEN } from "../../lib/content";
 
@@ -49,9 +50,8 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       {/* ── NAV ── */}
       <header className="sticky top-0 z-50 border-b border-[var(--ul-line)] bg-white/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white">L</span>
-            <span className="text-[17px]">Leadz Systems</span>
+          <a href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[18px] w-auto object-contain" />
           </a>
           <div className="hidden items-center gap-8 md:flex">
             <a href="/#diensten" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">Diensten</a>
@@ -172,9 +172,8 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       {/* ── FOOTER ── */}
       <footer className="border-t border-[var(--ul-line)] py-12">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
-          <a href="/" className="flex items-center gap-2 font-semibold">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--ul-accent)] to-[var(--ul-accent-2)] text-white">L</span>
-            Leadz Systems
+          <a href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[18px] w-auto object-contain" />
           </a>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {DIENSTEN.map((d) => (
