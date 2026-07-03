@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { NAV_LINKS } from "../lib/content";
 
@@ -10,8 +11,8 @@ export default function Nav() {
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 md:px-6">
       <div className="w-full max-w-3xl rounded-3xl md:rounded-full bg-[#1a1d22]/90 backdrop-blur-md border border-white/10 shadow-lg shadow-black/30">
         <div className="flex items-center justify-between gap-8 px-5 py-3">
-          <a href="/" className="text-base font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent whitespace-nowrap">
-            Leadz Systems
+          <a href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="h-[18px] w-auto object-contain brightness-0 invert" />
           </a>
 
           {/* Desktop links */}
