@@ -221,7 +221,7 @@ export default function UplinkedHome() {
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Wat we voor je bouwen</h2>
           <p className="mt-4 text-[var(--ul-muted)]">Van losse automatisering tot een complete webapplicatie. Altijd op maat, altijd rond hoe jij werkt.</p>
         </div>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
           {DIENSTEN.map((d, i) => (
             <a
               key={d.slug}
