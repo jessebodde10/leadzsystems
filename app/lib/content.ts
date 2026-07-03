@@ -38,6 +38,36 @@ export type Dienst = {
 
 export const DIENSTEN: Dienst[] = [
   {
+    slug: "ai-agents",
+    icon: "🤖",
+    title: "AI Agents",
+    stat: "24/7 aan het werk, zonder dat jij er naar omkijkt",
+    description:
+      "Een AI agent is software die zelfstandig taken uitvoert: e-mails verwerken, leads opvolgen, data doorzetten tussen systemen. Geen vermoeidheid, geen fouten, geen pauzes. Wij bouwen agents die precies passen bij hoe jouw bedrijf werkt.",
+    items: [
+      "Agents die e-mails, aanvragen en leads automatisch verwerken",
+      "Koppelingen met je bestaande systemen zoals CRM en boekhouding",
+      "24/7 actief, ook buiten kantooruren",
+      "Schaalbaar: meer volume zonder extra mensen",
+    ],
+    metaTitle: "AI Agents laten bouwen voor het MKB | Leadz Systems",
+    metaDescription:
+      "Laat AI agents het repetitieve werk overnemen: e-mailverwerking, leadopvolging, administratie en systeemkoppelingen. Maatwerk gebouwd rond jouw processen.",
+    heroLead:
+      "Terwijl jij je richt op de groei van je bedrijf, werkt een AI agent op de achtergrond. E-mails verwerken, leads opvolgen, data doorzetten: taken die nu uren kosten, gedaan in seconden.",
+    herkenbaar: [
+      "Medewerkers besteden uren aan taken die steeds hetzelfde zijn.",
+      "Leads of aanvragen blijven liggen omdat niemand er snel genoeg bij kan.",
+      "Systemen praten niet met elkaar en data wordt handmatig overgenomen.",
+    ],
+    oplossing: [
+      { title: "Agents die zelfstandig werken", desc: "Van inkomende e-mail tot leadopvolging: de agent herkent wat er moet gebeuren en handelt, zonder dat jij er iets voor hoeft te doen." },
+      { title: "Gekoppeld aan jouw systemen", desc: "De agent werkt samen met je CRM, boekhouding, inbox en andere tools. Geen dubbel werk, geen data die blijft liggen." },
+      { title: "Dag en nacht actief", desc: "Geen kantooruren, geen pauzes. Een AI agent werkt 24/7 en schaalt mee als het drukker wordt, zonder dat je extra mensen nodig hebt." },
+    ],
+    koppelingen: ["HubSpot", "Pipedrive", "Exact", "AFAS", "Google Workspace", "Slack", "WhatsApp Business", "Outlook"],
+  },
+  {
     slug: "ai-automatisering",
     icon: "⚡",
     title: "AI-automatisering & workflows",
