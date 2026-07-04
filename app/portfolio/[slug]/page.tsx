@@ -40,7 +40,7 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
           </a>
           <div className="flex items-center gap-6">
             <a href="/#portfolio" className="text-sm text-[var(--ul-muted)] transition-colors hover:text-[var(--ul-ink)]">← Portfolio</a>
-            <a href="/#contact" className="rounded-full bg-[var(--ul-ink)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5">
+            <a href="/#contact" className="hidden md:inline-block rounded-full bg-[var(--ul-ink)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5">
               Plan een gesprek
             </a>
           </div>
