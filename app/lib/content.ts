@@ -176,39 +176,93 @@ export const FAQS = [
   { q: "Werken jullie per project of doorlopend?", a: "Beide. Je kunt kiezen voor een eenmalig project (één oplossing, vaste prijs) of een doorlopend partnerschap waarbij we blijven doorontwikkelen en je altijd iemand hebt die meekijkt." },
 ];
 
+export type PortfolioItem = {
+  slug: string;
+  tag: string;
+  title: string;
+  description: string;
+  stack: string[];
+  url: string;
+  domain: string;
+  uitdaging: string;
+  watWeDeden: string[];
+  resultaat: string;
+  screenshot?: string;
+};
+
 // PORTFOLIO — echte, live projecten. De previews tonen de site zelf via een iframe.
-export const PORTFOLIO_ITEMS = [
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
+    slug: "happy-face",
     tag: "Website",
     title: "Happy Face — schoonheidssalon",
     description: "Complete website voor een schoonheidssalon in Rijswijk: behandelingen, merken en contact, met een warme en persoonlijke uitstraling.",
-    stack: ["Website", "Responsive", "SEO"],
+    stack: ["Next.js", "Responsive", "SEO"],
     url: "https://website-happy-test.vercel.app/",
     domain: "happy-face.nl",
+    uitdaging: "Happy Face had geen online aanwezigheid die recht deed aan de sfeer en kwaliteit van de salon. De oude site was gedateerd en genereerde nauwelijks aanvragen. Het doel: een website die de warmte van de salon uitstraalt en bezoekers omzet naar klanten.",
+    watWeDeden: [
+      "Complete nieuwe website ontworpen en gebouwd in Next.js",
+      "Overzichtspagina met alle behandelingen en bijbehorende merken",
+      "Contactpagina met afspraakmogelijkheid",
+      "Geoptimaliseerd voor Google met correcte structuur en laadsnelheid",
+      "Volledig mobielvriendelijk en snel op alle apparaten",
+    ],
+    resultaat: "Een warme, professionele website die de uitstraling van de salon weerspiegelt en bezoekers een duidelijke weg geeft naar het maken van een afspraak.",
   },
   {
+    slug: "connect-rise",
     tag: "Website",
     title: "Connect & Rise — ademcoach",
     description: "Website voor een ademcoach met workshops en circles rond ouder & kind, gericht op rust, ruimte en verbinding.",
-    stack: ["Website", "Workshops", "Responsive"],
+    stack: ["Next.js", "Responsive", "SEO"],
     url: "https://connectrise-test.vercel.app/",
     domain: "connectrise.nl",
+    uitdaging: "Connect & Rise bood workshops en ademcoaching aan, maar had geen website die het aanbod helder maakte. Potentiële deelnemers vonden moeilijk wat ze zochten en haakten af. De wens: een rustige, persoonlijke site die vertrouwen wekt.",
+    watWeDeden: [
+      "Nieuwe website gebouwd met focus op rust en persoonlijk contact",
+      "Overzichtspagina met workshops, circles en individuele sessies",
+      "Verhaal van de coach duidelijk en toegankelijk neergezet",
+      "Contactformulier voor aanmeldingen en vragen",
+      "Mobielvriendelijk en snel geladen",
+    ],
+    resultaat: "Een website die de eigenheid van het merk uitstraalt en bezoekers op een rustige manier begeleidt naar aanmelding of contact.",
   },
   {
+    slug: "ags",
     tag: "Web-app",
     title: "AGS — maatwerk tool",
     description: "Een maatwerk webapplicatie die een specifiek werkproces digitaliseert en versnelt, gebouwd rond de wensen van de klant.",
-    stack: ["Web-app", "Maatwerk", "Dashboard"],
+    stack: ["Next.js", "Supabase", "Maatwerk"],
     url: "https://ags-tool.vercel.app/",
     domain: "ags-tool.app",
+    uitdaging: "AGS verwerkte een terugkerend werkproces handmatig via losse bestanden en e-mails. Dat kostte veel tijd, was foutgevoelig en gaf geen overzicht. De vraag: kan dit slimmer, sneller en betrouwbaarder?",
+    watWeDeden: [
+      "Werkproces in kaart gebracht en vertaald naar een digitale tool",
+      "Webapplicatie op maat gebouwd met eigen login en gebruikersbeheer",
+      "Gestructureerd overzicht van alle lopende en afgeronde taken",
+      "Automatische verwerking van stappen die eerder handmatig gingen",
+      "Snel te gebruiken op desktop, ook onderweg op mobiel",
+    ],
+    resultaat: "Een tool die het werkproces volledig digitaliseert: minder handwerk, minder fouten en altijd inzicht in de status van lopende zaken.",
   },
   {
+    slug: "freezo",
     tag: "Web-app",
     title: "Freezo — freelance dashboard",
     description: "Een centraal dashboard voor zelfstandige professionals om hun werk te organiseren en beheren. Alles op één plek, overzichtelijk en snel.",
-    stack: ["Web-app", "Dashboard", "Maatwerk"],
+    stack: ["Next.js", "Supabase", "Dashboard"],
     url: "https://www.freezo.nl",
     domain: "freezo.nl",
+    uitdaging: "Freelancers werken met losse tools voor facturatie, planning en overzicht. Dat leidt tot verspreide informatie en verlies van tijd. Freezo wilde één centrale plek waar alles samenkomt.",
+    watWeDeden: [
+      "Dashboard gebouwd met realtime overzicht van inkomsten en opdrachten",
+      "Registratie en login met eigen account per gebruiker",
+      "Overzicht van actieve en afgeronde projecten",
+      "Inzicht in omzet en openstaande facturen",
+      "Schaalbare techniek zodat het platform kan meegroeien",
+    ],
+    resultaat: "Een helder dashboard dat freelancers in één oogopslag laat zien hoe hun bedrijf ervoor staat, zonder losse spreadsheets of aparte tools.",
   },
 ];
 

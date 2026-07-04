@@ -285,22 +285,24 @@ export default function UplinkedHome() {
         </div>
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {PORTFOLIO_ITEMS.map((p, i) => (
-            <div
+            <a
               key={p.title}
+              href={`/portfolio/${p.slug}`}
               className="ul-reveal ul-preview group flex flex-col overflow-hidden rounded-2xl border border-[var(--ul-line)] bg-white transition-all hover:-translate-y-1 hover:shadow-xl"
               style={{ transitionDelay: `${i * 70}ms` }}
             >
               <LivePreview url={p.url} domain={p.domain} tag={p.tag} />
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-semibold">{p.title}</h3>
+                <h3 className="font-semibold group-hover:text-[var(--ul-accent)] transition-colors">{p.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-[var(--ul-muted)]">{p.description}</p>
                 <div className="mt-4 flex flex-wrap items-center gap-1.5">
                   {p.stack.map((s) => (
                     <span key={s} className="rounded-md bg-[var(--ul-accent-soft)] px-2 py-1 text-[11px] font-medium text-[var(--ul-accent)]">{s}</span>
                   ))}
                 </div>
+                <span className="mt-4 text-sm font-medium text-[var(--ul-accent)]">Bekijk project →</span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
