@@ -202,6 +202,14 @@ export const PORTFOLIO_ITEMS = [
     url: "https://ags-tool.vercel.app/",
     domain: "ags-tool.app",
   },
+  {
+    tag: "Web-app",
+    title: "Freezo — freelance dashboard",
+    description: "Een centraal dashboard voor zelfstandige professionals om hun werk te organiseren en beheren. Alles op één plek, overzichtelijk en snel.",
+    stack: ["Web-app", "Dashboard", "Maatwerk"],
+    url: "https://www.freezo.nl",
+    domain: "freezo.nl",
+  },
 ];
 
 export const WAAROM = [
