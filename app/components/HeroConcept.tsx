@@ -1017,7 +1017,8 @@ const CSS = `
 }
 .lz-light .lz-bg-grain{ opacity:.22; }
 .lz-light .lz-nav-inner{ background:rgba(255,255,255,.74); box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 40px -26px rgba(20,24,40,.35); }
-.lz-light .lz-logo{ filter:none; opacity:1; }
+/* Fully dark logo on light theme — flattens the indigo mark to the same dark as the wordmark */
+.lz-light .lz-logo{ filter:brightness(0); opacity:.92; }
 .lz-light .lz-eyebrow{ background:rgba(20,24,40,.03); }
 .lz-light .lz-panel{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 40px 80px -46px rgba(20,24,40,.4), 0 30px 60px -34px color-mix(in srgb,var(--iris) 24%,transparent); }
