@@ -154,8 +154,9 @@ export default function HeroConcept() {
   const [lines, setLines] = useState<LogLine[]>([]);
   const [count, setCount] = useState(1284);
   const [palette, setPalette] = useState<React.CSSProperties>({});
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   const [bg, setBg] = useState<"mesh" | "flow" | "nodes" | "contour" | "dots">("mesh");
+  const [menuOpen, setMenuOpen] = useState(false);
   const idRef = useRef(0);
   const clockRef = useRef(7 * 60 + 41); // start the fictional day at 07:41
   const reducedRef = useRef(false);
@@ -167,7 +168,8 @@ export default function HeroConcept() {
     const params = new URLSearchParams(window.location.search);
     const p = params.get("p") ?? "amber";
     setPalette(PALETTES[p] ?? PALETTES.amber);
-    if (params.get("t") === "light") setTheme("light");
+    if (params.get("t") === "dark") setTheme("dark");
+    else if (params.get("t") === "light") setTheme("light");
     const b = params.get("bg");
     if (b === "mesh" || b === "flow" || b === "nodes" || b === "contour" || b === "dots") setBg(b);
 
@@ -293,17 +295,39 @@ export default function HeroConcept() {
       {/* ── Nav ── */}
       <nav className="lz-nav">
         <div className="lz-nav-inner">
-          <a href="/" className="lz-brand" aria-label="Leadz Systems home">
-            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="lz-logo" priority />
-          </a>
-          <div className="lz-nav-links">
-            <a href="#diensten" className="lz-nav-link">Diensten</a>
-            <a href="#werkwijze" className="lz-nav-link">Werkwijze</a>
-            <a href="#portfolio" className="lz-nav-link">Portfolio</a>
-            <a href="#prijzen" className="lz-nav-link">Prijzen</a>
-            <a href="#over-ons" className="lz-nav-link">Over ons</a>
+          <div className="lz-nav-row">
+            <a href="/" className="lz-brand" aria-label="Leadz Systems home">
+              <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="lz-logo" priority />
+            </a>
+            <div className="lz-nav-links">
+              <a href="#diensten" className="lz-nav-link">Diensten</a>
+              <a href="#werkwijze" className="lz-nav-link">Werkwijze</a>
+              <a href="#portfolio" className="lz-nav-link">Portfolio</a>
+              <a href="#prijzen" className="lz-nav-link">Prijzen</a>
+              <a href="#over-ons" className="lz-nav-link">Over ons</a>
+            </div>
+            <a href="#contact" className="lz-btn lz-btn-primary lz-nav-cta">Plan een gesprek</a>
+            <button
+              type="button"
+              className="lz-burger"
+              aria-label={menuOpen ? "Menu sluiten" : "Menu openen"}
+              aria-expanded={menuOpen}
+              aria-controls="lz-mobile-menu"
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--1" : ""}`} />
+              <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--2" : ""}`} />
+              <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--3" : ""}`} />
+            </button>
           </div>
-          <a href="#contact" className="lz-btn lz-btn-primary lz-nav-cta">Plan een gesprek</a>
+          <div id="lz-mobile-menu" className={`lz-mobile-menu${menuOpen ? " is-open" : ""}`}>
+            <div className="lz-mobile-menu-inner">
+              {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#prijzen", "Prijzen"], ["#over-ons", "Over ons"]].map(([href, label]) => (
+                <a key={href} href={href} className="lz-mobile-link" onClick={() => setMenuOpen(false)}>{label}</a>
+              ))}
+              <a href="#contact" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een gesprek</a>
+            </div>
+          </div>
         </div>
       </nav>
 
@@ -724,10 +748,10 @@ const CSS = `
 
 /* ── Nav ── */
 .lz-nav{ position:absolute; top:0; left:0; right:0; z-index:20; display:flex; justify-content:center; padding:var(--sp-3) var(--sp-3) 0; }
-.lz-nav-inner{ width:100%; max-width:var(--maxw); display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
-  padding:12px 14px 12px 20px; border:1px solid var(--line); border-radius:18px;
+.lz-nav-inner{ width:100%; max-width:var(--maxw); overflow:hidden; border:1px solid var(--line); border-radius:18px;
   background:rgba(16,18,24,.66); backdrop-filter:blur(14px);
   box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -24px rgba(0,0,0,.9); }
+.lz-nav-row{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5); padding:12px 14px 12px 20px; }
 .lz-brand{ display:flex; align-items:center; border-radius:8px; }
 .lz-brand:focus-visible{ outline:2px solid var(--iris-2); outline-offset:4px; }
 .lz-logo{ height:19px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:.94; }
@@ -736,7 +760,22 @@ const CSS = `
 .lz-nav-link:hover{ color:var(--paper); }
 .lz-nav-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:4px; color:var(--paper); }
 .lz-nav .lz-nav-cta{ display:none; white-space:nowrap; }
-@media(min-width:860px){ .lz-nav-links{ display:flex; } .lz-nav .lz-nav-cta{ display:inline-flex; } }
+/* Hamburger — mobile only */
+.lz-burger{ display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:42px; height:42px; margin:-6px -8px -6px 0; border-radius:10px; cursor:pointer; background:transparent; border:0; }
+.lz-burger:focus-visible{ outline:2px solid var(--iris-2); outline-offset:2px; }
+.lz-burger-bar{ width:22px; height:2px; border-radius:2px; background:var(--paper); transition:transform .25s cubic-bezier(.22,1,.36,1), opacity .2s ease; }
+.lz-burger-bar--1{ transform:translateY(7px) rotate(45deg); }
+.lz-burger-bar--2{ opacity:0; }
+.lz-burger-bar--3{ transform:translateY(-7px) rotate(-45deg); }
+/* Mobile dropdown menu */
+.lz-mobile-menu{ max-height:0; overflow:hidden; transition:max-height .32s cubic-bezier(.22,1,.36,1); }
+.lz-mobile-menu.is-open{ max-height:340px; }
+.lz-mobile-menu-inner{ display:flex; flex-direction:column; gap:2px; padding:6px 14px 16px; border-top:1px solid var(--line); }
+.lz-mobile-link{ padding:13px 6px; font-size:15px; color:var(--paper); text-decoration:none; border-radius:8px; border-bottom:1px solid rgba(255,255,255,.05); }
+.lz-mobile-link:last-of-type{ border-bottom:0; }
+.lz-mobile-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:2px; }
+.lz-mobile-cta{ margin-top:12px; width:100%; }
+@media(min-width:860px){ .lz-nav-links{ display:flex; } .lz-nav .lz-nav-cta{ display:inline-flex; } .lz-burger{ display:none; } .lz-mobile-menu{ display:none; } }
 
 /* ── Buttons ── */
 .lz-btn{ display:inline-flex; align-items:center; gap:8px; justify-content:center; font-size:15px; font-weight:600; letter-spacing:.01em; text-decoration:none;
@@ -829,13 +868,6 @@ const CSS = `
 .lz-step-desc{ margin-top:6px; color:var(--fog); font-size:.98rem; line-height:1.65; max-width:44rem; }
 @media(min-width:760px){ .lz-step{ grid-template-columns:120px 1fr; align-items:baseline; gap:32px; padding:30px 0; } .lz-step-nr{ font-size:2.4rem; } }
 
-/* ── Waarom ── */
-.lz-why-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-3); }
-@media(min-width:760px){ .lz-why-grid{ grid-template-columns:repeat(3,1fr); gap:var(--sp-4); } }
-.lz-why{ border:1px solid var(--line); border-radius:18px; padding:26px; background:linear-gradient(180deg, var(--surface) 0%, #101219 100%); box-shadow:0 1px 0 rgba(255,255,255,.04) inset; }
-.lz-why-tag{ display:inline-block; font-family:var(--font-geist-mono),monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--iris-2); padding:5px 10px; border-radius:999px; border:1px solid color-mix(in srgb, var(--iris-2) 30%, transparent); background:color-mix(in srgb, var(--iris) 10%, transparent); }
-.lz-why-title{ font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.3rem; letter-spacing:-.01em; margin-top:16px; }
-.lz-why-desc{ margin-top:10px; color:var(--fog); font-size:.96rem; line-height:1.65; }
 
 /* ── Over Jesse ── */
 .lz-about{ display:grid; grid-template-columns:1fr; gap:var(--sp-6); align-items:center; }
@@ -948,16 +980,8 @@ const CSS = `
 @keyframes lzReel{ 0%,8%{ transform:translateY(0);} 92%,100%{ transform:translateY(-1720px);} }
 
 @media(max-width:480px){ .lz-eyebrow{ font-size:11px; letter-spacing:.08em; padding:6px 12px; } }
-
-/* ── Theme toggle ── */
-.lz-theme-toggle{ position:fixed; bottom:22px; left:22px; z-index:60; display:inline-flex; align-items:center; gap:8px;
-  padding:9px 14px 9px 12px; border-radius:999px; cursor:pointer; font-size:13px; font-weight:600; letter-spacing:.01em;
-  color:var(--paper); background:rgba(20,23,31,.72); border:1px solid var(--line-2); backdrop-filter:blur(12px);
-  box-shadow:0 10px 26px -12px rgba(0,0,0,.7); transition:transform .2s cubic-bezier(.34,1.56,.64,1), border-color .2s ease, background-color .2s ease; }
-.lz-theme-toggle:hover{ transform:translateY(-2px); border-color:color-mix(in srgb, var(--iris) 45%, var(--line-2)); }
-.lz-theme-toggle:active{ transform:translateY(0); }
-.lz-theme-toggle:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
-.lz-theme-toggle svg{ color:var(--iris-2); }
+/* Clear the floating WhatsApp button so it never overlaps footer text on small screens */
+@media(max-width:620px){ .lz-footer{ padding-bottom:92px; } }
 
 /* ── Light theme ── keeps amber accent; flips base surfaces, text, lines, shadows ── */
 .lz-light{
@@ -973,7 +997,6 @@ const CSS = `
     radial-gradient(42% 40% at 92% 6%, color-mix(in srgb, var(--iris) 15%, transparent) 0%, transparent 58%),
     linear-gradient(180deg,#F8F7F4 0%, #F3F4F7 60%, #F3F4F7 100%);
 }
-.lz-light .lz-bg-grid{ background-image:linear-gradient(rgba(20,24,40,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(20,24,40,.05) 1px,transparent 1px); }
 .lz-light .lz-bg-grain{ opacity:.22; }
 .lz-light .lz-nav-inner{ background:rgba(255,255,255,.74); box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 40px -26px rgba(20,24,40,.35); }
 .lz-light .lz-logo{ filter:none; opacity:1; }
@@ -984,7 +1007,7 @@ const CSS = `
 .lz-light .lz-log-fade{ background:linear-gradient(180deg, rgba(255,255,255,.98), transparent); }
 .lz-light .lz-log-line{ border-top-color:rgba(16,20,32,.08); }
 .lz-light .lz-log-done{ color:#0F8A43; background:rgba(21,163,74,.12); border-color:rgba(21,163,74,.30); }
-.lz-light .lz-card,.lz-light .lz-why,.lz-light .lz-work{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
+.lz-light .lz-card,.lz-light .lz-work{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -34px rgba(20,24,40,.32); }
 .lz-light .lz-card:hover{ box-shadow:0 1px 0 rgba(255,255,255,1) inset, 0 30px 60px -34px rgba(20,24,40,.4), 0 20px 50px -32px var(--iris-glow); }
 .lz-light .lz-card-list li,.lz-light .lz-price-list li{ color:#3A4150; }
@@ -999,7 +1022,6 @@ const CSS = `
 .lz-light .lz-about-img{ mix-blend-mode:normal; }
 .lz-light .lz-cta{ background:linear-gradient(180deg,#ffffff 0%,#F4F5F8 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 40px 80px -50px rgba(20,24,40,.4); }
-.lz-light .lz-theme-toggle{ background:rgba(255,255,255,.78); box-shadow:0 10px 26px -14px rgba(20,24,40,.4); }
 .lz-light .lz-wa{ box-shadow:0 12px 30px -8px rgba(32,185,90,.45), 0 2px 6px rgba(20,24,40,.15); }
 
 @media(prefers-reduced-motion:reduce){
@@ -1007,5 +1029,6 @@ const CSS = `
   .lz-panel,.lz-live-dot,.lz-spinner,.lz-log-line{ animation:none; }
   .lz-reelbox iframe{ animation:none; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
+  .lz-burger-bar,.lz-mobile-menu{ transition:none; }
 }
 `;
