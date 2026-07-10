@@ -1000,6 +1000,11 @@ const CSS = `
 @media(max-width:480px){ .lz-eyebrow{ font-size:11px; letter-spacing:.08em; padding:6px 12px; } }
 /* Clear the floating WhatsApp button so it never overlaps footer text on small screens */
 @media(max-width:620px){ .lz-footer{ padding-bottom:92px; } }
+/* Panel footer: stack counter above the system chips so nothing looks lopsided on mobile */
+@media(max-width:520px){
+  .lz-panel-foot{ flex-direction:column; align-items:flex-start; gap:16px; }
+  .lz-systems{ justify-content:flex-start; max-width:100%; }
+}
 
 /* ── Light theme ── keeps amber accent; flips base surfaces, text, lines, shadows ── */
 .lz-light{
