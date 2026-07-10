@@ -19,7 +19,8 @@ const TASKS = [
   "Werkbon verwerkt",
 ];
 
-const SYSTEMS = ["HubSpot", "Make", "Zapier", "Slack", "Moneybird", "Microsoft 365"];
+/* Tools shown in the scrolling marquee under the hero. */
+const TOOLS = ["OpenAI", "Claude", "Make", "Zapier", "n8n", "HubSpot", "Pipedrive", "Exact", "AFAS", "Moneybird", "Slack", "Microsoft 365", "Google Workspace", "Supabase", "Stripe", "WhatsApp"];
 
 /* Werkwijze — 4 steps, copy matches the live leadzsystems.nl site. */
 const WERKWIJZE = [
@@ -400,14 +401,27 @@ export default function HeroConcept() {
                   <span className="lz-counter-num">{count.toLocaleString("nl-NL")}</span>
                   <span className="lz-counter-label">taken vandaag afgehandeld</span>
                 </div>
-                <div className="lz-systems" aria-label="Gekoppelde systemen">
-                  {SYSTEMS.map((s) => (<span key={s} className="lz-chip">{s}</span>))}
-                </div>
+                <span className="lz-panel-status"><span className="lz-live-dot" aria-hidden />live</span>
               </div>
             </div>
           </div>
         </div>
       </header>
+
+      {/* ── Tools marquee ── */}
+      <section className="lz-marquee-band" aria-label="Tools waarmee we koppelen">
+        <p className="lz-marquee-label">Koppelt naadloos met de tools die je al gebruikt</p>
+        <div className="lz-marquee">
+          <div className="lz-marquee-track">
+            {[...TOOLS, ...TOOLS].map((t, i) => (
+              <span className="lz-tool" key={i}>
+                <span className="lz-tool-dot" aria-hidden />
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Diensten ── */}
       <section id="diensten" className="lz-section">
@@ -484,7 +498,7 @@ export default function HeroConcept() {
       <section id="over-ons" className="lz-section">
         <div className="lz-about lz-reveal">
           <div className="lz-about-photo">
-            <Image src="/jesse-color.png" alt="Jesse, oprichter van Leadz Systems" width={832} height={1050} className="lz-about-img" sizes="(max-width:900px) 100vw, 380px" />
+            <Image src="/jesse-color.png" alt="Jesse, oprichter van Leadz Systems" width={832} height={890} className="lz-about-img" sizes="(max-width:900px) 100vw, 380px" />
             <div className="lz-about-photo-tint" aria-hidden />
           </div>
           <div className="lz-about-text">
@@ -839,8 +853,18 @@ const CSS = `
 .lz-counter{ display:flex; flex-direction:column; gap:2px; }
 .lz-counter-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:22px; letter-spacing:-.01em; color:var(--paper); font-variant-numeric:tabular-nums; }
 .lz-counter-label{ font-size:11.5px; color:var(--fog-2); }
-.lz-systems{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; max-width:56%; }
+.lz-panel-status{ display:inline-flex; align-items:center; gap:7px; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fog-2); }
 .lz-chip{ font-family:var(--font-geist-mono),monospace; font-size:11px; color:var(--fog); padding:4px 9px; border:1px solid var(--line); border-radius:7px; background:rgba(255,255,255,.02); }
+
+/* ── Tools marquee (full-width bar under the hero) ── */
+.lz-marquee-band{ position:relative; z-index:1; padding:var(--sp-5) 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.lz-marquee-label{ text-align:center; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--fog-2); margin-bottom:var(--sp-4); padding:0 var(--edge); }
+.lz-marquee{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.lz-marquee-track{ display:flex; align-items:center; width:max-content; animation:lzMarquee 48s linear infinite; }
+.lz-marquee:hover .lz-marquee-track{ animation-play-state:paused; }
+.lz-tool{ display:inline-flex; align-items:center; gap:16px; padding:0 26px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.28rem; letter-spacing:-.01em; color:var(--fog); white-space:nowrap; }
+.lz-tool-dot{ width:5px; height:5px; border-radius:2px; background:var(--iris); transform:rotate(45deg); }
+@keyframes lzMarquee{ from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
 
 /* ── Section scaffold ── */
 .lz-section{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:var(--sp-7) var(--edge); }
@@ -1000,11 +1024,6 @@ const CSS = `
 @media(max-width:480px){ .lz-eyebrow{ font-size:11px; letter-spacing:.08em; padding:6px 12px; } }
 /* Clear the floating WhatsApp button so it never overlaps footer text on small screens */
 @media(max-width:620px){ .lz-footer{ padding-bottom:92px; } }
-/* Panel footer: stack counter above the system chips so nothing looks lopsided on mobile */
-@media(max-width:520px){
-  .lz-panel-foot{ flex-direction:column; align-items:flex-start; gap:16px; }
-  .lz-systems{ justify-content:flex-start; max-width:100%; }
-}
 
 /* ── Light theme ── keeps amber accent; flips base surfaces, text, lines, shadows ── */
 .lz-light{
@@ -1052,6 +1071,7 @@ const CSS = `
   .lz-anim,.lz-reveal{ opacity:1; transform:none; animation:none; transition:none; }
   .lz-panel,.lz-live-dot,.lz-spinner,.lz-log-line{ animation:none; }
   .lz-reelbox iframe{ animation:none; }
+  .lz-marquee-track{ animation:none; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
   .lz-burger-bar,.lz-mobile-menu{ transition:none; }
 }
