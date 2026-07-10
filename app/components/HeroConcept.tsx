@@ -306,6 +306,7 @@ export default function HeroConcept() {
               <a href="#portfolio" className="lz-nav-link">Portfolio</a>
               <a href="#prijzen" className="lz-nav-link">Prijzen</a>
               <a href="#over-ons" className="lz-nav-link">Over ons</a>
+              <a href="/nieuws" className="lz-nav-link">Nieuws</a>
             </div>
             <a href="#contact" className="lz-btn lz-btn-primary lz-nav-cta">Plan een gesprek</a>
             <button
@@ -323,7 +324,7 @@ export default function HeroConcept() {
           </div>
           <div id="lz-mobile-menu" className={`lz-mobile-menu${menuOpen ? " is-open" : ""}`}>
             <div className="lz-mobile-menu-inner">
-              {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#prijzen", "Prijzen"], ["#over-ons", "Over ons"]].map(([href, label]) => (
+              {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#prijzen", "Prijzen"], ["#over-ons", "Over ons"], ["/nieuws", "Nieuws"]].map(([href, label]) => (
                 <a key={href} href={href} className="lz-mobile-link" onClick={() => setMenuOpen(false)}>{label}</a>
               ))}
               <a href="#contact" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een gesprek</a>
@@ -361,9 +362,6 @@ export default function HeroConcept() {
               <a href="#diensten" className="lz-btn lz-btn-ghost">Bekijk wat we doen</a>
             </div>
 
-            <p className="lz-trust lz-anim" style={{ animationDelay: "620ms" }}>
-              MKB-ondernemers die slimmer werken met Leadz
-            </p>
           </div>
 
           {/* Signature — live agent worklog */}
