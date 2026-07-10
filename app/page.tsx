@@ -1,4 +1,4 @@
-import UplinkedHome from "./components/UplinkedHome";
+import HeroConcept from "./components/HeroConcept";
 import { SITE, FAQS } from "./lib/content";
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <UplinkedHome />
+      <HeroConcept />
     </>
   );
 }
