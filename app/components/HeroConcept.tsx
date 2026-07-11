@@ -649,12 +649,13 @@ export default function HeroConcept() {
             bespreken.
           </p>
           <div className="lz-cta-row lz-cta-center">
-            <a href={`tel:${SITE.phoneIntl}`} className="lz-btn lz-btn-primary">
-              Bel direct {SITE.phone}
+            <a href={SITE.cal} target="_blank" rel="noopener noreferrer" className="lz-btn lz-btn-primary">
+              Plan een meeting
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden className="lz-btn-arrow">
                 <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
+            <a href={`tel:${SITE.phoneIntl}`} className="lz-btn lz-btn-ghost">Bel direct {SITE.phone}</a>
             <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="lz-btn lz-btn-ghost">App ons</a>
           </div>
           <div className="lz-cta-contacts">

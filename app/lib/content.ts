@@ -8,6 +8,7 @@ export const SITE = {
   phone: "06 24 50 58 63",
   phoneIntl: "+31624505863",
   whatsapp: "31624505863",
+  cal: "https://cal.com/leadz-systems-2yvqzu",
   region: "Nederland",
   kvk: "73898074",
 };
