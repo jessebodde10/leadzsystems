@@ -7,7 +7,7 @@ import { ARTIKELEN } from "../lib/news";
 export const metadata: Metadata = {
   title: "AI Nieuws",
   description:
-    "De laatste AI-nieuwtjes, ontwikkelingen en praktijkinzichten voor het MKB — verzameld door Leadz Systems.",
+    "De laatste AI-nieuwtjes, ontwikkelingen en praktijkinzichten voor het MKB, verzameld door Leadz Systems.",
   alternates: { canonical: "/nieuws" },
   openGraph: {
     title: "AI Nieuws | Leadz Systems",
@@ -44,7 +44,7 @@ export default function NieuwsPage() {
         <span className="nws-kicker"><span className="nws-kicker-dot" aria-hidden />Nieuws</span>
         <h1 className="nws-title">AI Nieuws</h1>
         <p className="nws-lead">
-          De laatste AI-nieuwtjes, ontwikkelingen en praktijkinzichten — kort en helder,
+          De laatste AI-nieuwtjes, ontwikkelingen en praktijkinzichten, kort en helder,
           voor ondernemers die slimmer willen werken.
         </p>
       </section>

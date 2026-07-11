@@ -26,11 +26,11 @@ export const ARTIKELEN: Artikel[] = [
     date: "2026-07-10",
     category: "AI-nieuws",
     excerpt:
-      "OpenAI brengt zijn nieuwste model breed uit in drie varianten — Sol, Terra en Luna. Eerste indrukken, en hoe het zich verhoudt tot Claude Fable 5.",
+      "OpenAI brengt zijn nieuwste model breed uit in drie varianten: Sol, Terra en Luna. Eerste indrukken, en hoe het zich verhoudt tot Claude Fable 5.",
     body: [
       "OpenAI's nieuwste model komt vanaf vandaag voor iedereen beschikbaar. Na weken waarin GPT-5.6 alleen voor een handvol partners toegankelijk was, zet OpenAI de deuren open, met drie smaken: Sol als het krachtigste vlaggenschip, Terra voor dagelijks werk, en Luna als de snelle, goedkope optie.",
       "Vroege testers zijn onder de indruk, al is de teneur dat Sol net iets minder slim aanvoelt dan Claude Fable 5, maar op sommige taken juist uitblinkt en vooral veel biedt voor zijn prijs.",
-      "Hoogleraar en auteur van ons boek Co-intelligentie Ethan Mollick vatte het verschil aardig: “Fable gaat het liefst zelfstandig aan de slag, terwijl Sol sneller is maar meer stap voor stap met je meewerkt.”",
+      "Hoogleraar en auteur van het boek Co-Intelligence, Ethan Mollick, vatte het verschil aardig: “Fable gaat het liefst zelfstandig aan de slag, terwijl Sol sneller is maar meer stap voor stap met je meewerkt.”",
       "Wij voelen het model de komende week zelf uitgebreid aan de tand, dus verwacht binnenkort een grondiger oordeel.",
     ],
   },
@@ -53,7 +53,7 @@ export const ARTIKELEN: Artikel[] = [
     date: "2026-07-08",
     category: "AI-nieuws",
     excerpt:
-      "In Excel en Outlook stapt Microsoft geleidelijk over op zelfgebouwde AI — om minder afhankelijk te zijn van de grote AI-labs.",
+      "In Excel en Outlook stapt Microsoft geleidelijk over op zelfgebouwde AI, om minder afhankelijk te zijn van de grote AI-labs.",
     body: [
       "Microsoft begint de modellen van OpenAI en Anthropic te vervangen door eigen modellen. In vertrouwde programma's als Excel en Outlook schakelt Microsoft geleidelijk over op zelfgebouwde AI.",
       "De reden is nuchter: Microsoft verstookt gigantische hoeveelheden AI-rekenkracht in zijn producten, krijgt die nu nog met korting, maar wil niet straks overgeleverd zijn aan wat de grote AI-labs besluiten te rekenen.",
@@ -66,7 +66,7 @@ export const ARTIKELEN: Artikel[] = [
     date: "2026-07-07",
     category: "AI-nieuws",
     excerpt:
-      "OpenAI's nieuwe voice-laag GPT-Live luistert terwijl ze praat — onderbreken, pauzeren en live vertalen worden mogelijk.",
+      "OpenAI's nieuwe voice-laag GPT-Live luistert terwijl ze praat. Onderbreken, pauzeren en live vertalen worden mogelijk.",
     body: [
       "De nieuwe voice mode luistert terwijl ze praat. Je hoeft dus niet meer netjes te wachten tot ChatGPT klaar is. Je kunt onderbreken, nadenken, pauzeren of vragen of ze even stil blijft. Het wordt minder een dictafoon die om de beurt aan staat en meer een gesprek. OpenAI noemt dit GPT-Live, een nieuwe voice-laag die continu kan luisteren en reageren.",
       "Voor gewone gebruikers is dit waarschijnlijk de update die je als eerste merkt. Tijdens wandelen, koken, autorijden, reizen of taal oefenen is praten vaak logischer dan typen. Zeker als ChatGPT beter wacht wanneer je nadenkt en minder snel door je heen praat. De nieuwe stemmodus kan live vertalen, beter omgaan met onderbrekingen en bij ingewikkeldere vragen op de achtergrond een sterker model of web search inschakelen. Jij blijft praten, terwijl ChatGPT ondertussen zoekt of redeneert.",

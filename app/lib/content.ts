@@ -195,7 +195,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     slug: "happy-face",
     tag: "Website",
-    title: "Happy Face — schoonheidssalon",
+    title: "Happy Face - schoonheidssalon",
     description: "Complete website voor een schoonheidssalon in Rijswijk: behandelingen, merken en contact, met een warme en persoonlijke uitstraling.",
     stack: ["Next.js", "Responsive", "SEO"],
     url: "https://website-happy-test.vercel.app/",
@@ -213,7 +213,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     slug: "connect-rise",
     tag: "Website",
-    title: "Connect & Rise — ademcoach",
+    title: "Connect & Rise - ademcoach",
     description: "Website voor een ademcoach met workshops en circles rond ouder & kind, gericht op rust, ruimte en verbinding.",
     stack: ["Next.js", "Responsive", "SEO"],
     url: "https://connectrise-test.vercel.app/",
@@ -231,7 +231,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     slug: "ags",
     tag: "Web-app",
-    title: "AGS — maatwerk tool",
+    title: "AGS - maatwerk tool",
     description: "Een maatwerk webapplicatie die een specifiek werkproces digitaliseert en versnelt, gebouwd rond de wensen van de klant.",
     stack: ["Next.js", "Supabase", "Maatwerk"],
     url: "https://ags-tool.vercel.app/",
@@ -249,7 +249,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     slug: "freezo",
     tag: "Web-app",
-    title: "Freezo — freelance dashboard",
+    title: "Freezo - freelance dashboard",
     description: "Een centraal dashboard voor zelfstandige professionals om hun werk te organiseren en beheren. Alles op één plek, overzichtelijk en snel.",
     stack: ["Next.js", "Supabase", "Dashboard"],
     url: "https://www.freezo.nl",

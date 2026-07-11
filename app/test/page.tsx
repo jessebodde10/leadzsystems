@@ -17,7 +17,7 @@ const WAAROM = [
   {
     nr: "01",
     title: "Op maat, niet van de plank",
-    desc: "Geen one-size-fits-all. Wij bouwen tools die perfect aansluiten bij hoe jouw bedrijf werkt — niet andersom.",
+    desc: "Geen one-size-fits-all. Wij bouwen tools die perfect aansluiten bij hoe jouw bedrijf werkt, niet andersom.",
     tag: "100% op maat",
     surface: "#d5f5c2",
   },

@@ -8,7 +8,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata = {
-  title: "Concept — Leadz Systems",
+  title: "Concept",
   robots: { index: false, follow: false },
 };
 

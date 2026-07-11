@@ -34,7 +34,7 @@ const WERKWIJZE = [
 const STATS = [
   { num: "50+", label: "tools en systemen waar we direct mee koppelen" },
   { num: "3 weken", label: "gemiddelde doorlooptijd van idee tot live" },
-  { num: "100%", label: "tevredenheidsgarantie — we stoppen pas als jij blij bent" },
+  { num: "100%", label: "tevredenheidsgarantie, we stoppen pas als jij blij bent" },
 ];
 
 /* Prijzen — three plans, copy matches the live site. */
@@ -674,14 +674,14 @@ export default function HeroConcept() {
             <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="lz-logo" />
             <p className="lz-footer-tag">
               Leadz Systems helpt ondernemers en teams in Nederland AI en automations praktisch
-              toe te passen — via software op maat, koppelingen en implementatie.
+              toe te passen, via software op maat, koppelingen en implementatie.
             </p>
             <p className="lz-footer-copy">© {year} {SITE.name}</p>
           </div>
 
           <div className="lz-footer-col">
             <h3 className="lz-footer-h">Over {SITE.name}</h3>
-            <p className="lz-footer-person"><strong>Jesse</strong> — oprichter</p>
+            <p className="lz-footer-person"><strong>Jesse</strong>, oprichter</p>
             <a href="https://www.linkedin.com/company/leadz-systems/" target="_blank" rel="noopener noreferrer" className="lz-footer-link">LinkedIn</a>
             <a href={`mailto:${SITE.email}`} className="lz-footer-link">{SITE.email}</a>
           </div>
