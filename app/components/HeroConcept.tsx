@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SITE, DIENSTEN, PORTFOLIO_ITEMS, FAQS } from "../lib/content";
+import CalEmbed from "./CalEmbed";
 
 /* The pool of plain-language tasks the agent visibly clears in the live worklog.
    Kept in Dutch and concrete on purpose — this is the product made visible. */
@@ -645,25 +646,18 @@ export default function HeroConcept() {
           <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Contact</span>
           <h2 className="lz-cta-title">Klaar om <span className="lz-iris">slimmer</span><br />te werken?</h2>
           <p className="lz-lead lz-cta-lead">
-            Plan direct een vrijblijvend gesprek om de mogelijkheden voor jouw bedrijf te
-            bespreken.
+            Kies hieronder direct een moment dat jou uitkomt. Past er niets tussen? Bel of app
+            ons, dan plannen we samen een ander tijdstip.
           </p>
-          <div className="lz-cta-row lz-cta-center">
-            <a href={SITE.cal} target="_blank" rel="noopener noreferrer" className="lz-btn lz-btn-primary">
-              Plan een meeting
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden className="lz-btn-arrow">
-                <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-            <a href={`tel:${SITE.phoneIntl}`} className="lz-btn lz-btn-ghost">Bel direct {SITE.phone}</a>
-            <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="lz-btn lz-btn-ghost">App ons</a>
+          <div className="lz-cal-card">
+            <CalEmbed calUrl={SITE.cal} />
           </div>
           <div className="lz-cta-contacts">
-            <a href={`mailto:${SITE.email}`} className="lz-contact-link">{SITE.email}</a>
-            <span className="lz-contact-sep" aria-hidden>·</span>
             <a href={`tel:${SITE.phoneIntl}`} className="lz-contact-link">{SITE.phone}</a>
             <span className="lz-contact-sep" aria-hidden>·</span>
-            <span className="lz-contact-muted">KvK {SITE.kvk}</span>
+            <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="lz-contact-link">WhatsApp</a>
+            <span className="lz-contact-sep" aria-hidden>·</span>
+            <a href={`mailto:${SITE.email}`} className="lz-contact-link">{SITE.email}</a>
           </div>
         </div>
       </section>
@@ -977,6 +971,7 @@ const CSS = `
 .lz-cta-title{ font-family:var(--font-bricolage),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:1.02; font-size:clamp(2rem,5vw,3.4rem); margin:var(--sp-3) auto 0; max-width:18ch; }
 .lz-cta-lead{ margin-left:auto; margin-right:auto; }
 .lz-cta-center{ justify-content:center; margin-top:var(--sp-5); }
+.lz-cal-card{ width:100%; margin-top:var(--sp-5); text-align:left; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.4); }
 .lz-cta-contacts{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin-top:var(--sp-5); font-family:var(--font-geist-mono),monospace; font-size:13px; }
 .lz-contact-link{ color:var(--paper); text-decoration:none; border-radius:6px; transition:color .18s ease; }
 .lz-contact-link:hover{ color:var(--iris-2); }
