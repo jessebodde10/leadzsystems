@@ -309,7 +309,7 @@ export default function HeroConcept() {
               <a href="#over-ons" className="lz-nav-link">Over ons</a>
               <a href="/nieuws" className="lz-nav-link">Nieuws</a>
             </div>
-            <a href="#contact" className="lz-btn lz-btn-primary lz-nav-cta">Plan een gesprek</a>
+            <a href="#agenda" className="lz-btn lz-btn-primary lz-nav-cta">Plan een gesprek</a>
             <button
               type="button"
               className="lz-burger"
@@ -328,7 +328,7 @@ export default function HeroConcept() {
               {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#prijzen", "Prijzen"], ["#over-ons", "Over ons"], ["/nieuws", "Nieuws"]].map(([href, label]) => (
                 <a key={href} href={href} className="lz-mobile-link" onClick={() => setMenuOpen(false)}>{label}</a>
               ))}
-              <a href="#contact" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een gesprek</a>
+              <a href="#agenda" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een gesprek</a>
             </div>
           </div>
         </div>
@@ -354,7 +354,7 @@ export default function HeroConcept() {
             </p>
 
             <div className="lz-cta-row lz-anim" style={{ animationDelay: "520ms" }}>
-              <a href="#contact" className="lz-btn lz-btn-primary">
+              <a href="#agenda" className="lz-btn lz-btn-primary">
                 Plan een vrijblijvend gesprek
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden className="lz-btn-arrow">
                   <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -518,7 +518,7 @@ export default function HeroConcept() {
               gewoon met mij te maken.
             </p>
             <div className="lz-cta-row lz-about-cta">
-              <a href="#contact" className="lz-btn lz-btn-primary">
+              <a href="#agenda" className="lz-btn lz-btn-primary">
                 Plan een kennismaking
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden className="lz-btn-arrow">
                   <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -646,18 +646,11 @@ export default function HeroConcept() {
           <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Contact</span>
           <h2 className="lz-cta-title">Klaar om <span className="lz-iris">slimmer</span><br />te werken?</h2>
           <p className="lz-lead lz-cta-lead">
-            Kies hieronder direct een moment dat jou uitkomt. Past er niets tussen? Bel of app
-            ons, dan plannen we samen een ander tijdstip.
+            Kies hieronder direct een moment dat jou uitkomt. In 30 minuten kijken we samen
+            waar de meeste tijd of omzet blijft liggen.
           </p>
-          <div className="lz-cal-card">
+          <div id="agenda" className="lz-cal-card">
             <CalEmbed calUrl={SITE.cal} />
-          </div>
-          <div className="lz-cta-contacts">
-            <a href={`tel:${SITE.phoneIntl}`} className="lz-contact-link">{SITE.phone}</a>
-            <span className="lz-contact-sep" aria-hidden>·</span>
-            <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="lz-contact-link">WhatsApp</a>
-            <span className="lz-contact-sep" aria-hidden>·</span>
-            <a href={`mailto:${SITE.email}`} className="lz-contact-link">{SITE.email}</a>
           </div>
         </div>
       </section>
@@ -971,7 +964,7 @@ const CSS = `
 .lz-cta-title{ font-family:var(--font-bricolage),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:1.02; font-size:clamp(2rem,5vw,3.4rem); margin:var(--sp-3) auto 0; max-width:18ch; }
 .lz-cta-lead{ margin-left:auto; margin-right:auto; }
 .lz-cta-center{ justify-content:center; margin-top:var(--sp-5); }
-.lz-cal-card{ width:100%; margin-top:var(--sp-5); text-align:left; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.4); }
+.lz-cal-card{ width:100%; margin-top:var(--sp-5); scroll-margin-top:100px; text-align:left; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.4); }
 .lz-cta-contacts{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin-top:var(--sp-5); font-family:var(--font-geist-mono),monospace; font-size:13px; }
 .lz-contact-link{ color:var(--paper); text-decoration:none; border-radius:6px; transition:color .18s ease; }
 .lz-contact-link:hover{ color:var(--iris-2); }
