@@ -639,17 +639,45 @@ export default function HeroConcept() {
         </div>
       </section>
 
-      {/* ── Contact / closing CTA ── */}
+      {/* ── Contact / agenda ── */}
       <section id="contact" className="lz-section">
-        <div className="lz-cta lz-reveal">
-          <div className="lz-cta-glow" aria-hidden />
-          <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Contact</span>
-          <h2 className="lz-cta-title">Klaar om <span className="lz-iris">slimmer</span><br />te werken?</h2>
-          <p className="lz-lead lz-cta-lead">
-            Kies hieronder direct een moment dat jou uitkomt. In 30 minuten kijken we samen
-            waar de meeste tijd of omzet blijft liggen.
-          </p>
-          <div id="agenda" className="lz-cal-card">
+        <div className="lz-contact-grid">
+          <div className="lz-contact-info lz-reveal">
+            <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Kennismaking</span>
+            <h2 className="lz-h2">Plan een vrijblijvend gesprek</h2>
+            <p className="lz-lead">
+              Een gesprek over automatisering, AI-agents of maatwerk software voor jouw bedrijf.
+              In 30 minuten kijken we samen waar je team nu tijd verliest, welke processen
+              slimmer kunnen en of Leadz Systems de juiste partij is om dat op te lossen.
+            </p>
+            <p className="lz-contact-p">
+              Bedoeld voor ondernemers en teams die minder handwerk willen, systemen beter willen
+              koppelen, of willen weten wat AI-software praktisch kan betekenen in hun operatie.
+            </p>
+            <p className="lz-contact-sub">Dit bespreken we:</p>
+            <ul className="lz-contact-list">
+              {[
+                "Waar nu de meeste tijd, fouten of vertraging ontstaan",
+                "Welke workflows of systemen je kunt automatiseren",
+                "Of maatwerk software, AI-automatisering of eerst een procesanalyse logisch is",
+                "Wat een realistische eerste stap, scope en investering kan zijn",
+              ].map((item) => (
+                <li key={item}>
+                  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden className="lz-tick">
+                    <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="lz-contact-note">
+              Geen pitchdeck, geen verplichting. Je praat direct met Jesse, niet met een
+              accountmanager. Denken we dat standaardsoftware of een andere route slimmer is,
+              dan zeggen we dat gewoon.
+            </p>
+          </div>
+
+          <div id="agenda" className="lz-cal-card lz-reveal">
             <CalEmbed calUrl={SITE.cal} />
           </div>
         </div>
@@ -964,7 +992,15 @@ const CSS = `
 .lz-cta-title{ font-family:var(--font-bricolage),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:1.02; font-size:clamp(2rem,5vw,3.4rem); margin:var(--sp-3) auto 0; max-width:18ch; }
 .lz-cta-lead{ margin-left:auto; margin-right:auto; }
 .lz-cta-center{ justify-content:center; margin-top:var(--sp-5); }
-.lz-cal-card{ width:100%; margin-top:var(--sp-5); scroll-margin-top:100px; text-align:left; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.4); }
+.lz-contact-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-6); align-items:start; }
+@media(min-width:920px){ .lz-contact-grid{ grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:var(--sp-6); } }
+.lz-contact-info .lz-h2{ margin-top:var(--sp-3); }
+.lz-contact-p{ margin-top:var(--sp-3); color:var(--fog); font-size:clamp(1rem,1.4vw,1.08rem); line-height:1.7; max-width:34rem; }
+.lz-contact-sub{ margin-top:var(--sp-5); font-weight:600; color:var(--paper); font-size:1.02rem; }
+.lz-contact-list{ margin-top:14px; display:flex; flex-direction:column; gap:11px; }
+.lz-contact-list li{ display:flex; align-items:flex-start; gap:11px; color:#3A4150; font-size:.98rem; line-height:1.5; }
+.lz-contact-note{ margin-top:var(--sp-5); padding-top:var(--sp-4); border-top:1px solid var(--line); color:var(--fog); font-size:.96rem; line-height:1.65; max-width:34rem; }
+.lz-cal-card{ width:100%; scroll-margin-top:100px; text-align:left; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.4); }
 .lz-cta-contacts{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin-top:var(--sp-5); font-family:var(--font-geist-mono),monospace; font-size:13px; }
 .lz-contact-link{ color:var(--paper); text-decoration:none; border-radius:6px; transition:color .18s ease; }
 .lz-contact-link:hover{ color:var(--iris-2); }
