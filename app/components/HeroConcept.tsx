@@ -670,11 +670,6 @@ export default function HeroConcept() {
                 </li>
               ))}
             </ul>
-            <p className="lz-contact-note">
-              Geen pitchdeck, geen verplichting. Je praat direct met Jesse, niet met een
-              accountmanager. Denken we dat standaardsoftware of een andere route slimmer is,
-              dan zeggen we dat gewoon.
-            </p>
           </div>
 
           <div id="agenda" className="lz-cal-card lz-reveal">
