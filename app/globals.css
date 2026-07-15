@@ -308,7 +308,8 @@ body {
 .dnst-bar { position: sticky; top: 0; z-index: 30; background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .dnst-bar-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 24px; }
 .dnst-brand { display: inline-flex; }
-.dnst-logo { height: 22px; width: auto; object-fit: contain; }
+/* brightness(0) vlakt het indigo merkteken af naar hetzelfde donker als het woordmerk */
+.dnst-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0); opacity: 0.92; }
 .dnst-bar-actions { display: flex; align-items: center; gap: 20px; }
 .dnst-back { font-size: 14px; color: var(--muted); border-radius: 6px; transition: color 0.18s ease; }
 .dnst-back:hover { color: var(--ink); }
