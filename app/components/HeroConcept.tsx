@@ -344,8 +344,8 @@ export default function HeroConcept() {
             </span>
 
             <h1 className="lz-h1">
-              <span className="lz-line lz-anim" style={{ animationDelay: "120ms" }}>Software die werkt.</span>
-              <span className="lz-line lz-iris lz-anim" style={{ animationDelay: "240ms" }}>Processen die lopen.</span>
+              <span className="lz-line lz-anim" style={{ animationDelay: "120ms" }}>Van handmatig werk</span>
+              <span className="lz-line lz-iris lz-anim" style={{ animationDelay: "240ms" }}>naar slimme systemen</span>
             </h1>
 
             <p className="lz-sub lz-anim" style={{ animationDelay: "420ms" }}>
