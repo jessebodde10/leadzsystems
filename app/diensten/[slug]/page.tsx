@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const TICK = (
-  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden className="dnst-tick">
+  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden className="pg-tick">
     <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -49,38 +49,38 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
   };
 
   return (
-    <div className="dnst-root">
+    <div className="pg-root">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
 
       {/* ── Top bar ── */}
-      <header className="dnst-bar">
-        <div className="dnst-bar-inner">
-          <Link href="/" className="dnst-brand" aria-label="Leadz Systems home">
-            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="dnst-logo" priority />
+      <header className="pg-bar">
+        <div className="pg-bar-inner">
+          <Link href="/" className="pg-brand" aria-label="Leadz Systems home">
+            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="pg-logo" priority />
           </Link>
-          <div className="dnst-bar-actions">
-            <Link href="/#diensten" className="dnst-back">← Alle diensten</Link>
-            <a href="/#agenda" className="dnst-btn">Plan een gesprek</a>
+          <div className="pg-bar-actions">
+            <Link href="/#diensten" className="pg-back">← Alle diensten</Link>
+            <a href="/#agenda" className="pg-btn">Plan een gesprek</a>
           </div>
         </div>
       </header>
 
       {/* ── Hero ── */}
-      <section className="dnst-hero">
-        <span className="dnst-kicker"><span className="dnst-kicker-dot" aria-hidden />Diensten</span>
-        <h1 className="dnst-title">{dienst.title}</h1>
-        <p className="dnst-stat">{dienst.stat}</p>
-        <p className="dnst-lead">{dienst.heroLead}</p>
-        <a href="/#agenda" className="dnst-btn dnst-hero-cta">Plan een vrijblijvend gesprek</a>
+      <section className="pg-hero">
+        <span className="pg-kicker"><span className="pg-kicker-dot" aria-hidden />Diensten</span>
+        <h1 className="pg-title">{dienst.title}</h1>
+        <p className="pg-stat">{dienst.stat}</p>
+        <p className="pg-lead">{dienst.heroLead}</p>
+        <a href="/#agenda" className="pg-btn pg-hero-cta">Plan een vrijblijvend gesprek</a>
       </section>
 
       {/* ── Herkenbaar ── */}
-      <section className="dnst-section">
-        <h2 className="dnst-h2">Herkenbaar?</h2>
-        <ul className="dnst-pain">
+      <section className="pg-section">
+        <h2 className="pg-h2">Herkenbaar?</h2>
+        <ul className="pg-pain">
           {dienst.herkenbaar.map((h) => (
             <li key={h}>{h}</li>
           ))}
@@ -88,49 +88,49 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── Oplossing ── */}
-      <section className="dnst-section">
-        <h2 className="dnst-h2">Hoe we het oplossen</h2>
-        <div className="dnst-grid3">
+      <section className="pg-section">
+        <h2 className="pg-h2">Hoe we het oplossen</h2>
+        <div className="pg-grid3">
           {dienst.oplossing.map((o) => (
-            <article key={o.title} className="dnst-card">
-              <h3 className="dnst-card-title">{o.title}</h3>
-              <p className="dnst-card-desc">{o.desc}</p>
+            <article key={o.title} className="pg-card">
+              <h3 className="pg-card-title">{o.title}</h3>
+              <p className="pg-card-desc">{o.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
       {/* ── Voorbeelden ── */}
-      <section className="dnst-section">
-        <h2 className="dnst-h2">Voorbeelden uit de praktijk</h2>
-        <p className="dnst-sub">
+      <section className="pg-section">
+        <h2 className="pg-h2">Voorbeelden uit de praktijk</h2>
+        <p className="pg-sub">
           Een greep uit wat we binnen {dienst.title.toLowerCase()} bouwen. Staat jouw situatie er
           niet tussen? Dat is eerder regel dan uitzondering: we bouwen het gewoon op maat.
         </p>
-        <div className="dnst-grid2">
+        <div className="pg-grid2">
           {dienst.voorbeelden.map((v) => (
-            <article key={v.title} className="dnst-ex">
-              <div className="dnst-ex-head">
+            <article key={v.title} className="pg-ex">
+              <div className="pg-ex-head">
                 {TICK}
-                <h3 className="dnst-ex-title">{v.title}</h3>
+                <h3 className="pg-ex-title">{v.title}</h3>
               </div>
-              <p className="dnst-ex-desc">{v.desc}</p>
+              <p className="pg-ex-desc">{v.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
       {/* ── Alles op maat ── */}
-      <section className="dnst-section">
-        <div className="dnst-maat">
-          <h2 className="dnst-h2">Alles is bespreekbaar</h2>
-          <p className="dnst-maat-p">
+      <section className="pg-section">
+        <div className="pg-maat">
+          <h2 className="pg-h2">Alles is bespreekbaar</h2>
+          <p className="pg-maat-p">
             We werken niet met een vast pakket waar jij je omheen moet buigen. Werkt jouw proces
             net even anders? Prima, dan bouwen we het zo. In het eerste gesprek kijken we wat er
             nodig is, wat het oplevert en waar we het beste kunnen beginnen. Klein starten mag,
             uitbreiden kan altijd.
           </p>
-          <ul className="dnst-maat-list">
+          <ul className="pg-maat-list">
             <li>{TICK}Gebouwd rond jouw proces, niet andersom</li>
             <li>{TICK}Klein beginnen en stap voor stap uitbreiden</li>
             <li>{TICK}Vaste prijs vooraf, geen verrassingen achteraf</li>
@@ -140,49 +140,49 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── Koppelingen ── */}
-      <section className="dnst-section">
-        <h2 className="dnst-h2">Koppelt met je bestaande tools</h2>
-        <p className="dnst-sub">
+      <section className="pg-section">
+        <h2 className="pg-h2">Koppelt met je bestaande tools</h2>
+        <p className="pg-sub">
           Werk je met iets dat er niet tussen staat? Grote kans dat we het alsnog kunnen koppelen.
           Vraag het gerust.
         </p>
-        <div className="dnst-chips">
+        <div className="pg-chips">
           {dienst.koppelingen.map((k) => (
-            <span key={k} className="dnst-chip">{k}</span>
+            <span key={k} className="pg-chip">{k}</span>
           ))}
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className="dnst-section">
-        <div className="dnst-cta">
-          <h2 className="dnst-cta-title">Benieuwd wat dit voor jou oplevert?</h2>
-          <p className="dnst-cta-lead">
+      <section className="pg-section">
+        <div className="pg-cta">
+          <h2 className="pg-cta-title">Benieuwd wat dit voor jou oplevert?</h2>
+          <p className="pg-cta-lead">
             In 30 minuten kijken we samen waar je nu tijd verliest en of dit de juiste stap is.
             Vrijblijvend, en we zeggen het eerlijk als iets anders slimmer is.
           </p>
-          <a href="/#agenda" className="dnst-btn dnst-cta-btn">Plan een vrijblijvend gesprek</a>
+          <a href="/#agenda" className="pg-btn pg-cta-btn">Plan een vrijblijvend gesprek</a>
         </div>
       </section>
 
       {/* ── Andere diensten ── */}
-      <section className="dnst-section">
-        <h2 className="dnst-h2">Andere diensten</h2>
-        <div className="dnst-grid3">
+      <section className="pg-section">
+        <h2 className="pg-h2">Andere diensten</h2>
+        <div className="pg-grid3">
           {andere.map((a) => (
-            <Link key={a.slug} href={`/diensten/${a.slug}`} className="dnst-other">
-              <h3 className="dnst-card-title">{a.title}</h3>
-              <p className="dnst-card-desc">{a.description}</p>
-              <span className="dnst-other-link">Bekijk dienst →</span>
+            <Link key={a.slug} href={`/diensten/${a.slug}`} className="pg-other">
+              <h3 className="pg-card-title">{a.title}</h3>
+              <p className="pg-card-desc">{a.description}</p>
+              <span className="pg-other-link">Bekijk dienst →</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer className="dnst-footer">
+      <footer className="pg-footer">
         <span>© {new Date().getFullYear()} {SITE.name}</span>
-        <Link href="/" className="dnst-back">Naar de homepage</Link>
+        <Link href="/" className="pg-back">Naar de homepage</Link>
       </footer>
     </div>
   );

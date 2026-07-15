@@ -159,6 +159,7 @@ export default function HeroConcept() {
   const [theme, setTheme] = useState<"dark" | "light">("light");
   const [bg, setBg] = useState<"mesh" | "flow" | "nodes" | "contour" | "dots">("mesh");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [workFilter, setWorkFilter] = useState("Alles");
   const idRef = useRef(0);
   const clockRef = useRef(7 * 60 + 41); // start the fictional day at 07:41
   const reducedRef = useRef(false);
@@ -539,9 +540,23 @@ export default function HeroConcept() {
           <p className="lz-lead">Concrete oplossingen voor concrete problemen. Van automatisering tot webapplicatie.</p>
         </div>
 
+        <div className="lz-filter lz-reveal" role="group" aria-label="Filter op type project">
+          {["Alles", ...Array.from(new Set(PORTFOLIO_ITEMS.map((p) => p.tag)))].map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              className={`lz-filter-btn${workFilter === tag ? " is-active" : ""}`}
+              aria-pressed={workFilter === tag}
+              onClick={() => setWorkFilter(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
         <div className="lz-work-grid">
-          {PORTFOLIO_ITEMS.map((p, i) => (
-            <article key={p.slug} className="lz-work lz-reveal" style={{ transitionDelay: `${i * 60}ms` }}>
+          {PORTFOLIO_ITEMS.filter((p) => workFilter === "Alles" || p.tag === workFilter).map((p, i) => (
+            <a key={p.slug} href={`/portfolio/${p.slug}`} className="lz-work lz-reveal is-visible" style={{ transitionDelay: `${i * 60}ms` }}>
               <div className="lz-browser">
                 <div className="lz-browser-bar">
                   <span className="lz-dot" /><span className="lz-dot" /><span className="lz-dot" />
@@ -558,7 +573,8 @@ export default function HeroConcept() {
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <a className="lz-preview-cover" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${p.title} in een nieuw tabblad`} />
+                  {/* Vangt kliks op zodat de hele kaart naar de case linkt */}
+                  <div className="lz-preview-cover" aria-hidden />
                 </div>
               </div>
               <div className="lz-work-body">
@@ -569,15 +585,15 @@ export default function HeroConcept() {
                   <div className="lz-work-stack">
                     {p.stack.map((s) => (<span key={s} className="lz-chip">{s}</span>))}
                   </div>
-                  <a className="lz-work-link" href={p.url} target="_blank" rel="noopener noreferrer">
-                    Bekijk live
+                  <span className="lz-work-link">
+                    Bekijk case
                     <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
-                      <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                  </a>
+                  </span>
                 </div>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </section>
@@ -952,8 +968,18 @@ const CSS = `
 /* ── Portfolio ── */
 .lz-work-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-4); }
 @media(min-width:760px){ .lz-work-grid{ grid-template-columns:1fr 1fr; } }
-.lz-work{ border:1px solid var(--line); border-radius:18px; overflow:hidden; background:linear-gradient(180deg, var(--surface) 0%, #101219 100%); box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 24px 48px -32px rgba(0,0,0,.9); transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease; }
-.lz-work:hover{ transform:translateY(-4px); border-color:var(--line-2); }
+.lz-filter{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:var(--sp-5); }
+.lz-filter-btn{ font-size:13.5px; font-weight:600; color:var(--fog); padding:9px 16px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line-2); background:var(--surface);
+  transition:color .2s ease, border-color .2s ease, background-color .2s ease; }
+.lz-filter-btn:hover{ color:var(--paper); border-color:color-mix(in srgb, var(--iris) 45%, var(--line-2)); }
+.lz-filter-btn:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
+.lz-filter-btn.is-active{ color:var(--on-accent); border-color:transparent; background:linear-gradient(180deg,var(--iris-2) 0%, var(--iris) 100%); box-shadow:0 8px 20px -10px var(--iris-glow); }
+.lz-work{ display:flex; flex-direction:column; text-decoration:none; color:inherit; border:1px solid var(--line); border-radius:18px; overflow:hidden; background:linear-gradient(180deg, var(--surface) 0%, #101219 100%); box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 24px 48px -32px rgba(0,0,0,.9); transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease; }
+.lz-work:hover{ transform:translateY(-4px); border-color:color-mix(in srgb, var(--iris) 40%, var(--line-2)); }
+.lz-work:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
+.lz-work-body{ flex:1; display:flex; flex-direction:column; }
+.lz-work-foot{ margin-top:auto; }
 .lz-browser{ background:#0d0f15; border-bottom:1px solid var(--line); }
 .lz-browser-bar{ display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line); }
 .lz-dot{ width:9px; height:9px; border-radius:999px; background:#2a2f3a; }
