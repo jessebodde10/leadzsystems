@@ -64,10 +64,10 @@ export default function OpengraphImage() {
         {/* Headline */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 96, fontWeight: 800, color: ink, letterSpacing: -3, lineHeight: 1.02 }}>
-            Software die werkt.
+            Van handmatig werk
           </div>
           <div style={{ display: "flex", fontSize: 96, fontWeight: 800, color: amberText, letterSpacing: -3, lineHeight: 1.02 }}>
-            Processen die lopen.
+            naar slimme systemen
           </div>
           <div style={{ display: "flex", fontSize: 32, color: muted, marginTop: 28, maxWidth: 900, lineHeight: 1.4 }}>
             Slimme software en automatiseringen op maat, zodat jij je op de groei van je bedrijf kunt richten.
