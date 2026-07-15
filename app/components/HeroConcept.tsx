@@ -435,7 +435,7 @@ export default function HeroConcept() {
 
         <div className="lz-dienst-grid">
           {DIENSTEN.map((d, i) => (
-            <article key={d.slug} className="lz-card lz-reveal" style={{ transitionDelay: `${i * 70}ms` }}>
+            <a key={d.slug} href={`/diensten/${d.slug}`} className="lz-card lz-reveal" style={{ transitionDelay: `${i * 70}ms` }}>
               <div className="lz-card-top">
                 <span className="lz-card-icon"><DienstIcon slug={d.slug} /></span>
                 <span className="lz-card-stat">{d.stat}</span>
@@ -455,7 +455,8 @@ export default function HeroConcept() {
               <div className="lz-card-chips">
                 {d.koppelingen.slice(0, 5).map((k) => (<span key={k} className="lz-chip">{k}</span>))}
               </div>
-            </article>
+              <span className="lz-card-more">Meer over deze dienst →</span>
+            </a>
           ))}
         </div>
       </section>
@@ -886,7 +887,7 @@ const CSS = `
 /* ── Diensten ── */
 .lz-dienst-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-3); }
 @media(min-width:760px){ .lz-dienst-grid{ grid-template-columns:1fr 1fr; gap:var(--sp-4); } }
-.lz-card{ position:relative; border:1px solid var(--line); border-radius:18px; padding:26px; background:linear-gradient(180deg, var(--surface) 0%, #101219 100%);
+.lz-card{ position:relative; display:flex; flex-direction:column; text-decoration:none; color:inherit; border:1px solid var(--line); border-radius:18px; padding:26px; background:linear-gradient(180deg, var(--surface) 0%, #101219 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 24px 48px -32px rgba(0,0,0,.9);
   transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .3s ease; }
 .lz-card:hover{ transform:translateY(-4px); border-color:color-mix(in srgb, var(--iris) 40%, var(--line-2)); box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 34px 60px -30px rgba(0,0,0,.95), 0 20px 50px -30px var(--iris-glow); }
@@ -899,6 +900,9 @@ const CSS = `
 .lz-card-list li{ display:flex; align-items:flex-start; gap:10px; font-size:.93rem; color:#C4C8D4; line-height:1.45; }
 .lz-tick{ flex:none; margin-top:2px; color:var(--iris); }
 .lz-card-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:20px; padding-top:18px; border-top:1px solid var(--line); }
+.lz-card-more{ margin-top:18px; font-weight:600; font-size:.9rem; color:var(--iris-2); }
+.lz-card:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
+.lz-card-list{ flex:1; }
 
 /* ── Werkwijze ── */
 .lz-steps{ display:grid; grid-template-columns:1fr; gap:0; counter-reset:none; list-style:none; }

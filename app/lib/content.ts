@@ -35,6 +35,8 @@ export type Dienst = {
   herkenbaar: string[];
   oplossing: { title: string; desc: string }[];
   koppelingen: string[];
+  // Concrete voorbeelden van wat we binnen deze dienst bouwen.
+  voorbeelden: { title: string; desc: string }[];
 };
 
 export const DIENSTEN: Dienst[] = [
@@ -67,6 +69,14 @@ export const DIENSTEN: Dienst[] = [
       { title: "Dag en nacht actief", desc: "Geen kantooruren, geen pauzes. Een AI agent werkt 24/7 en schaalt mee als het drukker wordt, zonder dat je extra mensen nodig hebt." },
     ],
     koppelingen: ["HubSpot", "Pipedrive", "Exact", "AFAS", "Google Workspace", "Slack", "WhatsApp Business", "Outlook"],
+    voorbeelden: [
+      { title: "Inbox-agent", desc: "Leest je inkomende e-mail, herkent wat het is (aanvraag, vraag, factuur) en zet het door naar de juiste plek. Simpele vragen beantwoordt de agent zelf, in jouw toon." },
+      { title: "Leadopvolg-agent", desc: "Volgt elke nieuwe lead binnen enkele minuten op met een persoonlijk bericht, stelt een moment voor en legt alles vast in je CRM. Geen lead blijft meer liggen." },
+      { title: "Offerte-agent", desc: "Zet een aanvraag, spraaknotitie of formulier om in een complete offerte in jouw huisstijl, met de juiste prijzen erbij. Jij checkt en verstuurt." },
+      { title: "Administratie-agent", desc: "Haalt facturen en bonnen uit je inbox, leest ze uit, controleert ze en boekt ze in je boekhouding. Scheelt elke maand een stapel handwerk." },
+      { title: "Rapportage-agent", desc: "Verzamelt maandagochtend je cijfers uit alle systemen en zet een korte briefing klaar in Slack of je mail. Je begint de week met overzicht." },
+      { title: "Planning-agent", desc: "Kijkt naar beschikbaarheid, prioriteit en looptijd, en stelt zelf een realistische planning voor. Signaleert knelpunten voordat ze problemen worden." },
+    ],
   },
   {
     slug: "ai-automatisering",
@@ -97,6 +107,14 @@ export const DIENSTEN: Dienst[] = [
       { title: "AI op jouw kennis", desc: "Assistenten en chatbots die antwoorden op basis van jouw documenten, prijzen en werkwijze." },
     ],
     koppelingen: ["OpenAI", "Claude", "Make", "Zapier", "Google Workspace", "Microsoft 365"],
+    voorbeelden: [
+      { title: "Offertes uit ruwe input", desc: "Van een formulier, mailtje of ingesproken notitie naar een nette offerte in jouw huisstijl. Wat nu een half uur kost, is straks een minuut controleren." },
+      { title: "Documenten automatisch uitlezen", desc: "Werkbonnen, facturen en contracten worden gelezen, de juiste gegevens eruit gehaald en direct in het juiste systeem gezet." },
+      { title: "Inkomende aanvragen verwerken", desc: "Elke aanvraag wordt herkend, gelabeld, doorgezet naar de juiste persoon en bevestigd naar de klant. Ook 's avonds en in het weekend." },
+      { title: "Chatbot op je eigen kennis", desc: "Een assistent die antwoord geeft op basis van jouw documenten, prijzen en werkwijze. Voor je team intern, of voor klanten op je site." },
+      { title: "Data tussen systemen doorzetten", desc: "Geen overtypen meer. Gegevens stromen automatisch van het ene systeem naar het andere, met controle op fouten." },
+      { title: "Terugkerende rapportages", desc: "Wekelijkse of maandelijkse overzichten die zichzelf samenstellen en op het afgesproken moment in je mail liggen." },
+    ],
   },
   {
     slug: "websites-webapps",
@@ -127,6 +145,14 @@ export const DIENSTEN: Dienst[] = [
       { title: "Zelf in beheer", desc: "Pas teksten en afbeeldingen zelf aan, zonder dat je daar een ontwikkelaar voor nodig hebt." },
     ],
     koppelingen: ["Next.js", "Vercel", "Supabase", "Stripe", "Google Analytics"],
+    voorbeelden: [
+      { title: "Bedrijfswebsite die aanvragen oplevert", desc: "Snel, mobielvriendelijk en vindbaar in Google. Gebouwd rond wat jij verkoopt, met een duidelijke route naar contact." },
+      { title: "Klantportaal", desc: "Je klanten loggen in en zien hun status, documenten, facturen of voortgang. Scheelt jou een hoop mailtjes en telefoontjes." },
+      { title: "Aanvraag- of boekingsflow", desc: "Slimme formulieren die meedenken en direct in je agenda, CRM of mailbox landen. Inclusief automatische bevestiging." },
+      { title: "Interne tool op maat", desc: "Vervangt die losse Excel-bestanden en mailtjes door één applicatie waar je team écht mee werkt." },
+      { title: "Webapp met eigen accounts", desc: "Gebruikersbeheer, rollen en rechten, zodat iedereen precies ziet wat hij mag zien." },
+      { title: "Zelf je content beheren", desc: "Teksten en afbeeldingen aanpassen zonder ontwikkelaar. Jij houdt de site actueel, wij zorgen dat het werkt." },
+    ],
   },
   {
     slug: "integraties-dashboards",
@@ -157,6 +183,14 @@ export const DIENSTEN: Dienst[] = [
       { title: "Rapportage zonder werk", desc: "Automatische overzichten op het moment dat jij ze wilt, per mail of in Slack." },
     ],
     koppelingen: ["Moneybird", "Exact", "HubSpot", "Slack", "Google Sheets", "Power BI"],
+    voorbeelden: [
+      { title: "CRM gekoppeld aan boekhouding", desc: "Een deal die je wint wordt automatisch een factuur. Klantgegevens staan overal gelijk, zonder dat iemand ze overtypt." },
+      { title: "Eén dashboard met je cijfers", desc: "Omzet, leads, openstaande facturen en lopende projecten in één overzicht dat altijd actueel is. Op desktop en mobiel." },
+      { title: "Automatische rapportage", desc: "Elke maandag je belangrijkste cijfers in Slack of je mail. Geen exports meer, geen spreadsheets meer bij elkaar puzzelen." },
+      { title: "Webshop en voorraad synchroon", desc: "Bestellingen, voorraad en boekhouding praten met elkaar. Je grijpt nooit meer mis en verkoopt niets dat op is." },
+      { title: "Signalen bij afwijkingen", desc: "Een melding zodra een cijfer afwijkt van wat je verwacht. Je hoort het als er iets is, in plaats van het later te ontdekken." },
+      { title: "Urenregistratie en nacalculatie", desc: "Gewerkte uren stromen door naar je project en je factuur, zodat je per klus ziet wat het echt heeft opgeleverd." },
+    ],
   },
 ];
 

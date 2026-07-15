@@ -287,3 +287,97 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .nws-card, .nws-btn { transition: none; }
 }
+
+/* ─────────────────────────────────────────────────────────
+   DIENSTPAGINA'S (/diensten/[slug]) — lichte amber-stijl
+   Alles scoped onder .dnst-root
+   ───────────────────────────────────────────────────────── */
+.dnst-root {
+  --bg: #f3f4f7; --surface: #ffffff;
+  --ink: #14171f; --muted: #525869; --faint: #8890a0;
+  --line: rgba(16, 20, 32, 0.1); --line-2: rgba(16, 20, 32, 0.16);
+  --accent: #f5a524; --accent-text: #a2650e; --on-accent: #160f02;
+  flex: 1; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.dnst-root a { text-decoration: none; }
+
+/* Top bar */
+.dnst-bar { position: sticky; top: 0; z-index: 30; background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.dnst-bar-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 24px; }
+.dnst-brand { display: inline-flex; }
+.dnst-logo { height: 22px; width: auto; object-fit: contain; }
+.dnst-bar-actions { display: flex; align-items: center; gap: 20px; }
+.dnst-back { font-size: 14px; color: var(--muted); border-radius: 6px; transition: color 0.18s ease; }
+.dnst-back:hover { color: var(--ink); }
+.dnst-back:focus-visible, .dnst-brand:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+.dnst-btn { display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; color: var(--on-accent); padding: 10px 18px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.14); background: linear-gradient(180deg, #ffc061 0%, var(--accent) 100%); box-shadow: 0 8px 20px -10px rgba(245, 165, 36, 0.6); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap; }
+.dnst-btn:hover { transform: translateY(-2px); }
+.dnst-btn:active { transform: translateY(0); }
+.dnst-btn:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+
+/* Kicker */
+.dnst-kicker { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-geist-mono), monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); }
+.dnst-kicker-dot { width: 6px; height: 6px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); box-shadow: 0 0 12px 1px rgba(245, 165, 36, 0.5); }
+
+/* Hero */
+.dnst-hero { max-width: 1120px; margin: 0 auto; width: 100%; padding: 64px 24px 32px; }
+.dnst-title { font-family: var(--font-bricolage), sans-serif; font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 16px 0 0; }
+.dnst-stat { margin: 16px 0 0; font-family: var(--font-geist-mono), monospace; font-size: 13px; color: var(--accent-text); }
+.dnst-lead { margin: 18px 0 0; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.7; max-width: 40rem; }
+.dnst-hero-cta { margin-top: 28px; }
+
+/* Sections */
+.dnst-section { max-width: 1120px; margin: 0 auto; width: 100%; padding: 40px 24px; }
+.dnst-h2 { font-family: var(--font-bricolage), sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; font-size: clamp(1.7rem, 3vw, 2.2rem); }
+.dnst-sub { margin: 12px 0 0; color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 40rem; }
+.dnst-tick { flex: none; margin-top: 3px; color: var(--accent); }
+
+/* Herkenbaar */
+.dnst-pain { margin-top: 20px; display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 760px) { .dnst-pain { grid-template-columns: repeat(3, 1fr); } }
+.dnst-pain li { padding: 20px; border-left: 2px solid var(--accent); background: var(--surface); border-radius: 0 12px 12px 0; color: var(--muted); font-size: 0.98rem; line-height: 1.6; }
+
+/* Card grids */
+.dnst-grid3 { margin-top: 24px; display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 760px) { .dnst-grid3 { grid-template-columns: repeat(3, 1fr); } }
+.dnst-grid2 { margin-top: 24px; display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 700px) { .dnst-grid2 { grid-template-columns: 1fr 1fr; } }
+.dnst-card, .dnst-ex, .dnst-other { border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: var(--surface); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 20px 40px -34px rgba(20, 24, 40, 0.3); }
+.dnst-card-title { font-family: var(--font-bricolage), sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: -0.01em; }
+.dnst-card-desc { margin-top: 8px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+.dnst-ex-head { display: flex; align-items: flex-start; gap: 10px; }
+.dnst-ex-title { font-family: var(--font-bricolage), sans-serif; font-weight: 700; font-size: 1.08rem; letter-spacing: -0.01em; }
+.dnst-ex-desc { margin-top: 8px; color: var(--muted); font-size: 0.95rem; line-height: 1.65; }
+
+/* Alles op maat */
+.dnst-maat { border: 1px solid var(--line-2); border-radius: 20px; padding: 36px 28px; background: linear-gradient(180deg, #ffffff 0%, #f6f7fa 100%); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 24px 48px -36px rgba(20, 24, 40, 0.3); }
+.dnst-maat-p { margin-top: 14px; color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 46rem; }
+.dnst-maat-list { margin-top: 22px; display: grid; grid-template-columns: 1fr; gap: 11px; }
+@media (min-width: 760px) { .dnst-maat-list { grid-template-columns: 1fr 1fr; } }
+.dnst-maat-list li { display: flex; align-items: flex-start; gap: 10px; color: #3a4150; font-size: 0.96rem; line-height: 1.5; }
+
+/* Koppelingen */
+.dnst-chips { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.dnst-chip { font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--muted); padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+
+/* CTA */
+.dnst-cta { text-align: center; border: 1px solid var(--line-2); border-radius: 22px; padding: 52px 24px; background: linear-gradient(180deg, #ffffff 0%, #f4f5f8 100%); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 30px 60px -44px rgba(20, 24, 40, 0.35); }
+.dnst-cta-title { font-family: var(--font-bricolage), sans-serif; font-weight: 800; letter-spacing: -0.02em; font-size: clamp(1.6rem, 3vw, 2.1rem); }
+.dnst-cta-lead { margin: 14px auto 0; color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 36rem; }
+.dnst-cta-btn { margin-top: 26px; }
+
+/* Andere diensten */
+.dnst-other { display: flex; flex-direction: column; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease; }
+.dnst-other:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 40%, var(--line-2)); }
+.dnst-other:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+.dnst-other-link { margin-top: 16px; font-weight: 600; font-size: 0.9rem; color: var(--accent-text); }
+
+/* Footer */
+.dnst-footer { margin-top: auto; border-top: 1px solid var(--line); max-width: 1120px; margin-left: auto; margin-right: auto; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 28px 24px; color: var(--faint); font-size: 0.88rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dnst-btn, .dnst-other { transition: none; }
+}
