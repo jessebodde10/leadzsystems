@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE, DIENSTEN } from "../../lib/content";
+import HubFlow from "../../components/HubFlow";
 
 export function generateStaticParams() {
   return DIENSTEN.map((d) => ({ slug: d.slug }));
@@ -76,6 +77,18 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
         <p className="pg-lead">{dienst.heroLead}</p>
         <a href="/#agenda" className="pg-btn pg-hero-cta">Plan een vrijblijvend gesprek</a>
       </section>
+
+      {/* ── Live flow-diagram (alleen AI Agents) ── */}
+      {dienst.slug === "ai-agents" && (
+        <section className="pg-section">
+          <h2 className="pg-h2">Zo werkt een agent</h2>
+          <p className="pg-sub">
+            Binnenkomend werk wordt opgevangen, via de AI-engine afgehandeld en doorgezet naar
+            je systemen. 24/7, zonder dat jij ernaar omkijkt.
+          </p>
+          <HubFlow />
+        </section>
+      )}
 
       {/* ── Herkenbaar ── */}
       <section className="pg-section">
