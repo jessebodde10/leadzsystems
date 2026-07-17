@@ -563,18 +563,16 @@ export default function HeroConcept() {
                   <span className="lz-browser-url">{p.domain}</span>
                 </div>
                 <div className="lz-preview">
-                  <div className="lz-reelbox">
-                    <iframe
-                      src={p.url}
-                      title={`Preview van ${p.title}`}
-                      loading="lazy"
-                      scrolling="no"
-                      tabIndex={-1}
-                      referrerPolicy="no-referrer"
+                  {p.screenshot && (
+                    <Image
+                      src={p.screenshot}
+                      alt={`Screenshot van ${p.title}`}
+                      width={1280}
+                      height={3200}
+                      sizes="(max-width:760px) 100vw, 520px"
+                      className="lz-shot"
                     />
-                  </div>
-                  {/* Vangt kliks op zodat de hele kaart naar de case linkt */}
-                  <div className="lz-preview-cover" aria-hidden />
+                  )}
                 </div>
               </div>
               <div className="lz-work-body">
@@ -719,6 +717,7 @@ export default function HeroConcept() {
             <p className="lz-footer-line">{SITE.name}</p>
             <p className="lz-footer-line"><span className="lz-footer-label">KvK:</span> {SITE.kvk}</p>
             <div className="lz-footer-legal">
+              <a href="/privacy" className="lz-footer-link">Privacyverklaring</a>
               <a href="#contact" className="lz-footer-link">Contact</a>
             </div>
           </div>
@@ -984,11 +983,13 @@ const CSS = `
 .lz-browser-bar{ display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line); }
 .lz-dot{ width:9px; height:9px; border-radius:999px; background:#2a2f3a; }
 .lz-browser-url{ margin-left:10px; font-family:var(--font-geist-mono),monospace; font-size:11.5px; color:var(--fog-2); }
-.lz-preview{ position:relative; height:230px; overflow:hidden; background:#0e1017; }
-.lz-reelbox{ position:absolute; top:0; left:0; width:1280px; transform:scale(.42); transform-origin:top left; }
-.lz-reelbox iframe{ display:block; width:1280px; height:2600px; border:0; background:#fff; animation:lzReel 24s ease-in-out infinite alternate; }
-.lz-preview:hover .lz-reelbox iframe{ animation-play-state:paused; }
-.lz-preview-cover{ position:absolute; inset:0; z-index:2; display:block; }
+/* Langwerpige screenshot die langzaam door het beeld scrollt */
+.lz-preview{ position:relative; height:230px; overflow:hidden; background:#fff; }
+.lz-shot{ display:block; width:100%; height:auto; animation:lzShot 26s ease-in-out infinite alternate; }
+.lz-work:hover .lz-shot{ animation-play-state:paused; }
+/* calc(-100% + 230px) laat de onderkant van de screenshot exact op de framerand landen,
+   ongeacht de weergavehoogte van de kaart. */
+@keyframes lzShot{ 0%,8%{ transform:translateY(0); } 92%,100%{ transform:translateY(calc(-100% + 230px)); } }
 .lz-work-body{ padding:22px; }
 .lz-work-tag{ display:inline-block; font-family:var(--font-geist-mono),monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--iris-2); padding:4px 9px; border-radius:999px; border:1px solid color-mix(in srgb, var(--iris-2) 30%, transparent); }
 .lz-work-title{ font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:-.01em; margin-top:12px; }
@@ -1023,7 +1024,7 @@ const CSS = `
 .lz-contact-p{ margin-top:var(--sp-3); color:var(--fog); font-size:clamp(1rem,1.4vw,1.08rem); line-height:1.7; max-width:34rem; }
 .lz-contact-sub{ margin-top:var(--sp-5); font-weight:600; color:var(--paper); font-size:1.02rem; }
 .lz-contact-list{ margin-top:14px; display:flex; flex-direction:column; gap:11px; }
-.lz-contact-list li{ display:flex; align-items:flex-start; gap:11px; color:#3A4150; font-size:.98rem; line-height:1.5; }
+.lz-contact-list li{ display:flex; align-items:flex-start; gap:11px; color:var(--fog); font-size:.98rem; line-height:1.5; }
 .lz-contact-note{ margin-top:var(--sp-5); padding-top:var(--sp-4); border-top:1px solid var(--line); color:var(--fog); font-size:.96rem; line-height:1.65; max-width:34rem; }
 .lz-cal-card{ width:100%; scroll-margin-top:100px; text-align:left; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.4); }
 .lz-cta-contacts{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin-top:var(--sp-5); font-family:var(--font-geist-mono),monospace; font-size:13px; }

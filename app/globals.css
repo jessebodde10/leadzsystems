@@ -383,24 +383,31 @@ body {
   .pg-btn, .pg-other { transition: none; }
 }
 
+/* Doorlopende tekstpagina (privacyverklaring) — smalle, leesbare regelbreedte */
+.pg-root .prose { max-width: 68ch; }
+.pg-root .prose p { color: #2b303d; font-size: 1.05rem; line-height: 1.75; margin: 14px 0 0; }
+.pg-root .prose .pg-h2 { margin-top: 48px; }
+.pg-root .prose .sub { font-family: var(--font-geist-sans), sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--ink); margin: 28px 0 0; }
+.pg-root .prose ul.plain { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 0; padding-left: 22px; list-style: disc; }
+.pg-root .prose ul.plain li { color: #2b303d; font-size: 1.02rem; line-height: 1.6; }
+.pg-root .prose a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 2px; }
+.pg-root .prose a:hover { color: var(--ink); }
+.pg-root .prose a:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+
 /* Case-pagina: grote live preview van de echte site */
 .case-browser { border: 1px solid var(--line-2); border-radius: 18px; overflow: hidden; background: #eef0f4; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 30px 60px -40px rgba(20, 24, 40, 0.4); }
 .case-browser-bar { display: flex; align-items: center; gap: 6px; padding: 11px 16px; border-bottom: 1px solid var(--line); }
 .case-dot { width: 9px; height: 9px; border-radius: 999px; background: #c4c9d4; }
 .case-url { margin-left: 10px; font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--faint); }
-.case-preview { position: relative; height: 460px; overflow: hidden; background: #fff; }
-.case-reelbox { position: absolute; top: 0; left: 0; width: 1280px; transform-origin: top left; }
-.case-reelbox iframe { display: block; width: 1280px; height: 2600px; border: 0; background: #fff; animation: ulReel 26s ease-in-out infinite alternate; }
-.case-preview:hover .case-reelbox iframe { animation-play-state: paused; }
-.case-cover { position: absolute; inset: 0; z-index: 2; display: block; }
-.case-cover:focus-visible { outline: 2px solid var(--accent-text); outline-offset: -4px; }
+.case-preview { display: block; position: relative; height: 520px; overflow: hidden; background: #fff; }
+.case-preview:focus-visible { outline: 2px solid var(--accent-text); outline-offset: -4px; }
+.case-shot { display: block; width: 100%; height: auto; animation: caseShot 34s ease-in-out infinite alternate; }
+.case-preview:hover .case-shot { animation-play-state: paused; }
+/* calc(-100% + 520px) laat de onderkant van de screenshot exact op de framerand landen */
+@keyframes caseShot { 0%, 6% { transform: translateY(0); } 94%, 100% { transform: translateY(calc(-100% + 520px)); } }
 .case-note { margin-top: 14px; }
 .case-did { grid-template-columns: 1fr; }
 @media (min-width: 860px) { .case-did { grid-template-columns: 1fr 1fr; } }
 .case-other-title { margin-top: 10px; }
-/* Schaal de 1280px-brede preview naar de kaartbreedte */
-@media (max-width: 1180px) { .case-reelbox { transform: scale(0.82); } }
-@media (min-width: 1181px) { .case-reelbox { transform: scale(0.84); } }
-@media (max-width: 900px) { .case-reelbox { transform: scale(0.6); } .case-preview { height: 380px; } }
-@media (max-width: 620px) { .case-reelbox { transform: scale(0.4); } .case-preview { height: 300px; } }
-@media (prefers-reduced-motion: reduce) { .case-reelbox iframe { animation: none; } }
+@media (max-width: 900px) { .case-preview { height: 400px; } @keyframes caseShot { 0%, 6% { transform: translateY(0); } 94%, 100% { transform: translateY(calc(-100% + 400px)); } } }
+@media (prefers-reduced-motion: reduce) { .case-shot { animation: none; } }
