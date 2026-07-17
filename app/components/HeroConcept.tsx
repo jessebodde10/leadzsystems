@@ -707,7 +707,7 @@ export default function HeroConcept() {
 
           <div className="lz-footer-col">
             <h3 className="lz-footer-h">Over {SITE.name}</h3>
-            <p className="lz-footer-person"><strong>Jesse</strong>, oprichter</p>
+            <p className="lz-footer-line">Jesse, oprichter</p>
             <a href="https://www.linkedin.com/company/leadz-systems/" target="_blank" rel="noopener noreferrer" className="lz-footer-link">LinkedIn</a>
             <a href={`mailto:${SITE.email}`} className="lz-footer-link">{SITE.email}</a>
           </div>
@@ -715,7 +715,7 @@ export default function HeroConcept() {
           <div className="lz-footer-col">
             <h3 className="lz-footer-h">Bedrijfsgegevens</h3>
             <p className="lz-footer-line">{SITE.name}</p>
-            <p className="lz-footer-line"><span className="lz-footer-label">KvK:</span> {SITE.kvk}</p>
+            <p className="lz-footer-line">KvK: {SITE.kvk}</p>
             <div className="lz-footer-legal">
               <a href="/privacy" className="lz-footer-link">Privacyverklaring</a>
               <a href="#contact" className="lz-footer-link">Contact</a>
@@ -1044,14 +1044,12 @@ const CSS = `
 .lz-footer-copy{ margin-top:20px; color:var(--fog-2); font-size:.9rem; }
 .lz-footer-h{ font-family:var(--font-geist-sans),sans-serif; font-weight:600; font-size:1rem; color:var(--paper); margin-bottom:16px; }
 .lz-footer-col{ display:flex; flex-direction:column; gap:12px; }
-.lz-footer-person{ color:var(--fog); font-size:.95rem; }
-.lz-footer-person strong{ color:var(--paper); font-weight:600; }
 .lz-footer-line{ color:var(--fog); font-size:.95rem; line-height:1.5; }
-.lz-footer-label{ color:var(--paper); font-weight:500; }
 .lz-footer-link{ color:var(--fog); font-size:.95rem; text-decoration:none; border-radius:4px; width:fit-content; transition:color .18s ease; }
 .lz-footer-link:hover{ color:var(--iris-2); }
 .lz-footer-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
-.lz-footer-legal{ display:flex; flex-wrap:wrap; gap:var(--sp-4); margin-top:8px; }
+/* Geen extra margin: de kolom-gap bepaalt de ritmiek, zodat alle regels gelijk staan */
+.lz-footer-legal{ display:flex; flex-wrap:wrap; gap:var(--sp-4); }
 
 /* ── Floating WhatsApp ── */
 .lz-wa{ position:fixed; bottom:22px; right:22px; z-index:60; width:54px; height:54px; border-radius:999px; display:flex; align-items:center; justify-content:center; color:#fff; background:#20b95a; box-shadow:0 12px 30px -8px rgba(32,185,90,.6), 0 2px 6px rgba(0,0,0,.4); transition:transform .2s cubic-bezier(.34,1.56,.64,1); }

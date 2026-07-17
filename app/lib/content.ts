@@ -235,6 +235,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     stack: ["Next.js", "Responsive", "SEO"],
     url: "https://website-happy-test.vercel.app/",
     domain: "happy-face.nl",
+    screenshot: "/cases/happy-face.webp",
     uitdaging: "Happy Face had geen online aanwezigheid die recht deed aan de sfeer en kwaliteit van de salon. De oude site was gedateerd en genereerde nauwelijks aanvragen. Het doel: een website die de warmte van de salon uitstraalt en bezoekers omzet naar klanten.",
     watWeDeden: [
       "Complete nieuwe website ontworpen en gebouwd in Next.js",
@@ -253,6 +254,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     stack: ["Next.js", "Responsive", "SEO"],
     url: "https://connectrise-test.vercel.app/",
     domain: "connectrise.nl",
+    screenshot: "/cases/connect-rise.webp",
     uitdaging: "Connect & Rise bood workshops en ademcoaching aan, maar had geen website die het aanbod helder maakte. Potentiële deelnemers vonden moeilijk wat ze zochten en haakten af. De wens: een rustige, persoonlijke site die vertrouwen wekt.",
     watWeDeden: [
       "Nieuwe website gebouwd met focus op rust en persoonlijk contact",
@@ -264,24 +266,6 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     resultaat: "Een website die de eigenheid van het merk uitstraalt en bezoekers op een rustige manier begeleidt naar aanmelding of contact.",
   },
   {
-    slug: "ags",
-    tag: "Web-app",
-    title: "AGS - maatwerk tool",
-    description: "Een maatwerk webapplicatie die een specifiek werkproces digitaliseert en versnelt, gebouwd rond de wensen van de klant.",
-    stack: ["Next.js", "Supabase", "Maatwerk"],
-    url: "https://ags-tool.vercel.app/",
-    domain: "ags-tool.app",
-    uitdaging: "AGS verwerkte een terugkerend werkproces handmatig via losse bestanden en e-mails. Dat kostte veel tijd, was foutgevoelig en gaf geen overzicht. De vraag: kan dit slimmer, sneller en betrouwbaarder?",
-    watWeDeden: [
-      "Werkproces in kaart gebracht en vertaald naar een digitale tool",
-      "Webapplicatie op maat gebouwd met eigen login en gebruikersbeheer",
-      "Gestructureerd overzicht van alle lopende en afgeronde taken",
-      "Automatische verwerking van stappen die eerder handmatig gingen",
-      "Snel te gebruiken op desktop, ook onderweg op mobiel",
-    ],
-    resultaat: "Een tool die het werkproces volledig digitaliseert: minder handwerk, minder fouten en altijd inzicht in de status van lopende zaken.",
-  },
-  {
     slug: "freezo",
     tag: "Web-app",
     title: "Freezo - freelance dashboard",
@@ -289,6 +273,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     stack: ["Next.js", "Supabase", "Dashboard"],
     url: "https://www.freezo.nl",
     domain: "freezo.nl",
+    screenshot: "/cases/freezo.webp",
     uitdaging: "Freelancers werken met losse tools voor facturatie, planning en overzicht. Dat leidt tot verspreide informatie en verlies van tijd. Freezo wilde één centrale plek waar alles samenkomt.",
     watWeDeden: [
       "Dashboard gebouwd met realtime overzicht van inkomsten en opdrachten",
