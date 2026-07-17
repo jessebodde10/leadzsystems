@@ -73,12 +73,10 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
         <h1 className="pg-title">{item.title}</h1>
         <p className="pg-stat">{item.domain}</p>
         <p className="pg-lead">{item.description}</p>
-        <a href={item.url} target="_blank" rel="noopener noreferrer" className="pg-btn pg-hero-cta">
-          Bekijk de live site ↗
-        </a>
+        <a href="/#agenda" className="pg-btn pg-hero-cta">Plan een vrijblijvend gesprek</a>
       </section>
 
-      {/* ── Live preview ── */}
+      {/* ── Screenshot van de site ── */}
       <section className="pg-section">
         <div className="case-browser">
           <div className="case-browser-bar">
@@ -86,26 +84,19 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
             <span className="case-url">{item.domain}</span>
           </div>
           <div className="case-preview">
-            <div className="case-reelbox">
-              <iframe
-                src={item.url}
-                title={`Live preview van ${item.title}`}
-                loading="lazy"
-                scrolling="no"
-                tabIndex={-1}
-                referrerPolicy="no-referrer"
+            {item.screenshot && (
+              <Image
+                src={item.screenshot}
+                alt={`Screenshot van ${item.title}`}
+                width={1280}
+                height={3200}
+                sizes="(max-width:1180px) 100vw, 1072px"
+                className="case-shot"
+                priority
               />
-            </div>
-            <a
-              className="case-cover"
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${item.title} in een nieuw tabblad`}
-            />
+            )}
           </div>
         </div>
-        <p className="pg-sub case-note">Dit is de echte site, live geladen. Klik erop om 'm te openen.</p>
       </section>
 
       {/* ── Uitdaging ── */}

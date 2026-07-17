@@ -399,13 +399,11 @@ body {
 .case-browser-bar { display: flex; align-items: center; gap: 6px; padding: 11px 16px; border-bottom: 1px solid var(--line); }
 .case-dot { width: 9px; height: 9px; border-radius: 999px; background: #c4c9d4; }
 .case-url { margin-left: 10px; font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--faint); }
-.case-preview { display: block; position: relative; height: 520px; overflow: hidden; background: #fff; }
-.case-preview:focus-visible { outline: 2px solid var(--accent-text); outline-offset: -4px; }
+.case-preview { position: relative; height: 520px; overflow: hidden; background: #fff; }
 .case-shot { display: block; width: 100%; height: auto; animation: caseShot 34s ease-in-out infinite alternate; }
 .case-preview:hover .case-shot { animation-play-state: paused; }
 /* calc(-100% + 520px) laat de onderkant van de screenshot exact op de framerand landen */
 @keyframes caseShot { 0%, 6% { transform: translateY(0); } 94%, 100% { transform: translateY(calc(-100% + 520px)); } }
-.case-note { margin-top: 14px; }
 .case-did { grid-template-columns: 1fr; }
 @media (min-width: 860px) { .case-did { grid-template-columns: 1fr 1fr; } }
 .case-other-title { margin-top: 10px; }
