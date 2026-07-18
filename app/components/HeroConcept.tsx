@@ -25,11 +25,30 @@ const TOOLS = ["OpenAI", "Claude", "Make", "Zapier", "n8n", "HubSpot", "Pipedriv
 
 /* Werkwijze — 4 steps, copy matches the live leadzsystems.nl site. */
 const WERKWIJZE = [
-  { nr: "01", title: "Intake gesprek", desc: "We beginnen met een vrijblijvend gesprek om te begrijpen wat je wil aanpakken, welke systemen je gebruikt en wat het meeste oplevert." },
-  { nr: "02", title: "Ontwerp & voorstel", desc: "We leveren een helder voorstel met technische aanpak en vaste prijs. Pas als jij akkoord geeft, starten we." },
-  { nr: "03", title: "Bouwen & testen", desc: "Wij bouwen je oplossing op maat, koppelen alle systemen en testen alles uitgebreid met jou erbij." },
-  { nr: "04", title: "Live & onderhoud", desc: "Je oplossing gaat live. Wij zorgen voor hosting, updates en monitoring. Maand na maand, zonder gedoe." },
+  { week: "Week 1", title: "Analyse", icon: "search", desc: "We brengen je processen in kaart en berekenen waar AI de meeste tijd en kosten bespaart." },
+  { week: "Week 2", title: "Strategie", icon: "map", desc: "Je krijgt een concreet plan: welke processen we automatiseren, in welke volgorde en wat het oplevert." },
+  { week: "Week 3–6", title: "Ontwikkeling", icon: "build", desc: "We bouwen je AI-agents en workflows op maat en testen ze grondig met jouw eigen data." },
+  { week: "Week 6–8", title: "Implementatie", icon: "rocket", desc: "We rollen alles gecontroleerd uit en trainen je team, zodat iedereen ermee kan werken." },
+  { week: "Doorlopend", title: "Optimalisatie", icon: "cycle", desc: "We monitoren de resultaten en verbeteren continu, zodat het rendement elke maand groeit." },
 ];
+
+function WerkwijzeIcon({ name }: { name: string }) {
+  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (name) {
+    case "search":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>);
+    case "map":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>);
+    case "build":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>);
+    case "rocket":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M4 13a8 8 0 0 1 7-7 6 6 0 0 1 6 6 8 8 0 0 1-7 7c-.5-2-1-3-1.5-3.5S6 15 4 13z" /><path d="M7 14a6 6 0 0 0-3 6 6 6 0 0 0 6-3" /><circle cx="15" cy="9" r="1.2" /></svg>);
+    case "cycle":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M4.5 9a7.5 7.5 0 0 1 12.9-3.2L20 8" /><path d="M20 4v4h-4" /><path d="M19.5 15a7.5 7.5 0 0 1-12.9 3.2L4 16" /><path d="M4 20v-4h4" /></svg>);
+    default:
+      return null;
+  }
+}
 
 /* Trust stats — from the live site. */
 const STATS = [
@@ -160,6 +179,10 @@ export default function HeroConcept() {
   const [bg, setBg] = useState<"mesh" | "flow" | "nodes" | "contour" | "dots">("mesh");
   const [menuOpen, setMenuOpen] = useState(false);
   const [workFilter, setWorkFilter] = useState("Alles");
+  // Besparingscalculator — invoer
+  const [calcPeople, setCalcPeople] = useState(3);
+  const [calcHours, setCalcHours] = useState(8);
+  const [calcWage, setCalcWage] = useState(45);
   const idRef = useRef(0);
   const clockRef = useRef(7 * 60 + 41); // start the fictional day at 07:41
   const reducedRef = useRef(false);
@@ -236,6 +259,22 @@ export default function HeroConcept() {
   }, []);
 
   const year = new Date().getFullYear();
+
+  // Besparingscalculator — afgeleide waarden (70% automatiseringswinst op terugkerend handwerk)
+  const SAVE_FACTOR = 0.7;
+  const savedHrsWeek = calcPeople * calcHours * SAVE_FACTOR;
+  const euroWeek = savedHrsWeek * calcWage;
+  const fmtEuro = (n: number) => "€ " + Math.round(n).toLocaleString("nl-NL");
+  const fmtHrs = (n: number) => Math.round(n).toLocaleString("nl-NL") + " uur";
+  const savings = [
+    { label: "Per week", euro: euroWeek, hrs: savedHrsWeek },
+    { label: "Per maand", euro: (euroWeek * 52) / 12, hrs: (savedHrsWeek * 52) / 12 },
+    { label: "Per jaar", euro: euroWeek * 52, hrs: savedHrsWeek * 52, feat: true },
+  ];
+  const clampStep =
+    (setter: React.Dispatch<React.SetStateAction<number>>, delta: number, min: number, max: number) =>
+    () =>
+      setter((v) => Math.min(max, Math.max(min, v + delta)));
 
   return (
     <div className={`lz-root${theme === "light" ? " lz-light" : ""}`} ref={rootRef} style={{ ...rootStyle, ...palette }}>
@@ -466,18 +505,20 @@ export default function HeroConcept() {
       <section id="werkwijze" className="lz-section">
         <div className="lz-head lz-reveal">
           <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Werkwijze</span>
-          <h2 className="lz-h2">Van idee naar live<br />oplossing in 4 stappen.</h2>
-          <p className="lz-lead">We houden het simpel. Jij vertelt ons wat je wil bereiken. Wij zorgen dat het werkt.</p>
+          <h2 className="lz-h2">Van eerste gesprek naar<br /><span className="lz-iris">werkende AI in weken</span></h2>
+          <p className="lz-lead">Geen maandenlange IT-trajecten. Onze aanpak is helder, snel en volledig begeleid. Jij houdt op elk moment overzicht.</p>
         </div>
 
-        <ol className="lz-steps">
+        <ol className="lz-flow">
           {WERKWIJZE.map((s) => (
-            <li key={s.nr} className="lz-step lz-reveal">
-              <span className="lz-step-nr">{s.nr}</span>
-              <div className="lz-step-body">
-                <h3 className="lz-step-title">{s.title}</h3>
-                <p className="lz-step-desc">{s.desc}</p>
+            <li key={s.title} className="lz-flow-step lz-reveal">
+              <div className="lz-flow-top">
+                <span className="lz-flow-ico"><WerkwijzeIcon name={s.icon} /></span>
+                <span className="lz-flow-line" aria-hidden />
               </div>
+              <span className="lz-flow-week">{s.week}</span>
+              <h3 className="lz-flow-title">{s.title}</h3>
+              <p className="lz-flow-desc">{s.desc}</p>
             </li>
           ))}
         </ol>
@@ -492,6 +533,84 @@ export default function HeroConcept() {
               <span className="lz-statbig-label">{s.label}</span>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Besparingscalculator ── */}
+      <section id="besparing" className="lz-section">
+        <div className="sc-head lz-reveal">
+          <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Bereken je besparing</span>
+          <h2 className="lz-h2">Reken uit wat<br />automatisering <span className="lz-iris">jou oplevert</span></h2>
+          <p className="lz-lead">Vul drie getallen in en zie direct wat je per week, maand en jaar terugwint.</p>
+        </div>
+
+        <div className="sc-card lz-reveal">
+          <div className="sc-grid">
+            {/* Invoer */}
+            <div className="sc-inputs">
+              <div className="sc-field">
+                <span className="sc-label" id="sc-people">Medewerkers die handmatig werk doen</span>
+                <div className="sc-control">
+                  <span className="sc-value"><span className="sc-num" aria-labelledby="sc-people">{calcPeople}</span><span className="sc-unit">personen</span></span>
+                  <span className="sc-steppers">
+                    <button type="button" className="sc-step" aria-label="Minder medewerkers" onClick={clampStep(setCalcPeople, -1, 1, 100)}>−</button>
+                    <button type="button" className="sc-step" aria-label="Meer medewerkers" onClick={clampStep(setCalcPeople, 1, 1, 100)}>+</button>
+                  </span>
+                </div>
+              </div>
+
+              <div className="sc-field">
+                <span className="sc-label" id="sc-hours">Uren handmatig werk per medewerker per week</span>
+                <div className="sc-control">
+                  <span className="sc-value"><span className="sc-num" aria-labelledby="sc-hours">{calcHours}</span><span className="sc-unit">uur</span></span>
+                  <span className="sc-steppers">
+                    <button type="button" className="sc-step" aria-label="Minder uren" onClick={clampStep(setCalcHours, -1, 1, 80)}>−</button>
+                    <button type="button" className="sc-step" aria-label="Meer uren" onClick={clampStep(setCalcHours, 1, 1, 80)}>+</button>
+                  </span>
+                </div>
+              </div>
+
+              <div className="sc-field">
+                <span className="sc-label" id="sc-wage">Gemiddeld uurloon</span>
+                <div className="sc-control">
+                  <span className="sc-value"><span className="sc-num" aria-labelledby="sc-wage"><span className="sc-cur">€</span>{calcWage}</span><span className="sc-unit">per uur</span></span>
+                  <span className="sc-steppers">
+                    <button type="button" className="sc-step" aria-label="Lager uurloon" onClick={clampStep(setCalcWage, -5, 5, 500)}>−</button>
+                    <button type="button" className="sc-step" aria-label="Hoger uurloon" onClick={clampStep(setCalcWage, 5, 5, 500)}>+</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Resultaat */}
+            <div className="sc-results">
+              <span className="sc-results-kicker">Potentiële besparing</span>
+              <div className="sc-results-list" aria-live="polite">
+                {savings.map((s) => (
+                  <div key={s.label} className={`sc-result${s.feat ? " is-feat" : ""}`}>
+                    <span className="sc-result-label">{s.label}</span>
+                    <span className="sc-result-val">{fmtEuro(s.euro)}<span className="sc-result-hrs">· {fmtHrs(s.hrs)}</span></span>
+                  </div>
+                ))}
+              </div>
+              <p className="sc-note">
+                Berekening op basis van een geschatte automatiseringswinst van 70% bij terugkerend
+                handmatig werk. De werkelijke besparing hangt af van je processen.
+              </p>
+            </div>
+          </div>
+
+          <div className="sc-foot">
+            <p className="sc-foot-text">
+              Dit is tijd en capaciteit die je direct terugwint zodra je processen geautomatiseerd zijn.
+            </p>
+            <a href="#agenda" className="lz-btn lz-btn-primary sc-cta">
+              Plan een verkenningsgesprek
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden className="lz-btn-arrow">
+                <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -635,17 +754,17 @@ export default function HeroConcept() {
 
       {/* ── FAQ ── */}
       <section className="lz-section">
-        <div className="lz-head lz-reveal">
+        <div className="lz-head lz-head-center lz-reveal">
           <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Veelgestelde vragen</span>
-          <h2 className="lz-h2">Goed om<br />te weten.</h2>
+          <h2 className="lz-h2">Alles wat je wilt weten<br /><span className="lz-iris">voordat we starten</span></h2>
         </div>
         <div className="lz-faq lz-reveal">
           {FAQS.map((f) => (
             <details key={f.q} className="lz-faq-item">
               <summary className="lz-faq-q">
                 {f.q}
-                <span className="lz-faq-plus" aria-hidden>
-                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+                <span className="lz-faq-chevron" aria-hidden>
+                  <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
               </summary>
               <p className="lz-faq-a">{f.a}</p>
@@ -697,29 +816,46 @@ export default function HeroConcept() {
       <footer className="lz-footer">
         <div className="lz-footer-grid">
           <div className="lz-footer-brandcol">
-            <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="lz-logo" />
+            <Image src="/logo.png" alt={SITE.name} width={1350} height={157} className="lz-logo" />
             <p className="lz-footer-tag">
-              Leadz Systems helpt ondernemers en teams in Nederland AI en automations praktisch
-              toe te passen, via software op maat, koppelingen en implementatie.
+              {SITE.name} helpt MKB-bedrijven slimmer werken met AI en automatisering.
+              Slimmer werken. Meer bereiken.
             </p>
-            <p className="lz-footer-copy">© {year} {SITE.name}</p>
           </div>
 
+          <nav className="lz-footer-col" aria-label="Navigatie">
+            <h3 className="lz-footer-h">Navigatie</h3>
+            <a href="#diensten" className="lz-footer-link">Oplossingen</a>
+            <a href="/diensten/ai-agents" className="lz-footer-link">AI Agents</a>
+            <a href="/diensten/ai-automatisering" className="lz-footer-link">Automatiseringen</a>
+            <a href="/diensten/websites-webapps" className="lz-footer-link">Websites</a>
+            <a href="#portfolio" className="lz-footer-link">Cases</a>
+            <a href="#over-ons" className="lz-footer-link">Over ons</a>
+          </nav>
+
           <div className="lz-footer-col">
-            <h3 className="lz-footer-h">Over {SITE.name}</h3>
-            <p className="lz-footer-line">Jesse, oprichter</p>
-            <a href="https://www.linkedin.com/company/leadz-systems/" target="_blank" rel="noopener noreferrer" className="lz-footer-link">LinkedIn</a>
+            <h3 className="lz-footer-h">Contact</h3>
+            <a href="#agenda" className="lz-footer-link">Plan een AI Scan</a>
             <a href={`mailto:${SITE.email}`} className="lz-footer-link">{SITE.email}</a>
+            <a href="https://www.linkedin.com/company/leadz-systems/" target="_blank" rel="noopener noreferrer" className="lz-footer-link">LinkedIn</a>
           </div>
 
           <div className="lz-footer-col">
-            <h3 className="lz-footer-h">Bedrijfsgegevens</h3>
-            <p className="lz-footer-line">{SITE.name}</p>
-            <p className="lz-footer-line">KvK: {SITE.kvk}</p>
-            <div className="lz-footer-legal">
-              <a href="/privacy" className="lz-footer-link">Privacyverklaring</a>
-              <a href="#contact" className="lz-footer-link">Contact</a>
-            </div>
+            <h3 className="lz-footer-h">Juridisch</h3>
+            <a href="/privacy" className="lz-footer-link">Privacyverklaring</a>
+            <a href="/voorwaarden" className="lz-footer-link">Algemene voorwaarden</a>
+          </div>
+        </div>
+
+        <div className="lz-footer-bar">
+          <p className="lz-footer-copy">© {year} {SITE.name}. Alle rechten voorbehouden.</p>
+          <div className="lz-footer-sign">
+            <a href="https://www.linkedin.com/company/leadz-systems/" target="_blank" rel="noopener noreferrer" className="lz-footer-in" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden>
+                <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.64h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H10z" />
+              </svg>
+            </a>
+            <span>Slimmer werken. <span className="lz-footer-sign-em">Meer bereiken.</span></span>
           </div>
         </div>
       </footer>
@@ -920,13 +1056,16 @@ const CSS = `
 .lz-card-list{ flex:1; }
 
 /* ── Werkwijze ── */
-.lz-steps{ display:grid; grid-template-columns:1fr; gap:0; counter-reset:none; list-style:none; }
-.lz-step{ display:grid; grid-template-columns:auto 1fr; gap:20px; padding:24px 0; border-top:1px solid var(--line); }
-.lz-step:last-child{ border-bottom:1px solid var(--line); }
-.lz-step-nr{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:1.5rem; line-height:1; color:transparent; -webkit-text-stroke:1.4px color-mix(in srgb, var(--iris) 70%, transparent); min-width:3ch; font-variant-numeric:tabular-nums; }
-.lz-step-title{ font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.25rem; letter-spacing:-.01em; }
-.lz-step-desc{ margin-top:6px; color:var(--fog); font-size:.98rem; line-height:1.65; max-width:44rem; }
-@media(min-width:760px){ .lz-step{ grid-template-columns:120px 1fr; align-items:baseline; gap:32px; padding:30px 0; } .lz-step-nr{ font-size:2.4rem; } }
+.lz-flow{ display:grid; grid-template-columns:1fr; gap:32px; list-style:none; padding:0; margin-top:var(--sp-6); }
+@media(min-width:720px){ .lz-flow{ grid-template-columns:repeat(2,1fr); gap:36px 28px; } }
+@media(min-width:980px){ .lz-flow{ grid-template-columns:repeat(5,1fr); gap:24px; } }
+.lz-flow-top{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.lz-flow-ico{ flex:none; width:48px; height:48px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; color:var(--iris-2); background:color-mix(in srgb, var(--iris) 12%, transparent); border:1px solid color-mix(in srgb, var(--iris) 24%, var(--line)); }
+.lz-flow-line{ display:none; flex:1; height:1px; min-width:12px; background:color-mix(in srgb, var(--iris) 40%, var(--line)); }
+@media(min-width:980px){ .lz-flow-line{ display:block; margin-right:-24px; } .lz-flow-step:last-child .lz-flow-line{ display:none; } }
+.lz-flow-week{ display:block; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fog-2); }
+.lz-flow-title{ margin-top:6px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:-.01em; color:var(--paper); }
+.lz-flow-desc{ margin-top:10px; color:var(--fog); font-size:.95rem; line-height:1.6; }
 
 
 /* ── Over Jesse ── */
@@ -1001,14 +1140,18 @@ const CSS = `
 .lz-work-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
 
 /* ── FAQ ── */
-.lz-faq{ border-top:1px solid var(--line); }
-.lz-faq-item{ border-bottom:1px solid var(--line); }
-.lz-faq-q{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); padding:22px 4px; cursor:pointer; list-style:none; font-family:var(--font-bricolage),sans-serif; font-weight:600; font-size:1.12rem; letter-spacing:-.01em; color:var(--paper); }
+.lz-head-center{ max-width:720px; margin-left:auto; margin-right:auto; text-align:center; }
+.lz-head-center .lz-kicker{ justify-content:center; }
+.lz-faq{ display:flex; flex-direction:column; gap:16px; max-width:860px; margin:0 auto; }
+.lz-faq-item{ border:1px solid var(--line); border-radius:16px; background:var(--surface); padding:4px 26px; box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 20px 40px -36px rgba(20,24,40,.4); transition:border-color .2s ease, box-shadow .25s ease; }
+.lz-faq-item:hover{ border-color:color-mix(in srgb, var(--iris) 28%, var(--line-2)); }
+.lz-faq-item[open]{ box-shadow:0 1px 0 rgba(255,255,255,.05) inset, 0 26px 48px -34px rgba(20,24,40,.5); }
+.lz-faq-q{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); padding:22px 0; cursor:pointer; list-style:none; font-family:var(--font-bricolage),sans-serif; font-weight:600; font-size:1.12rem; letter-spacing:-.01em; color:var(--paper); }
 .lz-faq-q::-webkit-details-marker{ display:none; }
 .lz-faq-q:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; border-radius:6px; }
-.lz-faq-plus{ flex:none; width:32px; height:32px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; color:var(--iris-2); border:1px solid var(--line-2); transition:transform .25s cubic-bezier(.22,1,.36,1), background-color .2s ease; }
-.lz-faq-item[open] .lz-faq-plus{ transform:rotate(135deg); background:color-mix(in srgb, var(--iris) 14%, transparent); }
-.lz-faq-a{ padding:0 4px 24px; color:var(--fog); font-size:1rem; line-height:1.7; max-width:52rem; }
+.lz-faq-chevron{ flex:none; width:34px; height:34px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; color:var(--iris-2); border:1px solid var(--line-2); transition:transform .25s cubic-bezier(.22,1,.36,1), background-color .2s ease; }
+.lz-faq-item[open] .lz-faq-chevron{ transform:rotate(180deg); background:color-mix(in srgb, var(--iris) 14%, transparent); }
+.lz-faq-a{ padding:0 0 24px; color:var(--fog); font-size:1rem; line-height:1.7; }
 
 /* ── Closing CTA ── */
 .lz-cta{ position:relative; overflow:hidden; text-align:center; border:1px solid var(--line-2); border-radius:26px; padding:64px var(--sp-4); background:linear-gradient(180deg, #14161e 0%, #0e1016 100%); }
@@ -1035,21 +1178,27 @@ const CSS = `
 .lz-contact-muted{ color:var(--fog-2); }
 
 /* ── Footer ── */
-.lz-footer{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:var(--sp-7) var(--edge) var(--sp-6); border-top:1px solid var(--line); }
+.lz-footer{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:var(--sp-7) var(--edge) var(--sp-6); }
 .lz-footer-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-6); }
-@media(min-width:760px){ .lz-footer-grid{ grid-template-columns:1.7fr 1fr 1.2fr; gap:var(--sp-5); } }
-.lz-footer .lz-logo{ height:24px; }
-.lz-footer-brandcol{ max-width:360px; }
+@media(min-width:560px){ .lz-footer-grid{ grid-template-columns:1fr 1fr; } }
+@media(min-width:900px){ .lz-footer-grid{ grid-template-columns:2fr 1fr 1fr 1fr; gap:var(--sp-5); } }
+.lz-footer .lz-logo{ height:26px; }
+.lz-footer-brandcol{ max-width:360px; grid-column:1 / -1; }
+@media(min-width:900px){ .lz-footer-brandcol{ grid-column:auto; } }
 .lz-footer-tag{ margin-top:18px; color:var(--fog); font-size:.95rem; line-height:1.65; }
-.lz-footer-copy{ margin-top:20px; color:var(--fog-2); font-size:.9rem; }
-.lz-footer-h{ font-family:var(--font-geist-sans),sans-serif; font-weight:600; font-size:1rem; color:var(--paper); margin-bottom:16px; }
-.lz-footer-col{ display:flex; flex-direction:column; gap:12px; }
-.lz-footer-line{ color:var(--fog); font-size:.95rem; line-height:1.5; }
+.lz-footer-h{ font-family:var(--font-geist-mono),monospace; font-weight:500; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--fog-2); margin-bottom:8px; }
+.lz-footer-col{ display:flex; flex-direction:column; gap:14px; }
 .lz-footer-link{ color:var(--fog); font-size:.95rem; text-decoration:none; border-radius:4px; width:fit-content; transition:color .18s ease; }
 .lz-footer-link:hover{ color:var(--iris-2); }
 .lz-footer-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
-/* Geen extra margin: de kolom-gap bepaalt de ritmiek, zodat alle regels gelijk staan */
-.lz-footer-legal{ display:flex; flex-wrap:wrap; gap:var(--sp-4); }
+/* Onderbalk */
+.lz-footer-bar{ margin-top:var(--sp-6); padding-top:var(--sp-4); border-top:1px solid var(--line); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; }
+.lz-footer-copy{ color:var(--fog-2); font-size:.9rem; }
+.lz-footer-sign{ display:inline-flex; align-items:center; gap:12px; color:var(--fog-2); font-size:.9rem; }
+.lz-footer-sign-em{ color:var(--iris-2); font-weight:600; }
+.lz-footer-in{ display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px; color:var(--fog); background:var(--surface-2); border:1px solid var(--line); transition:color .18s ease, border-color .18s ease; }
+.lz-footer-in:hover{ color:var(--iris-2); border-color:color-mix(in srgb, var(--iris) 45%, var(--line-2)); }
+.lz-footer-in:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
 
 /* ── Floating WhatsApp ── */
 .lz-wa{ position:fixed; bottom:22px; right:22px; z-index:60; width:54px; height:54px; border-radius:999px; display:flex; align-items:center; justify-content:center; color:#fff; background:#20b95a; box-shadow:0 12px 30px -8px rgba(32,185,90,.6), 0 2px 6px rgba(0,0,0,.4); transition:transform .2s cubic-bezier(.34,1.56,.64,1); }
@@ -1073,6 +1222,41 @@ const CSS = `
 @media(max-width:620px){ .lz-footer{ padding-bottom:92px; } }
 
 /* ── Light theme ── keeps amber accent; flips base surfaces, text, lines, shadows ── */
+/* ── Besparingscalculator ── */
+.sc-head{ max-width:640px; margin:0 auto var(--sp-6); text-align:center; }
+.sc-head .lz-kicker{ justify-content:center; }
+.sc-head .lz-h2{ margin-top:var(--sp-3); }
+.sc-head .lz-lead{ margin-left:auto; margin-right:auto; }
+.sc-card{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; border:1px solid var(--line); border-radius:26px; background:var(--surface); padding:clamp(24px,3.2vw,44px); box-shadow:0 1px 0 rgba(255,255,255,.05) inset, 0 30px 60px -40px rgba(20,24,40,.5); }
+.sc-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-6); }
+@media(min-width:880px){ .sc-grid{ grid-template-columns:1fr 1fr; gap:var(--sp-7); } }
+.sc-field{ padding:20px 0; border-bottom:1px solid var(--line); }
+.sc-field:first-child{ padding-top:0; }
+.sc-field:last-child{ border-bottom:0; padding-bottom:0; }
+.sc-label{ display:block; font-size:.92rem; font-weight:600; color:var(--paper); }
+.sc-control{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:14px; }
+.sc-value{ display:inline-flex; align-items:baseline; gap:12px; }
+.sc-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:1.7rem; letter-spacing:-.02em; color:var(--paper); font-variant-numeric:tabular-nums; }
+.sc-cur{ color:var(--fog); font-weight:700; margin-right:3px; }
+.sc-unit{ font-family:var(--font-geist-mono),monospace; font-size:.78rem; color:var(--fog-2); }
+.sc-steppers{ display:inline-flex; gap:8px; flex:none; }
+.sc-step{ width:42px; height:42px; display:inline-flex; align-items:center; justify-content:center; font-size:1.3rem; line-height:1; color:var(--paper); background:var(--surface-2); border:1px solid var(--line-2); border-radius:12px; cursor:pointer; transition:transform .15s ease, border-color .2s ease; }
+.sc-step:hover{ border-color:color-mix(in srgb, var(--iris) 55%, var(--line-2)); transform:translateY(-1px); }
+.sc-step:active{ transform:translateY(0); }
+.sc-step:focus-visible{ outline:2px solid var(--iris-2); outline-offset:2px; }
+.sc-results-kicker{ display:block; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--iris-2); margin-bottom:16px; }
+.sc-result{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border:1px solid var(--line); border-radius:16px; background:var(--ink); }
+.sc-result + .sc-result{ margin-top:12px; }
+.sc-result-label{ font-size:.95rem; font-weight:600; color:var(--paper); }
+.sc-result-val{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:1.5rem; letter-spacing:-.02em; color:var(--paper); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.sc-result-hrs{ font-family:var(--font-geist-mono),monospace; font-size:.72rem; font-weight:400; letter-spacing:.02em; color:var(--fog-2); margin-left:8px; }
+.sc-result.is-feat{ background:color-mix(in srgb, var(--iris) 14%, transparent); border-color:color-mix(in srgb, var(--iris) 45%, var(--line-2)); }
+.sc-result.is-feat .sc-result-label{ color:var(--iris-2); }
+.sc-note{ margin-top:16px; color:var(--fog-2); font-size:.82rem; line-height:1.6; }
+.sc-foot{ margin-top:clamp(24px,3vw,32px); padding-top:clamp(24px,3vw,32px); border-top:1px solid var(--line); text-align:center; }
+.sc-foot-text{ max-width:34rem; margin:0 auto; color:var(--fog); font-size:1rem; line-height:1.6; }
+.sc-cta{ margin-top:var(--sp-4); }
+
 .lz-light{
   --ink:#F3F4F7; --ink-2:#EDEFF3;
   --surface:#ffffff; --surface-2:#ffffff;

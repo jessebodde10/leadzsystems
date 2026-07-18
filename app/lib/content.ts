@@ -8,7 +8,7 @@ export const SITE = {
   phone: "06 24 50 58 63",
   phoneIntl: "+31624505863",
   whatsapp: "31624505863",
-  cal: "https://cal.com/leadz-systems-2yvqzu",
+  cal: "https://cal.com/leadz-systems/30min",
   region: "Nederland",
   kvk: "73898074",
 };
@@ -203,12 +203,12 @@ export const STAPPEN = [
 ];
 
 export const FAQS = [
-  { q: "Wat doet Leadz Systems precies?", a: "We bouwen software op maat voor het MKB: van AI-automatiseringen die repetitief werk overnemen, tot websites, web-apps en koppelingen tussen systemen. Geen standaardpakketten, maar oplossingen gebouwd rond hoe jij werkt." },
-  { q: "Voor welke bedrijven is dit geschikt?", a: "Vooral voor MKB-bedrijven met 2 tot 50 medewerkers die merken dat processen te veel handwerk kosten of systemen niet goed op elkaar aansluiten. Branche maakt niet uit: als er werk te automatiseren valt, kunnen wij helpen." },
-  { q: "Hoe snel zie ik resultaat?", a: "De meeste projecten zijn binnen 2 tot 6 weken live. We beginnen altijd met de oplossing die het meeste oplevert, zodat je snel iets werkends hebt en niet pas na maanden." },
-  { q: "Wat maakt jullie anders dan andere bureaus?", a: "We zijn klein, werken direct en denken mee. Geen accountmanager ertussen, geen offerte van twintig pagina's. Je werkt direct met degene die ook bouwt, en we leveren pas op als jij tevreden bent." },
-  { q: "Hoe begin ik?", a: "Met een vrijblijvend gesprek van 30 minuten. We kijken samen waar de meeste tijd of omzet blijft liggen en of we daar iets zinnigs aan kunnen doen. Geen verplichtingen, gewoon eerlijk advies." },
-  { q: "Werken jullie per project of doorlopend?", a: "Beide. Je kunt kiezen voor een eenmalig project (één oplossing, vaste prijs) of een doorlopend partnerschap waarbij we blijven doorontwikkelen en je altijd iemand hebt die meekijkt." },
+  { q: "We hebben geen technische kennis in huis. Is dat een probleem?", a: "Nee, dat is juist ons uitgangspunt. Wij ontwerpen, bouwen en beheren alles. Jouw team hoeft alleen te weten hoe ze de resultaten gebruiken, en dat leren we ze in een korte training." },
+  { q: "Wat kost een AI-implementatie?", a: "Projecten starten vanaf €5.000 voor een afgebakende automatisering en lopen tot €25.000+ voor complete trajecten met meerdere agents en workflows. Na de gratis AI Scan krijg je een concreet voorstel met de verwachte besparing ernaast, zo zie je vooraf of de investering zich terugverdient." },
+  { q: "Hoe snel zien we resultaat?", a: "De eerste werkende automatisering staat meestal binnen 4 tot 6 weken live. We beginnen bewust met het proces dat de meeste tijd kost, zodat je de besparing direct merkt." },
+  { q: "Is onze bedrijfsdata veilig?", a: "Ja. We werken uitsluitend met professionele AI-platforms met Europese dataverwerking waar mogelijk, sluiten verwerkersovereenkomsten af en zorgen dat jouw data nooit wordt gebruikt om publieke modellen te trainen." },
+  { q: "Vervangt AI onze medewerkers?", a: "Nee, het vervangt hun vervelendste taken. Klanten zetten de vrijgekomen uren in voor werk dat wél groei oplevert: klantcontact, advies en verkoop. Groeien zonder extra personeel, dat is het doel." },
+  { q: "Wat gebeurt er na de oplevering?", a: "We blijven betrokken. Via monitoring en periodieke optimalisatie zorgen we dat je systemen blijven presteren en meegroeien met je bedrijf, en met de razendsnelle ontwikkeling van AI." },
 ];
 
 export type PortfolioItem = {

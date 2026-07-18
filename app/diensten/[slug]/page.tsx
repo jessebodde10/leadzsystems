@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE, DIENSTEN } from "../../lib/content";
-import HubFlow from "../../components/HubFlow";
+import AgentsShowcase from "../../components/AgentsShowcase";
 
 export function generateStaticParams() {
   return DIENSTEN.map((d) => ({ slug: d.slug }));
@@ -78,15 +78,15 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
         <a href="/#agenda" className="pg-btn pg-hero-cta">Plan een vrijblijvend gesprek</a>
       </section>
 
-      {/* ── Live flow-diagram (alleen AI Agents) ── */}
+      {/* ── Digitale collega's — agent-kaarten (alleen AI Agents) ── */}
       {dienst.slug === "ai-agents" && (
         <section className="pg-section">
-          <h2 className="pg-h2">Zo werkt een agent</h2>
+          <h2 className="pg-h2">Digitale collega&apos;s die <span className="pg-hl">nooit een taak laten liggen</span></h2>
           <p className="pg-sub">
-            Binnenkomend werk wordt opgevangen, via de AI-engine afgehandeld en doorgezet naar
-            je systemen. 24/7, zonder dat jij ernaar omkijkt.
+            Een AI-agent is geen chatbot. Het is een digitale medewerker die zelfstandig taken
+            uitvoert binnen jouw processen, getraind op jouw bedrijf, jouw systemen en jouw werkwijze.
           </p>
-          <HubFlow />
+          <AgentsShowcase />
         </section>
       )}
 
@@ -113,25 +113,27 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
         </div>
       </section>
 
-      {/* ── Voorbeelden ── */}
-      <section className="pg-section">
-        <h2 className="pg-h2">Voorbeelden uit de praktijk</h2>
-        <p className="pg-sub">
-          Een greep uit wat we binnen {dienst.title.toLowerCase()} bouwen. Staat jouw situatie er
-          niet tussen? Dat is eerder regel dan uitzondering: we bouwen het gewoon op maat.
-        </p>
-        <div className="pg-grid2">
-          {dienst.voorbeelden.map((v) => (
-            <article key={v.title} className="pg-ex">
-              <div className="pg-ex-head">
-                {TICK}
-                <h3 className="pg-ex-title">{v.title}</h3>
-              </div>
-              <p className="pg-ex-desc">{v.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      {/* ── Voorbeelden (niet op AI Agents: daar tonen de agent-kaarten dit al) ── */}
+      {dienst.slug !== "ai-agents" && (
+        <section className="pg-section">
+          <h2 className="pg-h2">Voorbeelden uit de praktijk</h2>
+          <p className="pg-sub">
+            Een greep uit wat we binnen {dienst.title.toLowerCase()} bouwen. Staat jouw situatie er
+            niet tussen? Dat is eerder regel dan uitzondering: we bouwen het gewoon op maat.
+          </p>
+          <div className="pg-grid2">
+            {dienst.voorbeelden.map((v) => (
+              <article key={v.title} className="pg-ex">
+                <div className="pg-ex-head">
+                  {TICK}
+                  <h3 className="pg-ex-title">{v.title}</h3>
+                </div>
+                <p className="pg-ex-desc">{v.desc}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Alles op maat ── */}
       <section className="pg-section">
