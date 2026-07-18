@@ -57,37 +57,6 @@ const STATS = [
   { num: "100%", label: "tevredenheidsgarantie, we stoppen pas als jij blij bent" },
 ];
 
-/* Prijzen — three plans, copy matches the live site. */
-const PRIJZEN = [
-  {
-    name: "Starter",
-    price: "€250",
-    setup: "€2.500 setup",
-    tagline: "Jouw eerste oplossing live. Eén automatisering, website of koppeling op maat.",
-    features: ["1 automatisering, website of koppeling", "Tot 3 systemen gekoppeld", "Oplevering binnen 2 tot 4 weken", "Hosting en onderhoud", "Maandelijkse rapportage", "E-mail support"],
-    cta: "Start je project",
-    featured: false,
-  },
-  {
-    name: "Growth",
-    price: "€350",
-    setup: "€3.500 setup",
-    tagline: "Meer koppelingen, AI-workflows en een oplossing die écht meegroeit met jouw bedrijf.",
-    features: ["Meerdere automatiseringen en koppelingen", "Tot 7 systemen gekoppeld", "Realtime inzicht in je data", "Hosting en onderhoud", "AI-workflows en slimme notificaties", "Wekelijkse rapportages", "Prioriteit support en kwartaalgesprek"],
-    cta: "Start je project",
-    featured: true,
-  },
-  {
-    name: "Custom",
-    price: "Op maat",
-    setup: "",
-    tagline: "Complexe automatisering, meerdere oplossingen of specifieke wensen. We denken graag mee.",
-    features: ["Onbeperkt koppelingen", "Onbeperkt automatiseringen", "Maatwerk AI-integraties", "Dedicated ontwikkelaar", "SLA met uptime garantie", "24/7 telefoon support"],
-    cta: "Neem contact op",
-    featured: false,
-  },
-];
-
 type LogLine = { id: number; time: string; task: string; state: "running" | "done" };
 
 /* Format minutes-of-day into HH:MM so the log reads like a real clock ticking forward. */
@@ -345,7 +314,6 @@ export default function HeroConcept() {
               <a href="#diensten" className="lz-nav-link">Diensten</a>
               <a href="#werkwijze" className="lz-nav-link">Werkwijze</a>
               <a href="#portfolio" className="lz-nav-link">Portfolio</a>
-              <a href="#prijzen" className="lz-nav-link">Prijzen</a>
               <a href="#over-ons" className="lz-nav-link">Over ons</a>
               <a href="/nieuws" className="lz-nav-link">Nieuws</a>
             </div>
@@ -365,7 +333,7 @@ export default function HeroConcept() {
           </div>
           <div id="lz-mobile-menu" className={`lz-mobile-menu${menuOpen ? " is-open" : ""}`}>
             <div className="lz-mobile-menu-inner">
-              {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#prijzen", "Prijzen"], ["#over-ons", "Over ons"], ["/nieuws", "Nieuws"]].map(([href, label]) => (
+              {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#over-ons", "Over ons"], ["/nieuws", "Nieuws"]].map(([href, label]) => (
                 <a key={href} href={href} className="lz-mobile-link" onClick={() => setMenuOpen(false)}>{label}</a>
               ))}
               <a href="#agenda" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een gesprek</a>
@@ -715,43 +683,6 @@ export default function HeroConcept() {
         </div>
       </section>
 
-      {/* ── Prijzen ── */}
-      <section id="prijzen" className="lz-section">
-        <div className="lz-head lz-reveal">
-          <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Prijzen</span>
-          <h2 className="lz-h2">Transparante,<br />vaste prijzen.</h2>
-          <p className="lz-lead">
-            Geen verborgen kosten, geen uurtje-factuurtje. We werken met een eenmalige setup
-            en een vast maandbedrag.
-          </p>
-        </div>
-
-        <div className="lz-price-grid">
-          {PRIJZEN.map((p, i) => (
-            <article key={p.name} className={`lz-price lz-reveal${p.featured ? " lz-price-featured" : ""}`} style={{ transitionDelay: `${i * 70}ms` }}>
-              {p.featured && <span className="lz-price-badge">Meest gekozen</span>}
-              <h3 className="lz-price-name">{p.name}</h3>
-              <div className="lz-price-amount">
-                <span className="lz-price-num">{p.price}</span>
-                {p.setup ? <span className="lz-price-per">/maand</span> : <span className="lz-price-per">&nbsp;</span>}
-              </div>
-              <span className="lz-price-setup">{p.setup || "op aanvraag"}</span>
-              <p className="lz-price-tagline">{p.tagline}</p>
-              <ul className="lz-price-list">
-                {p.features.map((f) => (
-                  <li key={f}>
-                    <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden className="lz-tick"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <a href="#contact" className={`lz-btn ${p.featured ? "lz-btn-primary" : "lz-btn-ghost"} lz-price-cta`}>{p.cta}</a>
-            </article>
-          ))}
-        </div>
-        <p className="lz-price-note lz-reveal">Alle prijzen zijn excl. btw. Setup is eenmalig. Maandabonnement opzegbaar per kwartaal.</p>
-      </section>
-
       {/* ── FAQ ── */}
       <section className="lz-section">
         <div className="lz-head lz-head-center lz-reveal">
@@ -1085,24 +1016,6 @@ const CSS = `
 .lz-statbig-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:clamp(2.4rem,4vw,3.2rem); letter-spacing:-.03em; line-height:1; color:var(--iris-2); }
 .lz-statbig-label{ color:var(--fog); font-size:.98rem; line-height:1.55; max-width:22rem; }
 
-/* ── Prijzen ── */
-.lz-price-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-4); align-items:stretch; }
-@media(min-width:860px){ .lz-price-grid{ grid-template-columns:repeat(3,1fr); } }
-.lz-price{ position:relative; display:flex; flex-direction:column; border:1px solid var(--line); border-radius:20px; padding:28px; background:linear-gradient(180deg, var(--surface) 0%, #101219 100%); box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 24px 48px -34px rgba(0,0,0,.9); }
-.lz-price-featured{ border-color:color-mix(in srgb, var(--iris) 55%, var(--line-2)); box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -30px rgba(0,0,0,.95), 0 24px 60px -30px var(--iris-glow); }
-@media(min-width:860px){ .lz-price-featured{ transform:translateY(-10px); } }
-.lz-price-badge{ position:absolute; top:-11px; left:28px; font-family:var(--font-geist-mono),monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--on-accent); padding:5px 11px; border-radius:999px; background:linear-gradient(180deg,var(--iris-2),var(--iris)); box-shadow:0 6px 16px -6px var(--iris-glow); }
-.lz-price-name{ font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.3rem; }
-.lz-price-amount{ display:flex; align-items:baseline; gap:6px; margin-top:14px; }
-.lz-price-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:2.5rem; letter-spacing:-.03em; line-height:1; color:var(--paper); }
-.lz-price-per{ color:var(--fog-2); font-size:.95rem; }
-.lz-price-setup{ display:block; margin-top:8px; font-family:var(--font-geist-mono),monospace; font-size:12.5px; color:var(--iris-2); }
-.lz-price-tagline{ margin-top:16px; color:var(--fog); font-size:.95rem; line-height:1.6; }
-.lz-price-list{ margin-top:20px; margin-bottom:24px; display:flex; flex-direction:column; gap:11px; flex:1; }
-.lz-price-list li{ display:flex; align-items:flex-start; gap:10px; font-size:.92rem; color:#C4C8D4; line-height:1.45; }
-.lz-price-cta{ width:100%; }
-.lz-price-note{ margin-top:var(--sp-4); text-align:center; color:var(--fog-2); font-size:.86rem; }
-
 /* ── Portfolio ── */
 .lz-work-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-4); }
 @media(min-width:760px){ .lz-work-grid{ grid-template-columns:1fr 1fr; } }
@@ -1284,9 +1197,7 @@ const CSS = `
 .lz-light .lz-card,.lz-light .lz-work{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -34px rgba(20,24,40,.32); }
 .lz-light .lz-card:hover{ box-shadow:0 1px 0 rgba(255,255,255,1) inset, 0 30px 60px -34px rgba(20,24,40,.4), 0 20px 50px -32px var(--iris-glow); }
-.lz-light .lz-card-list li,.lz-light .lz-price-list li{ color:#3A4150; }
-.lz-light .lz-price{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%); box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -34px rgba(20,24,40,.32); }
-.lz-light .lz-price-featured{ box-shadow:0 1px 0 rgba(255,255,255,1) inset, 0 30px 60px -34px rgba(20,24,40,.42), 0 24px 60px -30px var(--iris-glow); }
+.lz-light .lz-card-list li{ color:#3A4150; }
 .lz-light .lz-chip{ background:rgba(20,24,40,.03); }
 .lz-light .lz-browser{ background:#EDEFF3; }
 .lz-light .lz-dot{ background:#C4C9D4; }
