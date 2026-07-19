@@ -5,21 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { SITE, DIENSTEN, PORTFOLIO_ITEMS, FAQS } from "../lib/content";
 import CalEmbed from "./CalEmbed";
 
-/* The pool of plain-language tasks the agent visibly clears in the live worklog.
-   Kept in Dutch and concrete on purpose — this is the product made visible. */
-const TASKS = [
-  "Lead opgevolgd",
-  "Offerte opgesteld",
-  "E-mail beantwoord",
-  "Factuur verwerkt",
-  "Afspraak ingepland",
-  "Data gesynct naar CRM",
-  "Aanvraag doorgezet",
-  "Rapportage verstuurd",
-  "Nieuwe lead gekwalificeerd",
-  "Werkbon verwerkt",
-];
-
 /* Tools shown in the scrolling marquee under the hero. */
 const TOOLS = ["OpenAI", "Claude", "Make", "Zapier", "n8n", "HubSpot", "Pipedrive", "Exact", "AFAS", "Moneybird", "Slack", "Microsoft 365", "Google Workspace", "Supabase", "Stripe", "WhatsApp"];
 
@@ -80,13 +65,26 @@ const STATS = [
   { num: "100%", label: "tevredenheidsgarantie, we stoppen pas als jij blij bent" },
 ];
 
-type LogLine = { id: number; time: string; task: string; state: "running" | "done" };
+/* Hero-flow: drie statische stappen die tonen hoe een agent tot een resultaat komt.
+   Bewust geen live-tellende simulatie — een eerlijke illustratie, geen nepdata. */
+const FLOW_STEPS = [
+  { icon: "inbox", title: "AI Agent", sub: "Leest, begrijpt en handelt af", example: "Nieuwe lead ontvangen · beoordeeld in 4 sec." },
+  { icon: "link", title: "Automatisering", sub: "Verbindt je systemen", example: "CRM bijgewerkt · offerte klaargezet" },
+  { icon: "chart", title: "Bedrijfsresultaat", sub: "Meetbaar elke maand", example: "+38 uur bespaard deze week" },
+];
 
-/* Format minutes-of-day into HH:MM so the log reads like a real clock ticking forward. */
-function fmt(totalMinutes: number) {
-  const h = Math.floor(totalMinutes / 60) % 24;
-  const m = totalMinutes % 60;
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+function FlowIcon({ name }: { name: string }) {
+  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (name) {
+    case "inbox":
+      return (<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden {...p}><path d="M4 12h4l1.5 2.5h5L16 12h4" /><path d="M5.5 6h13L20 12v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6z" /></svg>);
+    case "link":
+      return (<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden {...p}><path d="M9 15 15 9" /><path d="M10.5 6.5 12 5a3.5 3.5 0 0 1 5 5l-1.5 1.5" /><path d="M13.5 17.5 12 19a3.5 3.5 0 0 1-5-5l1.5-1.5" /></svg>);
+    case "chart":
+      return (<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden {...p}><path d="M4 19V5" /><path d="M4 19h16" /><path d="m7 15 4-4 3 3 5-6" /><path d="M15 8h4v4" /></svg>);
+    default:
+      return null;
+  }
 }
 
 /* Palette variants — same layout, only the accent + its readable text colour change.
@@ -164,8 +162,6 @@ function DienstIcon({ slug }: { slug: string }) {
 }
 
 export default function HeroConcept() {
-  const [lines, setLines] = useState<LogLine[]>([]);
-  const [count, setCount] = useState(1284);
   const [palette, setPalette] = useState<React.CSSProperties>({});
   const [theme, setTheme] = useState<"dark" | "light">("light");
   const [bg, setBg] = useState<"mesh" | "flow" | "nodes" | "contour" | "dots">("mesh");
@@ -175,14 +171,10 @@ export default function HeroConcept() {
   const [calcPeople, setCalcPeople] = useState(3);
   const [calcHours, setCalcHours] = useState(8);
   const [calcWage, setCalcWage] = useState(45);
-  const idRef = useRef(0);
-  const clockRef = useRef(7 * 60 + 41); // start the fictional day at 07:41
-  const reducedRef = useRef(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // ── Live agent worklog ──
+  // ── Palet & thema uit URL-parameters (?p=amber|iris|teal, ?t=dark|light, ?bg=...) ──
   useEffect(() => {
-    // Amber is the chosen brand accent; ?p=iris|teal stays available for comparison.
     const params = new URLSearchParams(window.location.search);
     const p = params.get("p") ?? "amber";
     setPalette(PALETTES[p] ?? PALETTES.amber);
@@ -190,40 +182,6 @@ export default function HeroConcept() {
     else if (params.get("t") === "light") setTheme("light");
     const b = params.get("bg");
     if (b === "mesh" || b === "flow" || b === "nodes" || b === "contour" || b === "dots") setBg(b);
-
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reducedRef.current = mq.matches;
-
-    const seed: LogLine[] = TASKS.slice(0, 4).map((task, i) => {
-      idRef.current += 1;
-      clockRef.current += 1 + (i % 2);
-      return { id: idRef.current, time: fmt(clockRef.current), task, state: "done" };
-    });
-    idRef.current += 1;
-    clockRef.current += 2;
-    seed.push({ id: idRef.current, time: fmt(clockRef.current), task: TASKS[4], state: "running" });
-    setLines(seed);
-
-    if (mq.matches) return; // honour reduced motion: static filled log, no ticking
-
-    const tick = () => {
-      setLines((prev) => {
-        const done = prev.map((l) => ({ ...l, state: "done" as const }));
-        idRef.current += 1;
-        clockRef.current += 1 + Math.floor(Math.random() * 3);
-        const next: LogLine = {
-          id: idRef.current,
-          time: fmt(clockRef.current),
-          task: TASKS[idRef.current % TASKS.length],
-          state: "running",
-        };
-        return [...done, next].slice(-5);
-      });
-      setCount((c) => c + 1 + Math.floor(Math.random() * 2));
-    };
-
-    const interval = window.setInterval(tick, 1900);
-    return () => window.clearInterval(interval);
   }, []);
 
   // ── Scroll reveal ──
@@ -396,43 +354,29 @@ export default function HeroConcept() {
 
           </div>
 
-          {/* Signature — live agent worklog */}
+          {/* Signature — van agent naar resultaat, in drie stappen */}
           <div className="lz-col-panel lz-anim" style={{ animationDelay: "360ms" }}>
-            <div className="lz-panel">
-              <div className="lz-panel-head">
-                <span className="lz-panel-live">
-                  <span className="lz-live-dot" aria-hidden />
-                  agent · leadz
-                </span>
-                <span className="lz-panel-badge">24/7 actief</span>
-              </div>
-
-              <div className="lz-log" role="log" aria-label="Live activiteit van de agent">
-                <div className="lz-log-fade" aria-hidden />
-                {lines.map((l) => (
-                  <div key={l.id} className="lz-log-line">
-                    <span className="lz-log-time">{l.time}</span>
-                    <span className="lz-log-task">{l.task}</span>
-                    {l.state === "running" ? (
-                      <span className="lz-log-run" aria-label="bezig"><span className="lz-spinner" aria-hidden /></span>
-                    ) : (
-                      <span className="lz-log-done" aria-label="klaar">
-                        <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden>
-                          <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
-                    )}
+            <div className="lz-flow-card">
+              {FLOW_STEPS.map((s, i) => (
+                <div key={s.title} className="lz-flow-card-step">
+                  {i > 0 && <span className="lz-flow-card-connector" aria-hidden />}
+                  <div className="lz-flow-card-box">
+                    <div className="lz-flow-card-row">
+                      <span className="lz-flow-card-ico"><FlowIcon name={s.icon} /></span>
+                      <div>
+                        <h3 className="lz-flow-card-title">{s.title}</h3>
+                        <p className="lz-flow-card-sub">{s.sub}</p>
+                      </div>
+                    </div>
+                    <div className="lz-flow-card-pill">
+                      <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden>
+                        <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {s.example}
+                    </div>
                   </div>
-                ))}
-              </div>
-
-              <div className="lz-panel-foot">
-                <div className="lz-counter">
-                  <span className="lz-counter-num">{count.toLocaleString("nl-NL")}</span>
-                  <span className="lz-counter-label">taken vandaag afgehandeld</span>
                 </div>
-                <span className="lz-panel-status"><span className="lz-live-dot" aria-hidden />live</span>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -962,7 +906,6 @@ const CSS = `
 @media(min-width:980px){ .lz-hero-grid{ grid-template-columns:1.02fr .98fr; } .lz-hero{ padding-top:150px; } }
 .lz-eyebrow{ display:inline-flex; align-items:center; gap:9px; font-family:var(--font-geist-mono),monospace; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--fog); padding:7px 13px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.02); }
-.lz-live-dot{ width:7px; height:7px; border-radius:999px; background:var(--mint); box-shadow:0 0 0 0 rgba(74,222,158,.55); animation:lzPulse 2.4s ease-out infinite; }
 .lz-h1{ font-family:var(--font-bricolage),var(--font-geist-sans),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:.98; font-size:clamp(2.85rem,7vw,4.9rem); margin:var(--sp-4) 0 0; }
 .lz-h1 .lz-line{ display:block; }
 .lz-iris{ background:linear-gradient(100deg,var(--iris-2) 0%, color-mix(in srgb, var(--iris-2) 55%, #fff) 55%, var(--iris) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
@@ -970,30 +913,20 @@ const CSS = `
 .lz-cta-row{ display:flex; flex-wrap:wrap; gap:var(--sp-2); margin-top:var(--sp-5); }
 .lz-trust{ margin-top:var(--sp-4); color:var(--fog-2); font-family:var(--font-geist-mono),monospace; font-size:12.5px; letter-spacing:.02em; }
 
-/* ── Signature panel ── */
+/* ── Signature: agent → automatisering → resultaat ── */
 .lz-col-panel{ perspective:1400px; }
-.lz-panel{ position:relative; border:1px solid var(--line-2); border-radius:20px; overflow:hidden;
+.lz-flow-card{ display:flex; flex-direction:column; animation:lzFloat 8s ease-in-out infinite; }
+.lz-flow-card-step{ display:flex; flex-direction:column; }
+.lz-flow-card-connector{ width:1px; height:22px; margin:0 0 0 34px; background:linear-gradient(180deg, var(--line-2), color-mix(in srgb, var(--iris) 35%, var(--line-2))); }
+.lz-flow-card-box{ border:1px solid var(--line-2); border-radius:18px; padding:16px 18px;
   background:linear-gradient(180deg, rgba(26,30,40,.92) 0%, rgba(18,21,28,.94) 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 40px 80px -40px rgba(0,0,0,.95), 0 30px 60px -30px color-mix(in srgb, var(--iris) 30%, transparent);
-  animation:lzFloat 8s ease-in-out infinite; }
-.lz-panel::before{ content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit; background:radial-gradient(90% 60% at 90% 0%, color-mix(in srgb, var(--iris) 16%, transparent) 0%, transparent 60%); }
-.lz-panel-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--line); }
-.lz-panel-live{ display:inline-flex; align-items:center; gap:9px; font-family:var(--font-geist-mono),monospace; font-size:13px; color:var(--paper); letter-spacing:.02em; }
-.lz-panel-badge{ font-family:var(--font-geist-mono),monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--iris-2); padding:4px 9px; border-radius:999px;
-  border:1px solid color-mix(in srgb, var(--iris-2) 34%, transparent); background:color-mix(in srgb, var(--iris) 12%, transparent); }
-.lz-log{ position:relative; padding:8px 6px 8px 16px; height:236px; display:flex; flex-direction:column; justify-content:flex-end; }
-.lz-log-fade{ position:absolute; top:0; left:0; right:0; height:56px; z-index:2; pointer-events:none; background:linear-gradient(180deg, rgba(20,23,31,.98), transparent); }
-.lz-log-line{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px; padding:9px 10px 9px 0; font-family:var(--font-geist-mono),monospace; font-size:13.5px; border-top:1px solid rgba(255,255,255,.05); animation:lzLineIn .5s cubic-bezier(.22,1,.36,1) both; }
-.lz-log-time{ color:var(--fog-2); font-variant-numeric:tabular-nums; }
-.lz-log-task{ color:var(--paper); font-family:var(--font-geist-sans),sans-serif; font-size:14px; }
-.lz-log-done{ display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:6px; color:var(--mint); background:rgba(74,222,158,.12); border:1px solid rgba(74,222,158,.28); }
-.lz-log-run{ display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; }
-.lz-spinner{ width:13px; height:13px; border-radius:999px; border:2px solid color-mix(in srgb, var(--iris-2) 26%, transparent); border-top-color:var(--iris-2); animation:lzSpin .7s linear infinite; }
-.lz-panel-foot{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3); flex-wrap:wrap; padding:14px 16px; border-top:1px solid var(--line); background:rgba(10,11,16,.4); }
-.lz-counter{ display:flex; flex-direction:column; gap:2px; }
-.lz-counter-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:22px; letter-spacing:-.01em; color:var(--paper); font-variant-numeric:tabular-nums; }
-.lz-counter-label{ font-size:11.5px; color:var(--fog-2); }
-.lz-panel-status{ display:inline-flex; align-items:center; gap:7px; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fog-2); }
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -40px rgba(0,0,0,.9); }
+.lz-flow-card-row{ display:flex; align-items:flex-start; gap:12px; }
+.lz-flow-card-ico{ flex:none; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:11px; color:var(--iris-2); background:color-mix(in srgb, var(--iris) 15%, transparent); border:1px solid color-mix(in srgb, var(--iris) 30%, var(--line)); }
+.lz-flow-card-title{ font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1rem; letter-spacing:-.01em; color:var(--paper); }
+.lz-flow-card-sub{ margin-top:2px; color:var(--fog); font-size:.87rem; }
+.lz-flow-card-pill{ margin-top:12px; display:flex; align-items:center; gap:8px; padding:9px 12px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid var(--line); color:var(--fog-2); font-family:var(--font-geist-mono),monospace; font-size:12px; }
+.lz-flow-card-pill svg{ flex:none; color:var(--mint); }
 .lz-chip{ font-family:var(--font-geist-mono),monospace; font-size:11px; color:var(--fog); padding:4px 9px; border:1px solid var(--line); border-radius:7px; background:rgba(255,255,255,.02); }
 
 /* ── Tools marquee (full-width bar under the hero) ── */
@@ -1182,9 +1115,6 @@ const CSS = `
 .lz-reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
 .lz-reveal.is-visible{ opacity:1; transform:translateY(0); }
 @keyframes lzUp{ from{ opacity:0; transform:translateY(22px);} to{ opacity:1; transform:translateY(0);} }
-@keyframes lzLineIn{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
-@keyframes lzSpin{ to{ transform:rotate(360deg);} }
-@keyframes lzPulse{ 0%{ box-shadow:0 0 0 0 rgba(74,222,158,.5);} 70%{ box-shadow:0 0 0 8px rgba(74,222,158,0);} 100%{ box-shadow:0 0 0 0 rgba(74,222,158,0);} }
 @keyframes lzFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-8px);} }
 @keyframes lzReel{ 0%,8%{ transform:translateY(0);} 92%,100%{ transform:translateY(-1720px);} }
 
@@ -1246,12 +1176,10 @@ const CSS = `
 /* Fully dark logo on light theme — flattens the indigo mark to the same dark as the wordmark */
 .lz-light .lz-logo{ filter:brightness(0); opacity:.92; }
 .lz-light .lz-eyebrow{ background:rgba(20,24,40,.03); }
-.lz-light .lz-panel{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 40px 80px -46px rgba(20,24,40,.4), 0 30px 60px -34px color-mix(in srgb,var(--iris) 24%,transparent); }
-.lz-light .lz-panel-foot{ background:rgba(20,24,40,.03); }
-.lz-light .lz-log-fade{ background:linear-gradient(180deg, rgba(255,255,255,.98), transparent); }
-.lz-light .lz-log-line{ border-top-color:rgba(16,20,32,.08); }
-.lz-light .lz-log-done{ color:#0F8A43; background:rgba(21,163,74,.12); border-color:rgba(21,163,74,.30); }
+.lz-light .lz-flow-card-box{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.3); }
+.lz-light .lz-flow-card-pill{ background:rgba(20,24,40,.03); border-color:rgba(16,20,32,.08); }
+.lz-light .lz-flow-card-pill svg{ color:#0F8A43; }
 .lz-light .lz-card,.lz-light .lz-work{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -34px rgba(20,24,40,.32); }
 .lz-light .lz-card:hover{ box-shadow:0 1px 0 rgba(255,255,255,1) inset, 0 30px 60px -34px rgba(20,24,40,.4), 0 20px 50px -32px var(--iris-glow); }
@@ -1269,7 +1197,7 @@ const CSS = `
 
 @media(prefers-reduced-motion:reduce){
   .lz-anim,.lz-reveal{ opacity:1; transform:none; animation:none; transition:none; }
-  .lz-panel,.lz-live-dot,.lz-spinner,.lz-log-line{ animation:none; }
+  .lz-flow-card{ animation:none; }
   .lz-reelbox iframe{ animation:none; }
   .lz-marquee-track{ animation:none; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
