@@ -614,7 +614,6 @@ export default function HeroConcept() {
               <div className="lz-browser">
                 <div className="lz-browser-bar">
                   <span className="lz-dot" /><span className="lz-dot" /><span className="lz-dot" />
-                  <span className="lz-browser-url">{p.domain}</span>
                 </div>
                 <div className="lz-preview">
                   {p.screenshot && (

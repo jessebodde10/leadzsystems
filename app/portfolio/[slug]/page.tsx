@@ -71,7 +71,6 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
       <section className="pg-hero">
         <span className="pg-kicker"><span className="pg-kicker-dot" aria-hidden />Case · {item.tag}</span>
         <h1 className="pg-title">{item.title}</h1>
-        <p className="pg-stat">{item.domain}</p>
         <p className="pg-lead">{item.description}</p>
         <a href="/#agenda" className="pg-btn pg-hero-cta">Plan een vrijblijvend gesprek</a>
       </section>
@@ -81,7 +80,6 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
         <div className="case-browser">
           <div className="case-browser-bar">
             <span className="case-dot" /><span className="case-dot" /><span className="case-dot" />
-            <span className="case-url">{item.domain}</span>
           </div>
           <div className="case-preview">
             {item.screenshot && (
