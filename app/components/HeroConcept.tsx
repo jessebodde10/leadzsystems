@@ -68,7 +68,7 @@ const STATS = [
 /* Hero-flow: drie statische stappen die tonen hoe een agent tot een resultaat komt.
    Bewust geen live-tellende simulatie — een eerlijke illustratie, geen nepdata. */
 const FLOW_STEPS = [
-  { icon: "inbox", title: "AI Agent", sub: "Leest, begrijpt en handelt af", example: "Nieuwe lead ontvangen · beoordeeld in 4 sec." },
+  { icon: "inbox", title: "Digitale collega", sub: "Leest, begrijpt en handelt af", example: "Nieuwe lead ontvangen · beoordeeld in 4 sec." },
   { icon: "link", title: "Automatisering", sub: "Verbindt je systemen", example: "CRM bijgewerkt · offerte klaargezet" },
   { icon: "chart", title: "Bedrijfsresultaat", sub: "Meetbaar elke maand", example: "+38 uur bespaard deze week" },
 ];

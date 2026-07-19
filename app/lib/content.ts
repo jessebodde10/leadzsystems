@@ -204,7 +204,6 @@ export const STAPPEN = [
 
 export const FAQS = [
   { q: "We hebben geen technische kennis in huis. Is dat een probleem?", a: "Nee, dat is juist ons uitgangspunt. Wij ontwerpen, bouwen en beheren alles. Jouw team hoeft alleen te weten hoe ze de resultaten gebruiken, en dat leren we ze in een korte training." },
-  { q: "Wat kost een AI-implementatie?", a: "Projecten starten vanaf €5.000 voor een afgebakende automatisering en lopen tot €25.000+ voor complete trajecten met meerdere agents en workflows. Na de gratis AI Scan krijg je een concreet voorstel met de verwachte besparing ernaast, zo zie je vooraf of de investering zich terugverdient." },
   { q: "Hoe snel zien we resultaat?", a: "De eerste werkende automatisering staat meestal binnen 4 tot 6 weken live. We beginnen bewust met het proces dat de meeste tijd kost, zodat je de besparing direct merkt." },
   { q: "Is onze bedrijfsdata veilig?", a: "Ja. We werken uitsluitend met professionele AI-platforms met Europese dataverwerking waar mogelijk, sluiten verwerkersovereenkomsten af en zorgen dat jouw data nooit wordt gebruikt om publieke modellen te trainen." },
   { q: "Vervangt AI onze medewerkers?", a: "Nee, het vervangt hun vervelendste taken. Klanten zetten de vrijgekomen uren in voor werk dat wél groei oplevert: klantcontact, advies en verkoop. Groeien zonder extra personeel, dat is het doel." },
