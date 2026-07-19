@@ -327,11 +327,6 @@ export default function HeroConcept() {
       <header className="lz-hero">
         <div className="lz-hero-grid">
           <div className="lz-col-text">
-            <span className="lz-eyebrow lz-anim" style={{ animationDelay: "40ms" }}>
-              <span className="lz-kicker-dot" aria-hidden />
-              Software-partner voor het MKB, geen bureau
-            </span>
-
             <h1 className="lz-h1">
               <span className="lz-line lz-anim" style={{ animationDelay: "120ms" }}>Van handmatig werk</span>
               <span className="lz-line lz-iris lz-anim" style={{ animationDelay: "240ms" }}>naar slimme systemen</span>
