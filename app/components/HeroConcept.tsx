@@ -917,7 +917,13 @@ const CSS = `
 .lz-col-panel{ perspective:1400px; }
 .lz-flow-card{ display:flex; flex-direction:column; animation:lzFloat 8s ease-in-out infinite; }
 .lz-flow-card-step{ display:flex; flex-direction:column; }
-.lz-flow-card-connector{ width:1px; height:22px; margin:0 0 0 34px; background:linear-gradient(180deg, var(--line-2), color-mix(in srgb, var(--iris) 35%, var(--line-2))); }
+.lz-flow-card-connector{ position:relative; align-self:center; width:1px; height:30px; overflow:hidden;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--iris) 12%, transparent) 0%, color-mix(in srgb, var(--iris) 42%, transparent) 50%, color-mix(in srgb, var(--iris) 12%, transparent) 100%); }
+.lz-flow-card-connector::after{ content:""; position:absolute; left:0; top:0; width:1px; height:14px; border-radius:1px;
+  background:var(--iris-2); box-shadow:0 0 9px 1.5px var(--iris-glow);
+  animation:lzFlowGlow 2.6s cubic-bezier(.5,0,.5,1) infinite; }
+.lz-flow-card-step:nth-child(3) .lz-flow-card-connector::after{ animation-delay:1.3s; }
+@keyframes lzFlowGlow{ 0%{ transform:translateY(-16px); opacity:0; } 18%{ opacity:1; } 82%{ opacity:1; } 100%{ transform:translateY(30px); opacity:0; } }
 .lz-flow-card-box{ border:1px solid var(--line-2); border-radius:18px; padding:16px 18px;
   background:linear-gradient(180deg, rgba(26,30,40,.92) 0%, rgba(18,21,28,.94) 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -40px rgba(0,0,0,.9); }
@@ -1198,6 +1204,7 @@ const CSS = `
 @media(prefers-reduced-motion:reduce){
   .lz-anim,.lz-reveal{ opacity:1; transform:none; animation:none; transition:none; }
   .lz-flow-card{ animation:none; }
+  .lz-flow-card-connector::after{ animation:none; opacity:1; }
   .lz-reelbox iframe{ animation:none; }
   .lz-marquee-track{ animation:none; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
