@@ -65,5 +65,7 @@ export default function CalEmbed({ calUrl }: Props) {
     });
   }, [calUrl]);
 
-  return <div id="cal-inline" style={{ width: "100%", minHeight: 640, overflow: "hidden" }} />;
+  // Vaste, responsieve hoogte met interne scroll — zo blijft de widget compact
+  // in plaats van uit te rekken tot de volledige lijst tijdsloten.
+  return <div id="cal-inline" style={{ width: "100%", height: "min(600px, 76vh)", overflowY: "auto" }} />;
 }
