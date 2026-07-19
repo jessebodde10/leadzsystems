@@ -50,6 +50,29 @@ function WerkwijzeIcon({ name }: { name: string }) {
   }
 }
 
+const GARANTIES = [
+  { icon: "scan", title: "Eerst inzicht, dan pas een beslissing", desc: "Je krijgt een concreet voorstel met de verwachte besparing erbij, nog voordat je iets tekent. Zo weet je vooraf of het zich terugbetaalt." },
+  { icon: "tag", title: "Eén prijs, vooraf afgesproken", desc: "Geen losse uurtjes die achteraf oplopen. De prijs waar we het over eens worden, is de prijs die op de factuur staat." },
+  { icon: "chat", title: "Rechtstreeks contact, geen tussenpersoon", desc: "Je schakelt met mij, niet met een accountmanager die het weer moet doorvertalen. Van het eerste gesprek tot ver na oplevering." },
+  { icon: "shield", title: "We ronden pas af als jij tevreden bent", desc: "Een fase is pas klaar als het écht werkt zoals afgesproken. Geen halve opleveringen om maar te kunnen factureren." },
+];
+
+function GarantieIcon({ name }: { name: string }) {
+  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (name) {
+    case "scan":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M4 8V5a1 1 0 0 1 1-1h3" /><path d="M20 8V5a1 1 0 0 0-1-1h-3" /><path d="M4 16v3a1 1 0 0 0 1 1h3" /><path d="M20 16v3a1 1 0 0 1-1 1h-3" /><circle cx="12" cy="12" r="3.2" /></svg>);
+    case "tag":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M12.6 3.5H6a1.5 1.5 0 0 0-1.5 1.5v6.6c0 .4.16.78.44 1.06l8.9 8.9a1.5 1.5 0 0 0 2.12 0l6.6-6.6a1.5 1.5 0 0 0 0-2.12l-8.9-8.9a1.5 1.5 0 0 0-1.06-.44z" /><circle cx="9" cy="9" r="1.3" fill="currentColor" stroke="none" /></svg>);
+    case "chat":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 4v-4H5.5A1.5 1.5 0 0 1 4 14.5z" /></svg>);
+    case "shield":
+      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M12 3.5 5 6v6c0 4.6 3 7.9 7 9 4-1.1 7-4.4 7-9V6z" /><path d="M9 12.2l2.1 2.1L15.5 10" /></svg>);
+    default:
+      return null;
+  }
+}
+
 /* Trust stats — from the live site. */
 const STATS = [
   { num: "50+", label: "tools en systemen waar we direct mee koppelen" },
@@ -683,6 +706,26 @@ export default function HeroConcept() {
         </div>
       </section>
 
+      {/* ── Garanties ── */}
+      <section id="garanties" className="lz-section">
+        <div className="lz-guarantee-panel lz-reveal">
+          <div className="lz-guarantee-head">
+            <span className="lz-kicker"><span className="lz-kicker-dot" aria-hidden />Zonder verrassingen</span>
+            <h2 className="lz-h2">Wat je van ons<br />kunt verwachten.</h2>
+            <p className="lz-lead">Geen dikke voorwaarden nodig om te snappen waar je aan toe bent. Dit zijn de afspraken die we altijd aanhouden.</p>
+          </div>
+          <div className="lz-guarantee-grid">
+            {GARANTIES.map((g) => (
+              <div key={g.title} className="lz-guarantee-item">
+                <span className="lz-guarantee-ico"><GarantieIcon name={g.icon} /></span>
+                <h3 className="lz-guarantee-title">{g.title}</h3>
+                <p className="lz-guarantee-desc">{g.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── FAQ ── */}
       <section className="lz-section">
         <div className="lz-head lz-head-center lz-reveal">
@@ -1051,6 +1094,16 @@ const CSS = `
 .lz-work-link{ display:inline-flex; align-items:center; gap:6px; font-size:.9rem; font-weight:600; color:var(--iris-2); text-decoration:none; border-radius:6px; transition:gap .2s ease, color .2s ease; white-space:nowrap; }
 .lz-work-link:hover{ gap:9px; color:var(--iris); }
 .lz-work-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
+
+/* ── Garanties ── */
+.lz-guarantee-panel{ position:relative; overflow:hidden; border:1px solid var(--line-2); border-radius:28px; padding:clamp(32px,4.4vw,56px); background:linear-gradient(180deg, color-mix(in srgb, var(--iris) 7%, var(--surface)) 0%, var(--surface) 55%); }
+.lz-guarantee-head{ max-width:640px; }
+.lz-guarantee-grid{ margin-top:clamp(28px,3.6vw,40px); display:grid; grid-template-columns:1fr; gap:28px 32px; }
+@media(min-width:640px){ .lz-guarantee-grid{ grid-template-columns:1fr 1fr; } }
+@media(min-width:980px){ .lz-guarantee-grid{ grid-template-columns:repeat(4,1fr); } }
+.lz-guarantee-ico{ display:inline-flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:12px; color:var(--iris-2); background:color-mix(in srgb, var(--iris) 13%, transparent); border:1px solid color-mix(in srgb, var(--iris) 26%, var(--line)); }
+.lz-guarantee-title{ margin-top:16px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:-.01em; line-height:1.3; color:var(--paper); }
+.lz-guarantee-desc{ margin-top:9px; color:var(--fog); font-size:.9rem; line-height:1.6; }
 
 /* ── FAQ ── */
 .lz-head-center{ max-width:720px; margin-left:auto; margin-right:auto; text-align:center; }
