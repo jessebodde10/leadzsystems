@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { SITE } from "./lib/content";
+import ScrollProgress from "./components/ScrollProgress";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -80,7 +81,10 @@ export default function RootLayout({
       lang="nl"
       className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   );
 }
