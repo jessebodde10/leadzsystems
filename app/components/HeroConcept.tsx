@@ -298,7 +298,7 @@ export default function HeroConcept() {
               <a href="#over-ons" className="lz-nav-link">Over ons</a>
               <a href="/nieuws" className="lz-nav-link">Nieuws</a>
             </div>
-            <a href="#agenda" className="lz-btn lz-btn-primary lz-nav-cta">Plan een gesprek</a>
+            <a href="#agenda" className="lz-btn lz-btn-primary lz-nav-cta">Plan een AI Scan</a>
             <button
               type="button"
               className="lz-burger"
@@ -317,7 +317,7 @@ export default function HeroConcept() {
               {[["#diensten", "Diensten"], ["#werkwijze", "Werkwijze"], ["#portfolio", "Portfolio"], ["#over-ons", "Over ons"], ["/nieuws", "Nieuws"]].map(([href, label]) => (
                 <a key={href} href={href} className="lz-mobile-link" onClick={() => setMenuOpen(false)}>{label}</a>
               ))}
-              <a href="#agenda" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een gesprek</a>
+              <a href="#agenda" className="lz-btn lz-btn-primary lz-mobile-cta" onClick={() => setMenuOpen(false)}>Plan een AI Scan</a>
             </div>
           </div>
         </div>

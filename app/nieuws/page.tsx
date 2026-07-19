@@ -34,7 +34,7 @@ export default function NieuwsPage() {
           </Link>
           <div className="nws-bar-actions">
             <Link href="/" className="nws-back">← Terug naar site</Link>
-            <a href="/#contact" className="nws-btn">Plan een gesprek</a>
+            <a href="/#contact" className="nws-btn">Plan een AI Scan</a>
           </div>
         </div>
       </header>

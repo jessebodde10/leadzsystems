@@ -24,7 +24,7 @@ export default function PrivacyPage() {
           </Link>
           <div className="pg-bar-actions">
             <Link href="/" className="pg-back">← Terug naar site</Link>
-            <a href="/#agenda" className="pg-btn">Plan een gesprek</a>
+            <a href="/#agenda" className="pg-btn">Plan een AI Scan</a>
           </div>
         </div>
       </header>
