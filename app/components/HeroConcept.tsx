@@ -932,6 +932,11 @@ const CSS = `
 .lz-mobile-link:last-of-type{ border-bottom:0; }
 .lz-mobile-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:2px; }
 .lz-mobile-cta{ margin-top:12px; width:100%; }
+/* Op mobiel blijft de balk zichtbaar tijdens het scrollen, met een iets kleiner logo. */
+@media(max-width:859px){
+  .lz-nav{ position:fixed; }
+  .lz-logo{ height:16px; }
+}
 @media(min-width:860px){ .lz-nav-links{ display:flex; } .lz-nav .lz-nav-cta{ display:inline-flex; } .lz-burger{ display:none; } .lz-mobile-menu{ display:none; } }
 
 /* ── Buttons ── */
