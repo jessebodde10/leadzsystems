@@ -10,11 +10,11 @@ const TOOLS = ["OpenAI", "Claude", "Make", "Zapier", "n8n", "HubSpot", "Pipedriv
 
 /* Werkwijze — 4 steps, copy matches the live leadzsystems.nl site. */
 const WERKWIJZE = [
-  { week: "Week 1", title: "Analyse", icon: "search", desc: "We brengen je processen in kaart en berekenen waar AI de meeste tijd en kosten bespaart." },
-  { week: "Week 2", title: "Strategie", icon: "map", desc: "Je krijgt een concreet plan: welke processen we automatiseren, in welke volgorde en wat het oplevert." },
-  { week: "Week 3–6", title: "Ontwikkeling", icon: "build", desc: "We bouwen je AI-agents en workflows op maat en testen ze grondig met jouw eigen data." },
-  { week: "Week 6–8", title: "Implementatie", icon: "rocket", desc: "We rollen alles gecontroleerd uit en trainen je team, zodat iedereen ermee kan werken." },
-  { week: "Doorlopend", title: "Optimalisatie", icon: "cycle", desc: "We monitoren de resultaten en verbeteren continu, zodat het rendement elke maand groeit." },
+  { week: "Week 1", title: "Analyse", icon: "search", desc: "We brengen je processen in kaart en berekenen waar AI de meeste tijd en kosten bespaart.", krijgt: "Een helder overzicht van je grootste tijdvreters" },
+  { week: "Week 2", title: "Strategie", icon: "map", desc: "Je krijgt een concreet plan: welke processen we automatiseren, in welke volgorde en wat het oplevert.", krijgt: "Een concreet plan met vaste prijs vooraf" },
+  { week: "Week 3–6", title: "Ontwikkeling", icon: "build", desc: "We bouwen je AI-agents en workflows op maat en testen ze grondig met jouw eigen data.", krijgt: "Werkende software, getest met je eigen data" },
+  { week: "Week 6–8", title: "Implementatie", icon: "rocket", desc: "We rollen alles gecontroleerd uit en trainen je team, zodat iedereen ermee kan werken.", krijgt: "Alles live, je team getraind en aan de slag" },
+  { week: "Doorlopend", title: "Optimalisatie", icon: "cycle", desc: "We monitoren de resultaten en verbeteren continu, zodat het rendement elke maand groeit.", krijgt: "Doorlopende monitoring en verbetering" },
 ];
 
 function WerkwijzeIcon({ name }: { name: string }) {
@@ -64,6 +64,9 @@ const STATS = [
   { num: "3 weken", label: "gemiddelde doorlooptijd van idee tot live" },
   { num: "100%", label: "tevredenheidsgarantie, we stoppen pas als jij blij bent" },
 ];
+
+// Roterend woord in de hero-kop: "Van handmatig werk naar meer …"
+const HERO_WORDS = ["rust", "tijd", "omzet", "groei"];
 
 /* Hero-flow: drie statische stappen die tonen hoe een agent tot een resultaat komt.
    Bewust geen live-tellende simulatie — een eerlijke illustratie, geen nepdata. */
@@ -171,6 +174,7 @@ export default function HeroConcept() {
   const [calcPeople, setCalcPeople] = useState(3);
   const [calcHours, setCalcHours] = useState(8);
   const [calcWage, setCalcWage] = useState(45);
+  const [wordIdx, setWordIdx] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
 
   // ── Palet & thema uit URL-parameters (?p=amber|iris|teal, ?t=dark|light, ?bg=...) ──
@@ -206,6 +210,13 @@ export default function HeroConcept() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
+  }, []);
+
+  // ── Roterend hero-woord ──
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => setWordIdx((i) => (i + 1) % HERO_WORDS.length), 2400);
+    return () => window.clearInterval(id);
   }, []);
 
   const year = new Date().getFullYear();
@@ -329,7 +340,12 @@ export default function HeroConcept() {
           <div className="lz-col-text">
             <h1 className="lz-h1">
               <span className="lz-line lz-anim" style={{ animationDelay: "120ms" }}>Van handmatig werk</span>
-              <span className="lz-line lz-iris lz-anim" style={{ animationDelay: "240ms" }}>naar slimme systemen</span>
+              <span className="lz-line lz-anim" style={{ animationDelay: "240ms" }}>
+                naar meer{" "}
+                <span className="lz-rotate">
+                  <span key={wordIdx} className="lz-iris lz-rotate-word">{HERO_WORDS[wordIdx]}</span>
+                </span>
+              </span>
             </h1>
 
             <p className="lz-sub lz-anim" style={{ animationDelay: "420ms" }}>
@@ -449,6 +465,7 @@ export default function HeroConcept() {
               <span className="lz-flow-week">{s.week}</span>
               <h3 className="lz-flow-title">{s.title}</h3>
               <p className="lz-flow-desc">{s.desc}</p>
+              <p className="lz-flow-krijgt"><span className="lz-flow-krijgt-label">Je krijgt</span>{s.krijgt}</p>
             </li>
           ))}
         </ol>
@@ -902,6 +919,9 @@ const CSS = `
   color:var(--fog); padding:7px 13px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.02); }
 .lz-h1{ font-family:var(--font-bricolage),var(--font-geist-sans),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:.98; font-size:clamp(2.85rem,7vw,4.9rem); margin:var(--sp-4) 0 0; }
 .lz-h1 .lz-line{ display:block; }
+.lz-rotate{ display:inline-block; vertical-align:top; }
+.lz-rotate-word{ display:inline-block; animation:lzWordIn .55s cubic-bezier(.22,1,.36,1) both; }
+@keyframes lzWordIn{ from{ opacity:0; transform:translateY(.4em); filter:blur(2px); } to{ opacity:1; transform:translateY(0); filter:blur(0); } }
 .lz-iris{ background:linear-gradient(100deg,var(--iris-2) 0%, color-mix(in srgb, var(--iris-2) 55%, #fff) 55%, var(--iris) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .lz-sub{ max-width:33rem; margin:var(--sp-4) 0 0; color:var(--fog); font-size:clamp(1.02rem,1.5vw,1.16rem); line-height:1.7; }
 .lz-cta-row{ display:flex; flex-wrap:wrap; gap:var(--sp-2); margin-top:var(--sp-5); }
@@ -978,6 +998,8 @@ const CSS = `
 .lz-flow-week{ display:block; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fog-2); }
 .lz-flow-title{ margin-top:6px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:-.01em; color:var(--paper); }
 .lz-flow-desc{ margin-top:10px; color:var(--fog); font-size:.95rem; line-height:1.6; }
+.lz-flow-krijgt{ display:flex; flex-direction:column; gap:4px; margin-top:14px; padding-top:14px; border-top:1px solid var(--line); color:var(--paper); font-size:.9rem; line-height:1.45; }
+.lz-flow-krijgt-label{ font-family:var(--font-geist-mono),monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--iris-2); }
 
 
 /* ── Over Jesse ── */
@@ -1199,6 +1221,7 @@ const CSS = `
   .lz-anim,.lz-reveal{ opacity:1; transform:none; animation:none; transition:none; }
   .lz-flow-card{ animation:none; }
   .lz-flow-card-connector::after{ animation:none; opacity:1; }
+  .lz-rotate-word{ animation:none; }
   .lz-reelbox iframe{ animation:none; }
   .lz-marquee-track{ animation:none; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
