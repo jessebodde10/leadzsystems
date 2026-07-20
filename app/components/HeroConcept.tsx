@@ -65,8 +65,6 @@ const STATS = [
   { num: "100%", label: "tevredenheidsgarantie, we stoppen pas als jij blij bent" },
 ];
 
-// Roterend woord in de hero-kop: "Van handmatig werk naar meer …"
-const HERO_WORDS = ["rust", "tijd", "omzet", "groei"];
 
 /* Hero-flow: drie statische stappen die tonen hoe een agent tot een resultaat komt.
    Bewust geen live-tellende simulatie — een eerlijke illustratie, geen nepdata. */
@@ -174,7 +172,6 @@ export default function HeroConcept() {
   const [calcPeople, setCalcPeople] = useState(3);
   const [calcHours, setCalcHours] = useState(8);
   const [calcWage, setCalcWage] = useState(45);
-  const [wordIdx, setWordIdx] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
 
   // ── Palet & thema uit URL-parameters (?p=amber|iris|teal, ?t=dark|light, ?bg=...) ──
@@ -210,13 +207,6 @@ export default function HeroConcept() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
-
-  // ── Roterend hero-woord ──
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setWordIdx((i) => (i + 1) % HERO_WORDS.length), 2400);
-    return () => window.clearInterval(id);
   }, []);
 
   const year = new Date().getFullYear();
@@ -340,12 +330,7 @@ export default function HeroConcept() {
           <div className="lz-col-text">
             <h1 className="lz-h1">
               <span className="lz-line lz-anim" style={{ animationDelay: "120ms" }}>Van handmatig werk</span>
-              <span className="lz-line lz-anim" style={{ animationDelay: "240ms" }}>
-                naar{" "}
-                <span className="lz-rotate">
-                  meer <span key={wordIdx} className="lz-iris lz-rotate-word">{HERO_WORDS[wordIdx]}</span>
-                </span>
-              </span>
+              <span className="lz-line lz-iris lz-anim" style={{ animationDelay: "240ms" }}>naar slimme systemen</span>
             </h1>
 
             <p className="lz-sub lz-anim" style={{ animationDelay: "420ms" }}>
@@ -919,9 +904,6 @@ const CSS = `
   color:var(--fog); padding:7px 13px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.02); }
 .lz-h1{ font-family:var(--font-bricolage),var(--font-geist-sans),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:.98; font-size:clamp(2.85rem,7vw,4.9rem); margin:var(--sp-4) 0 0; }
 .lz-h1 .lz-line{ display:block; }
-.lz-rotate{ display:inline-block; vertical-align:top; white-space:nowrap; }
-.lz-rotate-word{ display:inline-block; animation:lzWordIn .55s cubic-bezier(.22,1,.36,1) both; }
-@keyframes lzWordIn{ from{ opacity:0; transform:translateY(.4em); filter:blur(2px); } to{ opacity:1; transform:translateY(0); filter:blur(0); } }
 .lz-iris{ background:linear-gradient(100deg,var(--iris-2) 0%, color-mix(in srgb, var(--iris-2) 55%, #fff) 55%, var(--iris) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .lz-sub{ max-width:33rem; margin:var(--sp-4) 0 0; color:var(--fog); font-size:clamp(1.02rem,1.5vw,1.16rem); line-height:1.7; }
 .lz-cta-row{ display:flex; flex-wrap:wrap; gap:var(--sp-2); margin-top:var(--sp-5); }
@@ -1221,7 +1203,6 @@ const CSS = `
   .lz-anim,.lz-reveal{ opacity:1; transform:none; animation:none; transition:none; }
   .lz-flow-card{ animation:none; }
   .lz-flow-card-connector::after{ animation:none; opacity:1; }
-  .lz-rotate-word{ animation:none; }
   .lz-reelbox iframe{ animation:none; }
   .lz-marquee-track{ animation:none; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
