@@ -21,6 +21,71 @@ export type Artikel = {
 
 export const ARTIKELEN: Artikel[] = [
   {
+    slug: "google-stelt-gemini-3-5-uit",
+    title: "Google stelt zijn nieuwste AI uit: Gemini 3.5 Pro laat op zich wachten",
+    date: "2026-07-17",
+    category: "AI-nieuws",
+    excerpt:
+      "Google schuift de brede lancering van Gemini 3.5 Pro maanden op na tegenvallende interne tests. Beleggers reageren nerveus.",
+    body: [
+      "Google heeft de brede uitrol van zijn nieuwste vlaggenschipmodel, Gemini 3.5 Pro, met enkele maanden uitgesteld. Uit interne tests bleek dat het model tegenviel op programmeren en op ingewikkelde taken waarbij het lang moet doorredeneren. Voorlopig blijft het alleen beschikbaar in een beperkte preview voor zakelijke klanten.",
+      "De markt reageerde meteen: het aandeel van moederbedrijf Alphabet zakte ruim 4 procent. De achterliggende zorg is of Google de aansluiting houdt in de race om de slimste AI, waarin OpenAI, Anthropic en inmiddels ook Chinese partijen hard aan de weg timmeren.",
+      "Voor jou als gebruiker is de les vooral dat 'binnenkort' bij AI zelden een harde datum is. De grote labs beloven veel, maar leveren pas als het klopt, en soms schuift dat op. Wie vandaag met AI aan de slag wil, bouwt daarom beter op wat nú betrouwbaar werkt dan op wat is aangekondigd.",
+    ],
+  },
+  {
+    slug: "apple-klaagt-openai-aan",
+    title: "Apple klaagt OpenAI aan om gestolen hardwaregeheimen",
+    date: "2026-07-17",
+    category: "AI-nieuws",
+    excerpt:
+      "Apple beschuldigt OpenAI van diefstal van bedrijfsgeheimen rond hardware en waarschuwt tientallen oud-werknemers. Ondertussen wordt Apple het waardevolste bedrijf ter wereld.",
+    body: [
+      "Apple is een grote rechtszaak begonnen tegen OpenAI. De iPhone-maker beschuldigt het AI-bedrijf ervan bedrijfsgeheimen over hardware te hebben gestolen. Zo'n veertig oud-Apple-medewerkers die inmiddels bij OpenAI werken kregen een juridische waarschuwing om hun documenten te bewaren voor aankomende verhoren.",
+      "De zaak legt bloot hoe fel de strijd om AI-hardware is geworden. OpenAI werkt aan eigen apparaten, en dat zit Apple, dat zelf zwaar op AI inzet, duidelijk niet lekker. Opvallend detail: in dezelfde week passeerde Apple chipmaker Nvidia als het waardevolste bedrijf ter wereld, met een beurswaarde die de 5 biljoen dollar nadert.",
+      "Voor de gewone gebruiker verandert er op korte termijn niets, maar het tekent het speelveld: de techreuzen zijn niet langer partners die elkaar aanvullen, maar concurrenten die elkaar voor de rechter slepen. De inzet is wie straks zowel de hardware als de AI in handen heeft.",
+    ],
+  },
+  {
+    slug: "kimi-k3-chinees-open-model",
+    title: "Chinees open AI-model Kimi K3 verslaat de gevestigde orde op code",
+    date: "2026-07-16",
+    category: "AI-nieuws",
+    excerpt:
+      "Moonshot AI's nieuwe open model Kimi K3 pakt de koppositie op programmeren, vóór Claude Fable 5 en GPT-5.6. En het is vrij beschikbaar.",
+    body: [
+      "Het Chinese Moonshot AI heeft Kimi K3 uitgebracht, een zogeheten open-weight model dat meteen bovenaan staat op een toonaangevende benchmark voor het bouwen van websites en het uitvoeren van agent-taken. Met een winstpercentage van 76 procent in directe vergelijkingen liet het model Anthropics Claude Fable 5 en OpenAI's GPT-5.6 Sol achter zich.",
+      "Bijzonder is dat Kimi K3 'open' is: bedrijven kunnen het model zelf draaien en aanpassen, zonder afhankelijk te zijn van één aanbieder. Dat maakt krachtige AI toegankelijker en goedkoper, en zet de gevestigde, gesloten modellen onder druk.",
+      "Voor het MKB is dit goed nieuws. Meer concurrentie en sterke open modellen betekenen lagere kosten en meer keuze; je zit niet vast aan één leverancier. Bij het bouwen van een oplossing kiezen wij daarom bewust het model dat op dat moment het beste past bij de taak en het budget, niet automatisch de bekendste naam.",
+    ],
+  },
+  {
+    slug: "anthropic-marktleider-ipo",
+    title: "Anthropic is stilletjes marktleider geworden, en gaat naar de beurs",
+    date: "2026-07-14",
+    category: "AI-nieuws",
+    excerpt:
+      "De maker van Claude draait naar verwachting 47 miljard dollar omzet op jaarbasis, is winstgevend, en bereidt een beursgang voor in oktober.",
+    body: [
+      "Anthropic, de maker van Claude, is bijna ongemerkt de commercieel sterkste speler in AI geworden. Het bedrijf koerst af op zo'n 47 miljard dollar omzet op jaarbasis en zou dit jaar zelfs winstgevend zijn, vooral dankzij Claude Code en breed gebruik binnen grote bedrijven.",
+      "Om die groei vast te houden zet Anthropic twee grote stappen. Het praat met Samsung over een eigen AI-chip om minder afhankelijk te zijn van Nvidia, en bereidt een beursgang (IPO) voor in oktober. Eigen chips en beurskapitaal moeten zorgen voor voldoende rekenkracht en voorspelbare groei.",
+      "Waarom dit voor jou relevant is: Claude is een van de modellen waarmee wij dagelijks oplossingen bouwen. Een gezond, winstgevend bedrijf erachter betekent stabiliteit en doorontwikkeling op de lange termijn, prettig als je AI een vaste plek in je bedrijfsvoering geeft.",
+    ],
+  },
+  {
+    slug: "95-procent-ai-pilots-levert-niets-op",
+    title: "95% van de AI-pilots levert niets op, en wat je daarvan kunt leren",
+    date: "2026-07-13",
+    category: "AI-nieuws",
+    excerpt:
+      "Uit onderzoek blijkt dat het overgrote deel van de bedrijfs-AI-projecten geen meetbaar resultaat oplevert. Microsoft zet 6.000 engineers in om dat te doorbreken.",
+    body: [
+      "Een ontnuchterend cijfer maakte deze week de ronde: naar schatting 95 procent van de AI-pilots bij bedrijven levert geen enkel meetbaar effect op de winst op. Microsoft neemt dat serieus en richtte een nieuwe afdeling op van 2,5 miljard dollar, met zo'n 6.000 engineers die letterlijk bij klanten binnen de deur gaan werken om projecten wél te laten slagen.",
+      "Het probleem zit zelden in de techniek, want de modellen zijn krachtig genoeg. Het gaat mis bij de aansluiting op echte processen: een losse pilot die niemand gebruikt, een tool die niet koppelt met bestaande systemen, of een oplossing die niet is gebouwd rond hoe mensen echt werken.",
+      "Precies daar zit onze aanpak. Wij beginnen niet bij de technologie maar bij het proces dat de meeste tijd kost, bouwen klein en meetbaar, en leveren pas op als het aantoonbaar werkt in de praktijk. Zo hoor je bij de 5 procent die het wél oplevert, in plaats van bij de 95 procent die blijft steken in een proef.",
+    ],
+  },
+  {
     slug: "gpt-5-6-nu-voor-iedereen",
     title: "GPT-5.6 nu voor iedereen: OpenAI zet de deuren open",
     date: "2026-07-10",
