@@ -341,9 +341,9 @@ export default function HeroConcept() {
             <h1 className="lz-h1">
               <span className="lz-line lz-anim" style={{ animationDelay: "120ms" }}>Van handmatig werk</span>
               <span className="lz-line lz-anim" style={{ animationDelay: "240ms" }}>
-                naar meer{" "}
+                naar{" "}
                 <span className="lz-rotate">
-                  <span key={wordIdx} className="lz-iris lz-rotate-word">{HERO_WORDS[wordIdx]}</span>
+                  meer <span key={wordIdx} className="lz-iris lz-rotate-word">{HERO_WORDS[wordIdx]}</span>
                 </span>
               </span>
             </h1>
@@ -919,7 +919,7 @@ const CSS = `
   color:var(--fog); padding:7px 13px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.02); }
 .lz-h1{ font-family:var(--font-bricolage),var(--font-geist-sans),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:.98; font-size:clamp(2.85rem,7vw,4.9rem); margin:var(--sp-4) 0 0; }
 .lz-h1 .lz-line{ display:block; }
-.lz-rotate{ display:inline-block; vertical-align:top; }
+.lz-rotate{ display:inline-block; vertical-align:top; white-space:nowrap; }
 .lz-rotate-word{ display:inline-block; animation:lzWordIn .55s cubic-bezier(.22,1,.36,1) both; }
 @keyframes lzWordIn{ from{ opacity:0; transform:translateY(.4em); filter:blur(2px); } to{ opacity:1; transform:translateY(0); filter:blur(0); } }
 .lz-iris{ background:linear-gradient(100deg,var(--iris-2) 0%, color-mix(in srgb, var(--iris-2) 55%, #fff) 55%, var(--iris) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
