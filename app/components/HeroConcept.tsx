@@ -11,20 +11,40 @@ import {
 } from "react-icons/si";
 import { FaSlack, FaGoogle, FaMicrosoft } from "react-icons/fa6";
 
-/* Echte merk-logo's voor de LogoLoop onder de hero. */
+/* Merk-wordmarks (aangeleverde SVG's) als monochroom masker: de vorm komt uit het bestand,
+   de kleur uit currentColor, zodat ze exact de gedempte→amber huisstijl van de loop volgen.
+   De eigen merkkleuren van de SVG's worden bewust genegeerd voor één rustig geheel. */
+function BrandMark({ src, title, ratio }: { src: string; title: string; ratio: number }) {
+  return (
+    <span
+      className="lz-brandmark"
+      role="img"
+      aria-label={title}
+      title={title}
+      style={{ aspectRatio: String(ratio), WebkitMaskImage: `url(${src})`, maskImage: `url(${src})` }}
+    />
+  );
+}
+
+/* Echte merk-logo's voor de LogoLoop onder de hero — icon-glyphs en wordmarks door elkaar. */
 const TOOL_LOGOS = [
   { node: <SiClaude title="Claude" />, title: "Claude" },
   { node: <SiGooglegemini title="Google Gemini" />, title: "Gemini" },
+  { node: <BrandMark src="/logos/openai.svg" title="OpenAI" ratio={3.688} />, title: "OpenAI" },
   { node: <FaGoogle title="Google Workspace" />, title: "Google Workspace" },
   { node: <FaMicrosoft title="Microsoft 365" />, title: "Microsoft 365" },
   { node: <SiHubspot title="HubSpot" />, title: "HubSpot" },
+  { node: <BrandMark src="/logos/pipedrive.svg" title="Pipedrive" ratio={3.76} />, title: "Pipedrive" },
   { node: <SiZapier title="Zapier" />, title: "Zapier" },
   { node: <SiMake title="Make" />, title: "Make" },
   { node: <SiN8N title="n8n" />, title: "n8n" },
+  { node: <BrandMark src="/logos/exact.svg" title="Exact" ratio={4.704} />, title: "Exact" },
   { node: <FaSlack title="Slack" />, title: "Slack" },
   { node: <SiNotion title="Notion" />, title: "Notion" },
+  { node: <BrandMark src="/logos/afas.svg" title="AFAS" ratio={2.179} />, title: "AFAS" },
   { node: <SiAirtable title="Airtable" />, title: "Airtable" },
   { node: <SiGmail title="Gmail" />, title: "Gmail" },
+  { node: <BrandMark src="/logos/moneybird.svg" title="Moneybird" ratio={6.125} />, title: "Moneybird" },
   { node: <SiSupabase title="Supabase" />, title: "Supabase" },
   { node: <SiStripe title="Stripe" />, title: "Stripe" },
   { node: <SiWhatsapp title="WhatsApp" />, title: "WhatsApp" },
@@ -962,6 +982,10 @@ const CSS = `
 .lz-marquee-band .logoloop__item{ flex:0 0 auto; margin-right:var(--logoloop-gap); font-size:var(--logoloop-logoHeight); line-height:1; }
 .lz-marquee-band .logoloop__item:last-child{ margin-right:var(--logoloop-gap); }
 .lz-marquee-band .logoloop__node{ display:inline-flex; align-items:center; color:color-mix(in srgb, var(--paper) 58%, transparent); transition:color .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1); }
+/* Wordmark-merken als monochroom masker: silhouet uit het SVG-bestand, kleur uit currentColor. */
+.lz-marquee-band .lz-brandmark{ display:inline-block; height:.92em; width:auto; background-color:currentColor;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center;
+  -webkit-mask-size:contain; mask-size:contain; }
 .lz-marquee-band .logoloop--scale-hover .logoloop__item:hover .logoloop__node{ transform:scale(1.18); color:var(--iris-2); }
 .lz-marquee-band .logoloop--fade::before,
 .lz-marquee-band .logoloop--fade::after{ content:""; position:absolute; top:0; bottom:0; width:clamp(32px,10%,140px); pointer-events:none; z-index:10; }
