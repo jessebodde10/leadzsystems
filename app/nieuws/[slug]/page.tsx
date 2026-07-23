@@ -61,7 +61,7 @@ export default async function ArtikelPage({ params }: { params: Promise<{ slug: 
           </Link>
           <div className="nws-bar-actions">
             <Link href="/nieuws" className="nws-back">← Alle artikelen</Link>
-            <a href="/#contact" className="nws-btn">Plan een gesprek</a>
+            <a href="/#contact" className="nws-btn">Plan een AI Scan</a>
           </div>
         </div>
       </header>
@@ -89,7 +89,7 @@ export default async function ArtikelPage({ params }: { params: Promise<{ slug: 
 
         <div className="nws-article-foot">
           <Link href="/nieuws" className="nws-back">← Terug naar alle artikelen</Link>
-          <a href="/#contact" className="nws-btn">Plan een gesprek</a>
+          <a href="/#contact" className="nws-btn">Plan een AI Scan</a>
         </div>
       </article>
 

@@ -62,7 +62,7 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
           </Link>
           <div className="pg-bar-actions">
             <Link href="/#portfolio" className="pg-back">← Alle cases</Link>
-            <a href="/#agenda" className="pg-btn">Plan een gesprek</a>
+            <a href="/#agenda" className="pg-btn">Plan een AI Scan</a>
           </div>
         </div>
       </header>
