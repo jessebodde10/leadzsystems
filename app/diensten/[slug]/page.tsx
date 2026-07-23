@@ -83,8 +83,9 @@ export default async function DienstPage({ params }: { params: Promise<{ slug: s
         <section className="pg-section">
           <h2 className="pg-h2">Digitale collega&apos;s die <span className="pg-hl">nooit een taak laten liggen</span></h2>
           <p className="pg-sub">
-            Een AI-agent is geen chatbot. Het is een digitale medewerker die zelfstandig taken
-            uitvoert binnen jouw processen, getraind op jouw bedrijf, jouw systemen en jouw werkwijze.
+            Een AI-agent is geen chatbot die vragen beantwoordt. Het is een digitale medewerker die
+            &apos;s nachts je offertes klaarzet en &apos;s ochtends je mailbox al heeft uitgezocht,
+            op basis van hoe jíj het zou doen.
           </p>
           <AgentsShowcase />
         </section>

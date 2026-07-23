@@ -37,26 +37,8 @@ const WERKWIJZE = [
   { week: "Week 2", title: "Strategie", icon: "map", desc: "Je krijgt een concreet plan: welke processen we automatiseren, in welke volgorde en wat het oplevert.", krijgt: "Een concreet plan met vaste prijs vooraf" },
   { week: "Week 3–6", title: "Ontwikkeling", icon: "build", desc: "We bouwen je AI-agents en workflows op maat en testen ze grondig met jouw eigen data.", krijgt: "Werkende software, getest met je eigen data" },
   { week: "Week 6–8", title: "Implementatie", icon: "rocket", desc: "We rollen alles gecontroleerd uit en trainen je team, zodat iedereen ermee kan werken.", krijgt: "Alles live, je team getraind en aan de slag" },
-  { week: "Doorlopend", title: "Optimalisatie", icon: "cycle", desc: "We monitoren de resultaten en verbeteren continu, zodat het rendement elke maand groeit.", krijgt: "Doorlopende monitoring en verbetering" },
+  { week: "Doorlopend", title: "Optimalisatie", icon: "cycle", desc: "We houden de boel in de gaten en schaven bij waar het beter kan. Wat vandaag werkt, kan volgende maand slimmer.", krijgt: "We blijven meekijken, ook na livegang" },
 ];
-
-function WerkwijzeIcon({ name }: { name: string }) {
-  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  switch (name) {
-    case "search":
-      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>);
-    case "map":
-      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>);
-    case "build":
-      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>);
-    case "rocket":
-      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M4 13a8 8 0 0 1 7-7 6 6 0 0 1 6 6 8 8 0 0 1-7 7c-.5-2-1-3-1.5-3.5S6 15 4 13z" /><path d="M7 14a6 6 0 0 0-3 6 6 6 0 0 0 6-3" /><circle cx="15" cy="9" r="1.2" /></svg>);
-    case "cycle":
-      return (<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden {...p}><path d="M4.5 9a7.5 7.5 0 0 1 12.9-3.2L20 8" /><path d="M20 4v4h-4" /><path d="M19.5 15a7.5 7.5 0 0 1-12.9 3.2L4 16" /><path d="M4 20v-4h4" /></svg>);
-    default:
-      return null;
-  }
-}
 
 const GARANTIES = [
   { icon: "scan", title: "Eerst inzicht, dan pas een beslissing", desc: "Je krijgt een concreet voorstel met de verwachte besparing erbij, nog voordat je iets tekent. Zo weet je vooraf of het zich terugbetaalt." },
@@ -92,9 +74,9 @@ const STATS = [
 /* Hero-flow: drie statische stappen die tonen hoe een agent tot een resultaat komt.
    Bewust geen live-tellende simulatie — een eerlijke illustratie, geen nepdata. */
 const FLOW_STEPS = [
-  { icon: "inbox", title: "Digitale collega", sub: "Leest, begrijpt en handelt af", example: "Nieuwe lead ontvangen · beoordeeld in 4 sec." },
-  { icon: "link", title: "Automatisering", sub: "Verbindt je systemen", example: "CRM bijgewerkt · offerte klaargezet" },
-  { icon: "chart", title: "Bedrijfsresultaat", sub: "Meetbaar elke maand", example: "+38 uur bespaard deze week" },
+  { icon: "inbox", title: "Digitale collega", sub: "Leest mee en pakt het op", example: "Aanvraag binnen · om 23:14 al beantwoord" },
+  { icon: "link", title: "Automatisering", sub: "Zet je systemen aan het werk", example: "CRM bijgewerkt · offerte klaargezet" },
+  { icon: "chart", title: "Bedrijfsresultaat", sub: "Je ziet het terug in je week", example: "Maandagochtend · overzicht staat klaar" },
 ];
 
 function FlowIcon({ name }: { name: string }) {
@@ -238,7 +220,8 @@ export default function HeroConcept() {
   const SAVE_FACTOR = 0.7;
   const savedHrsWeek = calcPeople * calcHours * SAVE_FACTOR;
   const euroWeek = savedHrsWeek * calcWage;
-  const fmtEuro = (n: number) => "€ " + Math.round(n).toLocaleString("nl-NL");
+  // Harde spatie ( ) na het euroteken, zodat bedrag en teken nooit los afbreken.
+  const fmtEuro = (n: number) => "€ " + Math.round(n).toLocaleString("nl-NL");
   const fmtHrs = (n: number) => Math.round(n).toLocaleString("nl-NL") + " uur";
   const savings = [
     { label: "Per week", euro: euroWeek, hrs: savedHrsWeek },
@@ -464,10 +447,10 @@ export default function HeroConcept() {
         </div>
 
         <ol className="lz-flow">
-          {WERKWIJZE.map((s) => (
+          {WERKWIJZE.map((s, i) => (
             <li key={s.title} className="lz-flow-step lz-reveal">
               <div className="lz-flow-top">
-                <span className="lz-flow-ico"><WerkwijzeIcon name={s.icon} /></span>
+                <span className="lz-flow-ico" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
                 <span className="lz-flow-line" aria-hidden />
               </div>
               <span className="lz-flow-week">{s.week}</span>
@@ -678,13 +661,21 @@ export default function HeroConcept() {
             <p className="lz-lead">Geen dikke voorwaarden nodig om te snappen waar je aan toe bent. Dit zijn de afspraken die we altijd aanhouden.</p>
           </div>
           <div className="lz-guarantee-grid">
-            {GARANTIES.map((g) => (
+            {GARANTIES.slice(0, 3).map((g) => (
               <div key={g.title} className="lz-guarantee-item">
                 <span className="lz-guarantee-ico"><GarantieIcon name={g.icon} /></span>
                 <h3 className="lz-guarantee-title">{g.title}</h3>
                 <p className="lz-guarantee-desc">{g.desc}</p>
               </div>
             ))}
+          </div>
+          {/* De belofte die alles samenvat, bewust uit het raster gelicht. */}
+          <div className="lz-guarantee-feature">
+            <span className="lz-guarantee-ico"><GarantieIcon name={GARANTIES[3].icon} /></span>
+            <div className="lz-guarantee-feature-body">
+              <h3 className="lz-guarantee-feature-title">{GARANTIES[3].title}</h3>
+              <p className="lz-guarantee-desc">{GARANTIES[3].desc}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -826,6 +817,12 @@ const CSS = `
   background:var(--ink); color:var(--paper);
   font-family:var(--font-geist-sans),system-ui,sans-serif; -webkit-font-smoothing:antialiased;
 }
+
+/* ── Micro-typografie: merkkleur bij tekstselectie + nette regelafbrekingen ── */
+.lz-root ::selection{ background:color-mix(in srgb, var(--iris) 32%, transparent); color:var(--paper); }
+.lz-root ::-moz-selection{ background:color-mix(in srgb, var(--iris) 32%, transparent); color:var(--paper); }
+.lz-h1,.lz-h2,.lz-card-title,.lz-flow-title,.lz-guarantee-title,.lz-guarantee-feature-title,.lz-faq-q,.lz-work-title,.lz-statbig-label{ text-wrap:balance; }
+.lz-lead,.lz-sub,.lz-about-p,.lz-card-desc,.lz-guarantee-desc,.lz-flow-desc,.lz-work-desc,.lz-contact-p{ text-wrap:pretty; }
 
 /* ── Ambient layers (hero region only) ── */
 .lz-bg-grad{ position:absolute; inset:0 0 auto; height:920px; z-index:-3; pointer-events:none;
@@ -1004,7 +1001,7 @@ const CSS = `
 @media(min-width:720px){ .lz-flow{ grid-template-columns:repeat(2,1fr); gap:36px 28px; } }
 @media(min-width:980px){ .lz-flow{ grid-template-columns:repeat(5,1fr); gap:24px; } }
 .lz-flow-top{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
-.lz-flow-ico{ flex:none; width:48px; height:48px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; color:var(--iris-2); background:color-mix(in srgb, var(--iris) 12%, transparent); border:1px solid color-mix(in srgb, var(--iris) 24%, var(--line)); }
+.lz-flow-ico{ flex:none; width:48px; height:48px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; color:var(--iris-2); background:color-mix(in srgb, var(--iris) 12%, transparent); border:1px solid color-mix(in srgb, var(--iris) 24%, var(--line)); font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
 .lz-flow-line{ display:none; flex:1; height:1px; min-width:12px; background:color-mix(in srgb, var(--iris) 40%, var(--line)); }
 @media(min-width:980px){ .lz-flow-line{ display:block; margin-right:-24px; } .lz-flow-step:last-child .lz-flow-line{ display:none; } }
 .lz-flow-week{ display:block; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fog-2); }
@@ -1072,7 +1069,15 @@ const CSS = `
 .lz-guarantee-head{ max-width:640px; }
 .lz-guarantee-grid{ margin-top:clamp(28px,3.6vw,40px); display:grid; grid-template-columns:1fr; gap:28px 32px; }
 @media(min-width:640px){ .lz-guarantee-grid{ grid-template-columns:1fr 1fr; } }
-@media(min-width:980px){ .lz-guarantee-grid{ grid-template-columns:repeat(4,1fr); } }
+@media(min-width:980px){ .lz-guarantee-grid{ grid-template-columns:repeat(3,1fr); } }
+/* Uitgelichte belofte — bewust asymmetrisch t.o.v. het raster erboven. */
+.lz-guarantee-feature{ margin-top:28px; display:flex; gap:20px; align-items:flex-start; padding:clamp(22px,2.6vw,30px); border-radius:20px;
+  border:1px solid color-mix(in srgb, var(--iris) 34%, var(--line-2));
+  background:linear-gradient(180deg, color-mix(in srgb, var(--iris) 12%, var(--surface-2)) 0%, var(--surface-2) 100%); }
+@media(min-width:640px){ .lz-guarantee-feature{ align-items:center; gap:26px; } }
+.lz-guarantee-feature-body{ flex:1; }
+.lz-guarantee-feature-title{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:clamp(1.15rem,1.9vw,1.4rem); letter-spacing:-.015em; line-height:1.25; color:var(--paper); }
+.lz-guarantee-feature .lz-guarantee-desc{ margin-top:8px; max-width:52rem; font-size:.98rem; }
 .lz-guarantee-ico{ display:inline-flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:12px; color:var(--iris-2); background:color-mix(in srgb, var(--iris) 13%, transparent); border:1px solid color-mix(in srgb, var(--iris) 26%, var(--line)); }
 .lz-guarantee-title{ margin-top:16px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:-.01em; line-height:1.3; color:var(--paper); }
 .lz-guarantee-desc{ margin-top:9px; color:var(--fog); font-size:.9rem; line-height:1.6; }

@@ -46,7 +46,7 @@ export const DIENSTEN: Dienst[] = [
     title: "AI Agents",
     stat: "24/7 aan het werk, zonder dat jij er naar omkijkt",
     description:
-      "Een AI agent is software die zelfstandig taken uitvoert: e-mails verwerken, leads opvolgen, data doorzetten tussen systemen. Geen vermoeidheid, geen fouten, geen pauzes. Wij bouwen agents die precies passen bij hoe jouw bedrijf werkt.",
+      "Een AI agent is software die zelfstandig taken uitvoert: e-mails verwerken, leads opvolgen, data doorzetten tussen systemen. Het werkt door als jij naar huis gaat, en maakt niet de slordige foutjes die er om vijf uur insluipen. Wij bouwen agents die precies passen bij hoe jouw bedrijf werkt.",
     items: [
       "Agents die e-mails, aanvragen en leads automatisch verwerken",
       "Koppelingen met je bestaande systemen zoals CRM en boekhouding",
