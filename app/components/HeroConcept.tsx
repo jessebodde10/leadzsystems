@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SITE, DIENSTEN, PORTFOLIO_ITEMS, FAQS } from "../lib/content";
 import CalEmbed from "./CalEmbed";
+import { ScrollVelocityContainer, ScrollVelocityRow } from "./ui/scroll-based-velocity";
 
-/* Tools shown in the scrolling marquee under the hero. */
+/* Tools shown in the scroll-velocity marquee under the hero. */
 const TOOLS = ["OpenAI", "Claude", "Make", "Zapier", "n8n", "HubSpot", "Pipedrive", "Exact", "AFAS", "Moneybird", "Slack", "Microsoft 365", "Google Workspace", "Supabase", "Stripe", "WhatsApp"];
 
 /* Werkwijze — 4 steps, copy matches the live leadzsystems.nl site. */
@@ -378,19 +379,19 @@ export default function HeroConcept() {
         </div>
       </header>
 
-      {/* ── Tools marquee ── */}
+      {/* ── Tools: scroll-based velocity marquee ── */}
       <section className="lz-marquee-band" aria-label="Tools waarmee we koppelen">
         <p className="lz-marquee-label">Koppelt naadloos met de tools die je al gebruikt</p>
-        <div className="lz-marquee">
-          <div className="lz-marquee-track">
-            {[...TOOLS, ...TOOLS].map((t, i) => (
-              <span className="lz-tool" key={i}>
+        <ScrollVelocityContainer className="lz-vel">
+          <ScrollVelocityRow baseVelocity={6} direction={1}>
+            {TOOLS.map((t) => (
+              <span className="lz-tool" key={t}>
                 <span className="lz-tool-dot" aria-hidden />
                 {t}
               </span>
             ))}
-          </div>
-        </div>
+          </ScrollVelocityRow>
+        </ScrollVelocityContainer>
       </section>
 
       {/* ── Diensten ── */}
@@ -932,14 +933,12 @@ const CSS = `
 .lz-chip{ font-family:var(--font-geist-mono),monospace; font-size:11px; color:var(--fog); padding:4px 9px; border:1px solid var(--line); border-radius:7px; background:rgba(255,255,255,.02); }
 
 /* ── Tools marquee (full-width bar under the hero) ── */
+/* ── Tools: scroll-based velocity marquee ── */
 .lz-marquee-band{ position:relative; z-index:1; padding:var(--sp-5) 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .lz-marquee-label{ text-align:center; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--fog-2); margin-bottom:var(--sp-4); padding:0 var(--edge); }
-.lz-marquee{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-.lz-marquee-track{ display:flex; align-items:center; width:max-content; animation:lzMarquee 48s linear infinite; }
-.lz-marquee:hover .lz-marquee-track{ animation-play-state:paused; }
+.lz-vel{ -webkit-mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
 .lz-tool{ display:inline-flex; align-items:center; gap:16px; padding:0 26px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.28rem; letter-spacing:-.01em; color:var(--fog); white-space:nowrap; }
 .lz-tool-dot{ width:5px; height:5px; border-radius:2px; background:var(--iris); transform:rotate(45deg); }
-@keyframes lzMarquee{ from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
 
 /* ── Section scaffold ── */
 .lz-section{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:var(--sp-7) var(--edge); }
