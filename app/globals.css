@@ -220,8 +220,8 @@ body {
 .nws-root a { text-decoration: none; }
 
 /* Top bar */
-.nws-bar { position: sticky; top: 0; z-index: 30; background: rgba(250, 247, 240, 0.86); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.nws-bar-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 24px; }
+.nws-bar { position: sticky; top: 0; z-index: 30; display: flex; justify-content: center; padding: 12px 16px 0; }
+.nws-bar-inner { width: 100%; max-width: 1120px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 14px 12px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, 0.74); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 18px 40px -26px rgba(20, 24, 40, 0.35); }
 .nws-brand { display: inline-flex; }
 .nws-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0); opacity: 0.92; }
 .nws-bar-actions { display: flex; align-items: center; gap: 20px; }
@@ -304,9 +304,9 @@ body {
 }
 .pg-root a { text-decoration: none; }
 
-/* Top bar */
-.pg-bar { position: sticky; top: 0; z-index: 30; background: rgba(250, 247, 240, 0.86); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.pg-bar-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 24px; }
+/* Top bar — zwevende pill, gelijk aan de homepage-nav (niet full-width) */
+.pg-bar { position: sticky; top: 0; z-index: 30; display: flex; justify-content: center; padding: 12px 16px 0; }
+.pg-bar-inner { width: 100%; max-width: 1120px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 14px 12px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, 0.74); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 18px 40px -26px rgba(20, 24, 40, 0.35); }
 .pg-brand { display: inline-flex; }
 /* brightness(0) vlakt het indigo merkteken af naar hetzelfde donker als het woordmerk */
 .pg-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0); opacity: 0.92; }
