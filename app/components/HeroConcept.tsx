@@ -4,10 +4,32 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SITE, DIENSTEN, PORTFOLIO_ITEMS, FAQS } from "../lib/content";
 import CalEmbed from "./CalEmbed";
-import { ScrollVelocityContainer, ScrollVelocityRow } from "./ui/scroll-based-velocity";
+import LogoLoop from "./ui/LogoLoop";
+import {
+  SiClaude, SiGooglegemini, SiZapier, SiMake, SiN8N, SiHubspot, SiNotion,
+  SiSupabase, SiStripe, SiWhatsapp, SiAirtable, SiGmail, SiGithub,
+} from "react-icons/si";
+import { FaSlack, FaGoogle, FaMicrosoft } from "react-icons/fa6";
 
-/* Tools shown in the scroll-velocity marquee under the hero. */
-const TOOLS = ["OpenAI", "Claude", "Make", "Zapier", "n8n", "HubSpot", "Pipedrive", "Exact", "AFAS", "Moneybird", "Slack", "Microsoft 365", "Google Workspace", "Supabase", "Stripe", "WhatsApp"];
+/* Echte merk-logo's voor de LogoLoop onder de hero. */
+const TOOL_LOGOS = [
+  { node: <SiClaude title="Claude" />, title: "Claude" },
+  { node: <SiGooglegemini title="Google Gemini" />, title: "Gemini" },
+  { node: <FaGoogle title="Google Workspace" />, title: "Google Workspace" },
+  { node: <FaMicrosoft title="Microsoft 365" />, title: "Microsoft 365" },
+  { node: <SiHubspot title="HubSpot" />, title: "HubSpot" },
+  { node: <SiZapier title="Zapier" />, title: "Zapier" },
+  { node: <SiMake title="Make" />, title: "Make" },
+  { node: <SiN8N title="n8n" />, title: "n8n" },
+  { node: <FaSlack title="Slack" />, title: "Slack" },
+  { node: <SiNotion title="Notion" />, title: "Notion" },
+  { node: <SiAirtable title="Airtable" />, title: "Airtable" },
+  { node: <SiGmail title="Gmail" />, title: "Gmail" },
+  { node: <SiSupabase title="Supabase" />, title: "Supabase" },
+  { node: <SiStripe title="Stripe" />, title: "Stripe" },
+  { node: <SiWhatsapp title="WhatsApp" />, title: "WhatsApp" },
+  { node: <SiGithub title="GitHub" />, title: "GitHub" },
+];
 
 /* Werkwijze — 4 steps, copy matches the live leadzsystems.nl site. */
 const WERKWIJZE = [
@@ -379,19 +401,19 @@ export default function HeroConcept() {
         </div>
       </header>
 
-      {/* ── Tools: scroll-based velocity marquee ── */}
+      {/* ── Tools: LogoLoop met echte merk-logo's ── */}
       <section className="lz-marquee-band" aria-label="Tools waarmee we koppelen">
         <p className="lz-marquee-label">Koppelt naadloos met de tools die je al gebruikt</p>
-        <ScrollVelocityContainer className="lz-vel">
-          <ScrollVelocityRow baseVelocity={6} direction={1}>
-            {TOOLS.map((t) => (
-              <span className="lz-tool" key={t}>
-                <span className="lz-tool-dot" aria-hidden />
-                {t}
-              </span>
-            ))}
-          </ScrollVelocityRow>
-        </ScrollVelocityContainer>
+        <LogoLoop
+          logos={TOOL_LOGOS}
+          speed={42}
+          direction="left"
+          logoHeight={30}
+          gap={64}
+          fadeOut
+          scaleOnHover
+          ariaLabel="Tools waarmee we koppelen"
+        />
       </section>
 
       {/* ── Diensten ── */}
@@ -936,9 +958,18 @@ const CSS = `
 /* ── Tools: scroll-based velocity marquee ── */
 .lz-marquee-band{ position:relative; z-index:1; padding:var(--sp-5) 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .lz-marquee-label{ text-align:center; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--fog-2); margin-bottom:var(--sp-4); padding:0 var(--edge); }
-.lz-vel{ -webkit-mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-.lz-tool{ display:inline-flex; align-items:center; gap:16px; padding:0 26px; font-family:var(--font-bricolage),sans-serif; font-weight:700; font-size:1.28rem; letter-spacing:-.01em; color:var(--fog); white-space:nowrap; }
-.lz-tool-dot{ width:5px; height:5px; border-radius:2px; background:var(--iris); transform:rotate(45deg); }
+/* LogoLoop (React Bits) — echte merk-logo's, thema-geïntegreerd */
+.lz-marquee-band .logoloop{ position:relative; --logoloop-gap:32px; --logoloop-logoHeight:28px; --logoloop-fadeColorAuto:var(--ink); }
+.lz-marquee-band .logoloop__track{ display:flex; width:max-content; will-change:transform; user-select:none; }
+.lz-marquee-band .logoloop__list{ display:flex; align-items:center; }
+.lz-marquee-band .logoloop__item{ flex:0 0 auto; margin-right:var(--logoloop-gap); font-size:var(--logoloop-logoHeight); line-height:1; }
+.lz-marquee-band .logoloop__item:last-child{ margin-right:var(--logoloop-gap); }
+.lz-marquee-band .logoloop__node{ display:inline-flex; align-items:center; color:color-mix(in srgb, var(--paper) 58%, transparent); transition:color .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1); }
+.lz-marquee-band .logoloop--scale-hover .logoloop__item:hover .logoloop__node{ transform:scale(1.18); color:var(--iris-2); }
+.lz-marquee-band .logoloop--fade::before,
+.lz-marquee-band .logoloop--fade::after{ content:""; position:absolute; top:0; bottom:0; width:clamp(32px,10%,140px); pointer-events:none; z-index:10; }
+.lz-marquee-band .logoloop--fade::before{ left:0; background:linear-gradient(to right, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, rgba(0,0,0,0) 100%); }
+.lz-marquee-band .logoloop--fade::after{ right:0; background:linear-gradient(to left, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, rgba(0,0,0,0) 100%); }
 
 /* ── Section scaffold ── */
 .lz-section{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:var(--sp-7) var(--edge); }
@@ -1203,7 +1234,8 @@ const CSS = `
   .lz-flow-card{ animation:none; }
   .lz-flow-card-connector::after{ animation:none; opacity:1; }
   .lz-reelbox iframe{ animation:none; }
-  .lz-marquee-track{ animation:none; }
+  .lz-marquee-band .logoloop__track{ transform:translate3d(0,0,0)!important; }
+  .lz-marquee-band .logoloop__node{ transition:none!important; }
   .lz-btn,.lz-btn-arrow,.lz-nav-link,.lz-card,.lz-work,.lz-faq-plus,.lz-wa{ transition:none; }
   .lz-burger-bar,.lz-mobile-menu{ transition:none; }
 }
