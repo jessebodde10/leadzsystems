@@ -1163,9 +1163,9 @@ const CSS = `
 .sc-cta{ margin-top:var(--sp-4); }
 
 .lz-light{
-  --ink:#F3F4F7; --ink-2:#EDEFF3;
-  --surface:#ffffff; --surface-2:#ffffff;
-  --line:rgba(16,20,32,.10); --line-2:rgba(16,20,32,.16);
+  --ink:#EFE9DC; --ink-2:#E8E1D1;
+  --surface:#FCFAF5; --surface-2:#FFFFFF;
+  --line:rgba(74,55,20,.15); --line-2:rgba(74,55,20,.24);
   --paper:#14171F; --fog:#525869; --fog-2:#8890A0;
   --iris-2:#A2650E; --mint:#15A34A;
 }
@@ -1173,30 +1173,30 @@ const CSS = `
   background:
     radial-gradient(48% 42% at 12% 0%, color-mix(in srgb, var(--iris) 26%, transparent) 0%, transparent 60%),
     radial-gradient(42% 40% at 92% 6%, color-mix(in srgb, var(--iris) 15%, transparent) 0%, transparent 58%),
-    linear-gradient(180deg,#F8F7F4 0%, #F3F4F7 60%, #F3F4F7 100%);
+    linear-gradient(180deg,#F5F0E5 0%, #EFE9DC 60%, #EFE9DC 100%);
 }
 .lz-light .lz-bg-grain{ opacity:.22; }
 .lz-light .lz-nav-inner{ background:rgba(255,255,255,.74); box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 40px -26px rgba(20,24,40,.35); }
 /* Fully dark logo on light theme — flattens the indigo mark to the same dark as the wordmark */
 .lz-light .lz-logo{ filter:brightness(0); opacity:.92; }
 .lz-light .lz-eyebrow{ background:rgba(20,24,40,.03); }
-.lz-light .lz-flow-card-box{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(20,24,40,.3); }
-.lz-light .lz-flow-card-pill{ background:rgba(20,24,40,.03); border-color:rgba(16,20,32,.08); }
+.lz-light .lz-flow-card-box{ background:linear-gradient(180deg,#FFFFFF 0%,#FBF6EC 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(74,55,20,.4); }
+.lz-light .lz-flow-card-pill{ background:rgba(74,55,20,.04); border-color:rgba(74,55,20,.10); }
 .lz-light .lz-flow-card-pill svg{ color:#0F8A43; }
-.lz-light .lz-card,.lz-light .lz-work{ background:linear-gradient(180deg,#ffffff 0%,#F6F7FA 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -34px rgba(20,24,40,.32); }
-.lz-light .lz-card:hover{ box-shadow:0 1px 0 rgba(255,255,255,1) inset, 0 30px 60px -34px rgba(20,24,40,.4), 0 20px 50px -32px var(--iris-glow); }
+.lz-light .lz-card,.lz-light .lz-work{ background:linear-gradient(180deg,#FFFFFF 0%,#FBF6EC 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 24px 48px -34px rgba(74,55,20,.4); }
+.lz-light .lz-card:hover{ box-shadow:0 1px 0 rgba(255,255,255,1) inset, 0 30px 60px -34px rgba(74,55,20,.5), 0 20px 50px -32px var(--iris-glow); }
 .lz-light .lz-card-list li{ color:#3A4150; }
-.lz-light .lz-chip{ background:rgba(20,24,40,.03); }
-.lz-light .lz-browser{ background:#EDEFF3; }
-.lz-light .lz-dot{ background:#C4C9D4; }
+.lz-light .lz-chip{ background:rgba(74,55,20,.05); }
+.lz-light .lz-browser{ background:#EFEADF; }
+.lz-light .lz-dot{ background:#CFC6B2; }
 .lz-light .lz-preview{ background:#ffffff; }
 .lz-light .lz-iris{ background:linear-gradient(100deg,#B4740E 0%, #E0952B 55%, #A2650E 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .lz-light .lz-about-photo{ background:#E9EBEF; }
 .lz-light .lz-about-img{ mix-blend-mode:normal; }
-.lz-light .lz-cta{ background:linear-gradient(180deg,#ffffff 0%,#F4F5F8 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 40px 80px -50px rgba(20,24,40,.4); }
+.lz-light .lz-cta{ background:linear-gradient(180deg,#FFFFFF 0%,#FBF6EC 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 40px 80px -50px rgba(74,55,20,.42); }
 .lz-light .lz-wa{ box-shadow:0 12px 30px -8px rgba(32,185,90,.45), 0 2px 6px rgba(20,24,40,.15); }
 
 @media(prefers-reduced-motion:reduce){
