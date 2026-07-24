@@ -9,7 +9,6 @@ import {
   SiClaude, SiGooglegemini, SiZapier, SiMake, SiN8N, SiHubspot, SiNotion,
   SiSupabase, SiStripe, SiWhatsapp, SiAirtable, SiGmail, SiGithub,
 } from "react-icons/si";
-import { FaSlack, FaGoogle, FaMicrosoft } from "react-icons/fa6";
 
 /* Merk-wordmarks (aangeleverde SVG's) als monochroom masker: de vorm komt uit het bestand,
    de kleur uit currentColor, zodat ze exact de gedempte→amber huisstijl van de loop volgen.
@@ -31,20 +30,21 @@ const TOOL_LOGOS = [
   { node: <SiClaude title="Claude" />, title: "Claude" },
   { node: <SiGooglegemini title="Google Gemini" />, title: "Gemini" },
   { node: <BrandMark src="/logos/openai.svg" title="OpenAI" ratio={3.688} />, title: "OpenAI" },
-  { node: <FaGoogle title="Google Workspace" />, title: "Google Workspace" },
-  { node: <FaMicrosoft title="Microsoft 365" />, title: "Microsoft 365" },
+  { node: <BrandMark src="/logos/google.svg" title="Google Workspace" ratio={1} />, title: "Google Workspace" },
+  { node: <BrandMark src="/logos/microsoft.svg" title="Microsoft 365" ratio={0.875} />, title: "Microsoft 365" },
   { node: <SiHubspot title="HubSpot" />, title: "HubSpot" },
   { node: <BrandMark src="/logos/pipedrive.svg" title="Pipedrive" ratio={3.76} />, title: "Pipedrive" },
   { node: <SiZapier title="Zapier" />, title: "Zapier" },
   { node: <SiMake title="Make" />, title: "Make" },
   { node: <SiN8N title="n8n" />, title: "n8n" },
   { node: <BrandMark src="/logos/exact.svg" title="Exact" ratio={4.704} />, title: "Exact" },
-  { node: <FaSlack title="Slack" />, title: "Slack" },
+  { node: <BrandMark src="/logos/slack.svg" title="Slack" ratio={0.875} />, title: "Slack" },
   { node: <SiNotion title="Notion" />, title: "Notion" },
   { node: <BrandMark src="/logos/afas.svg" title="AFAS" ratio={2.179} />, title: "AFAS" },
   { node: <SiAirtable title="Airtable" />, title: "Airtable" },
   { node: <SiGmail title="Gmail" />, title: "Gmail" },
   { node: <BrandMark src="/logos/moneybird.svg" title="Moneybird" ratio={6.125} />, title: "Moneybird" },
+  { node: <BrandMark src="/logos/mollie.svg" title="Mollie" ratio={1.5} />, title: "Mollie" },
   { node: <SiSupabase title="Supabase" />, title: "Supabase" },
   { node: <SiStripe title="Stripe" />, title: "Stripe" },
   { node: <SiWhatsapp title="WhatsApp" />, title: "WhatsApp" },
