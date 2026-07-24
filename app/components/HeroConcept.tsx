@@ -1015,7 +1015,9 @@ const CSS = `
 .lz-card-desc{ margin-top:10px; color:var(--fog); font-size:.98rem; line-height:1.65; }
 .lz-card-list{ margin-top:18px; display:flex; flex-direction:column; gap:9px; }
 .lz-card-list li{ display:flex; align-items:flex-start; gap:10px; font-size:.93rem; color:#C4C8D4; line-height:1.45; }
-.lz-tick{ flex:none; margin-top:2px; color:var(--iris); }
+/* Neutraal i.p.v. amber — het zijn lijst-bullets, geen call-to-action; amber blijft zo gereserveerd
+   voor de elementen die echt om aandacht vragen (icoon, stat, link). */
+.lz-tick{ flex:none; margin-top:2px; color:var(--fog); }
 .lz-card-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:20px; padding-top:18px; border-top:1px solid var(--line); }
 .lz-card-more{ margin-top:18px; font-weight:600; font-size:.9rem; color:var(--iris-2); }
 .lz-card:focus-visible{ outline:2px solid var(--iris-2); outline-offset:3px; }
