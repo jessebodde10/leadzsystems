@@ -193,6 +193,7 @@ export default function HeroConcept() {
   const [bg, setBg] = useState<"mesh" | "flow" | "nodes" | "contour" | "dots">("mesh");
   const [menuOpen, setMenuOpen] = useState(false);
   const [workFilter, setWorkFilter] = useState("Alles");
+  const [activeSection, setActiveSection] = useState("");
   // Besparingscalculator — invoer
   const [calcPeople, setCalcPeople] = useState(3);
   const [calcHours, setCalcHours] = useState(8);
@@ -231,6 +232,24 @@ export default function HeroConcept() {
       { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
     );
     els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  // ── Scrollspy: markeert het navlink dat bij de huidige sectie hoort ──
+  useEffect(() => {
+    const ids = ["diensten", "werkwijze", "portfolio", "over-ons"];
+    const sections = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveSection(e.target.id);
+        });
+      },
+      // Smalle band rond het midden van het scherm — de klassieke scrollspy-truc.
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => io.observe(s));
     return () => io.disconnect();
   }, []);
 
@@ -315,29 +334,37 @@ export default function HeroConcept() {
       <nav className="lz-nav">
         <div className="lz-nav-inner">
           <div className="lz-nav-row">
-            <a href="/" className="lz-brand" aria-label="Leadz Systems home">
-              <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="lz-logo" priority />
-            </a>
-            <div className="lz-nav-links">
-              <a href="#diensten" className="lz-nav-link">Diensten</a>
-              <a href="#werkwijze" className="lz-nav-link">Werkwijze</a>
-              <a href="#portfolio" className="lz-nav-link">Portfolio</a>
-              <a href="#over-ons" className="lz-nav-link">Over ons</a>
-              <a href="/nieuws" className="lz-nav-link">Nieuws</a>
+            <div className="lz-nav-left">
+              <a href="/" className="lz-brand" aria-label="Leadz Systems home">
+                <Image src="/logo.png" alt="Leadz Systems" width={1350} height={157} className="lz-logo" priority />
+              </a>
+              <div className="lz-nav-links">
+                {[
+                  ["diensten", "#diensten", "Diensten"],
+                  ["werkwijze", "#werkwijze", "Werkwijze"],
+                  ["portfolio", "#portfolio", "Portfolio"],
+                  ["over-ons", "#over-ons", "Over ons"],
+                ].map(([id, href, label]) => (
+                  <a key={id} href={href} className={`lz-nav-link${activeSection === id ? " is-active" : ""}`}>{label}</a>
+                ))}
+                <a href="/nieuws" className="lz-nav-link">Nieuws</a>
+              </div>
             </div>
-            <a href="#agenda" className="lz-btn lz-btn-primary lz-nav-cta">Plan een AI Scan</a>
-            <button
-              type="button"
-              className="lz-burger"
-              aria-label={menuOpen ? "Menu sluiten" : "Menu openen"}
-              aria-expanded={menuOpen}
-              aria-controls="lz-mobile-menu"
-              onClick={() => setMenuOpen((v) => !v)}
-            >
-              <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--1" : ""}`} />
-              <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--2" : ""}`} />
-              <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--3" : ""}`} />
-            </button>
+            <div className="lz-nav-right">
+              <a href="#agenda" className="lz-btn lz-btn-primary lz-nav-cta">Plan een AI Scan</a>
+              <button
+                type="button"
+                className="lz-burger"
+                aria-label={menuOpen ? "Menu sluiten" : "Menu openen"}
+                aria-expanded={menuOpen}
+                aria-controls="lz-mobile-menu"
+                onClick={() => setMenuOpen((v) => !v)}
+              >
+                <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--1" : ""}`} />
+                <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--2" : ""}`} />
+                <span className={`lz-burger-bar${menuOpen ? " lz-burger-bar--3" : ""}`} />
+              </button>
+            </div>
           </div>
           <div id="lz-mobile-menu" className={`lz-mobile-menu${menuOpen ? " is-open" : ""}`}>
             <div className="lz-mobile-menu-inner">
@@ -888,14 +915,23 @@ const CSS = `
 .lz-nav-inner{ width:100%; max-width:var(--maxw); overflow:hidden; border:1px solid var(--line); border-radius:18px;
   background:rgba(16,18,24,.66); backdrop-filter:blur(14px);
   box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -24px rgba(0,0,0,.9); }
-.lz-nav-row{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5); padding:12px 14px 12px 20px; }
-.lz-brand{ display:flex; align-items:center; border-radius:8px; }
+/* Twee vaste groepen (links / rechts) i.p.v. losse space-between items — voorkomt de
+   ongelijke, "uitgerekte" leegte tussen de laatste navlink en de CTA op brede schermen. */
+.lz-nav-row{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); padding:12px 14px 12px 20px; }
+.lz-nav-left{ display:flex; align-items:center; gap:var(--sp-6); min-width:0; }
+.lz-nav-right{ display:flex; align-items:center; gap:var(--sp-4); }
+.lz-brand{ display:flex; align-items:center; border-radius:8px; flex:none; }
 .lz-brand:focus-visible{ outline:2px solid var(--iris-2); outline-offset:4px; }
 .lz-logo{ height:19px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:.94; }
 .lz-nav-links{ display:none; align-items:center; gap:var(--sp-5); }
-.lz-nav-link{ font-size:14px; color:var(--fog); text-decoration:none; border-radius:6px; transition:color .18s cubic-bezier(.22,1,.36,1); }
+.lz-nav-link{ position:relative; font-size:14px; color:var(--fog); text-decoration:none; border-radius:6px; padding-bottom:4px; transition:color .18s cubic-bezier(.22,1,.36,1); }
 .lz-nav-link:hover{ color:var(--paper); }
 .lz-nav-link:focus-visible{ outline:2px solid var(--iris-2); outline-offset:4px; color:var(--paper); }
+.lz-nav-link::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; border-radius:2px;
+  background:var(--iris); transform:scaleX(0); transform-origin:left; opacity:0;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
+.lz-nav-link.is-active{ color:var(--paper); }
+.lz-nav-link.is-active::after{ transform:scaleX(1); opacity:1; }
 .lz-nav .lz-nav-cta{ display:none; white-space:nowrap; }
 /* Hamburger — mobile only */
 .lz-burger{ display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:42px; height:42px; margin:-6px -8px -6px 0; border-radius:10px; cursor:pointer; background:transparent; border:0; }
