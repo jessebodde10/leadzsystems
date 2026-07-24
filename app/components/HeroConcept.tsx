@@ -1047,11 +1047,16 @@ const CSS = `
 
 /* ── Trust stats band ── */
 .lz-stats-section{ padding-top:var(--sp-5); padding-bottom:var(--sp-5); }
-.lz-stats-band{ display:grid; grid-template-columns:1fr; gap:var(--sp-4); border-block:1px solid var(--line); padding:var(--sp-6) 0; }
-@media(min-width:760px){ .lz-stats-band{ grid-template-columns:repeat(3,1fr); gap:var(--sp-5); } }
-.lz-statbig{ display:flex; flex-direction:column; gap:8px; }
-.lz-statbig-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:clamp(2.4rem,4vw,3.2rem); letter-spacing:-.03em; line-height:1; color:var(--iris-2); }
-.lz-statbig-label{ color:var(--fog); font-size:.98rem; line-height:1.55; max-width:22rem; }
+.lz-stats-band{ display:grid; grid-template-columns:1fr; gap:var(--sp-6); border-block:1px solid var(--line); padding:var(--sp-6) 0; }
+@media(min-width:760px){ .lz-stats-band{ grid-template-columns:repeat(3,1fr); gap:0; } }
+.lz-statbig{ display:flex; flex-direction:column; gap:10px; padding:0 var(--sp-5); }
+@media(min-width:760px){
+  .lz-statbig{ border-left:1px solid var(--line); }
+  .lz-statbig:first-child{ border-left:none; padding-left:0; }
+  .lz-statbig:last-child{ padding-right:0; }
+}
+.lz-statbig-num{ font-family:var(--font-bricolage),sans-serif; font-weight:800; font-size:clamp(2.4rem,4vw,3.2rem); letter-spacing:-.03em; line-height:1; color:var(--iris-2); font-variant-numeric:tabular-nums; }
+.lz-statbig-label{ color:var(--fog); font-size:.95rem; line-height:1.5; max-width:19rem; }
 
 /* ── Portfolio ── */
 .lz-work-grid{ display:grid; grid-template-columns:1fr; gap:var(--sp-4); }
@@ -1249,7 +1254,6 @@ const CSS = `
    gradients that intentionally use the light tint), override text color directly on the
    handful of elements that use --iris-2 as body/label text on the cream background. */
 .lz-light .lz-flow-krijgt-label,
-.lz-light .lz-statbig-num,
 .lz-light .lz-footer-sign-em,
 .lz-light .sc-results-kicker,
 .lz-light .sc-result.is-feat .sc-result-label,
@@ -1258,6 +1262,8 @@ const CSS = `
 .lz-light .lz-work-tag,
 .lz-light .lz-work-link,
 .lz-light .lz-flow-ico{ color:#8A5309; }
+/* Stat-cijfers in het paper-zwart i.p.v. amber — leest rustiger naast de gekleurde labels elders. */
+.lz-light .lz-statbig-num{ color:var(--paper); }
 .lz-light .lz-eyebrow{ background:rgba(20,24,40,.03); }
 .lz-light .lz-flow-card-box{ background:linear-gradient(180deg,#FFFFFF 0%,#FBF6EC 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(74,55,20,.4); }
