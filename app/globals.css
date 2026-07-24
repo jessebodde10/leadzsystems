@@ -279,6 +279,9 @@ body {
 .nws-footer { margin-top: auto; border-top: 1px solid var(--line); }
 .nws-footer { max-width: 1120px; margin-left: auto; margin-right: auto; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 28px 24px; color: var(--faint); font-size: 0.88rem; }
 
+@media (max-width: 859px) {
+  .nws-logo { height: 18px; }
+}
 @media (max-width: 560px) {
   .nws-bar-actions .nws-btn { display: none; }
 }
@@ -318,6 +321,9 @@ body {
 .pg-btn:active { transform: translateY(0); }
 .pg-btn:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
 
+@media (max-width: 859px) {
+  .pg-logo { height: 18px; }
+}
 @media (max-width: 560px) {
   .pg-bar-actions .pg-btn { display: none; }
 }
