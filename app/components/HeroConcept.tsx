@@ -996,7 +996,8 @@ const CSS = `
 .lz-section{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:var(--sp-7) var(--edge); }
 .lz-head{ max-width:640px; margin-bottom:var(--sp-6); }
 .lz-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--font-geist-mono),monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--iris-2); }
-.lz-kicker-dot{ width:6px; height:6px; border-radius:2px; background:var(--iris); box-shadow:0 0 12px 1px var(--iris-glow); transform:rotate(45deg); }
+/* Korte accentstreep i.p.v. het generieke gedraaide bolletje/ruitje — sluit aan bij het lijn-motief van de site. */
+.lz-kicker-dot{ width:14px; height:3px; border-radius:2px; background:linear-gradient(90deg, var(--iris) 0%, var(--iris-2) 100%); box-shadow:0 0 10px 0.5px var(--iris-glow); }
 .lz-h2{ font-family:var(--font-bricolage),sans-serif; font-weight:800; letter-spacing:-.03em; line-height:1.0; font-size:clamp(2.1rem,4.6vw,3.4rem); margin:var(--sp-3) 0 0; }
 .lz-lead{ margin:var(--sp-3) 0 0; color:var(--fog); font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.7; max-width:36rem; }
 
@@ -1225,7 +1226,7 @@ const CSS = `
   --ink:#EFE9DC; --ink-2:#E8E1D1;
   --surface:#FCFAF5; --surface-2:#FFFFFF;
   --line:rgba(74,55,20,.15); --line-2:rgba(74,55,20,.24);
-  --paper:#14171F; --fog:#525869; --fog-2:#8890A0;
+  --paper:#14171F; --fog:#525869; --fog-2:#606878;
   --iris-2:#A2650E; --mint:#15A34A;
 }
 .lz-light .lz-bg-grad{
@@ -1241,6 +1242,22 @@ const CSS = `
 /* Kicker-tekst leest slecht in licht-amber op crème — donkerdere amber-tint voor contrast
    (gelijk aan --accent-text op de subpagina's). Het dot-ruitje blijft fel amber als accent. */
 .lz-light .lz-kicker{ color:#8A5309; }
+/* --iris-2 is also meant to darken in light mode, but the ?p= palette is applied as an
+   inline style on this same root element, and inline styles always win over a class rule
+   for the same custom property — so the light --iris-2 override above never actually takes
+   effect. Rather than force it with !important (which would also dull the amber button
+   gradients that intentionally use the light tint), override text color directly on the
+   handful of elements that use --iris-2 as body/label text on the cream background. */
+.lz-light .lz-flow-krijgt-label,
+.lz-light .lz-statbig-num,
+.lz-light .lz-footer-sign-em,
+.lz-light .sc-results-kicker,
+.lz-light .sc-result.is-feat .sc-result-label,
+.lz-light .lz-card-stat,
+.lz-light .lz-card-more,
+.lz-light .lz-work-tag,
+.lz-light .lz-work-link,
+.lz-light .lz-flow-ico{ color:#8A5309; }
 .lz-light .lz-eyebrow{ background:rgba(20,24,40,.03); }
 .lz-light .lz-flow-card-box{ background:linear-gradient(180deg,#FFFFFF 0%,#FBF6EC 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(74,55,20,.4); }
