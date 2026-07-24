@@ -1238,6 +1238,9 @@ const CSS = `
 .lz-light .lz-nav-inner{ background:rgba(255,255,255,.74); box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 40px -26px rgba(20,24,40,.35); }
 /* Fully dark logo on light theme — flattens the indigo mark to the same dark as the wordmark */
 .lz-light .lz-logo{ filter:brightness(0); opacity:.92; }
+/* Kicker-tekst leest slecht in licht-amber op crème — donkerdere amber-tint voor contrast
+   (gelijk aan --accent-text op de subpagina's). Het dot-ruitje blijft fel amber als accent. */
+.lz-light .lz-kicker{ color:#8A5309; }
 .lz-light .lz-eyebrow{ background:rgba(20,24,40,.03); }
 .lz-light .lz-flow-card-box{ background:linear-gradient(180deg,#FFFFFF 0%,#FBF6EC 100%);
   box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 30px 60px -40px rgba(74,55,20,.4); }
