@@ -3,15 +3,13 @@ import type { NextRequest } from "next/server";
 
 const MAINTENANCE = true; // zet op false om onderhoud uit te zetten
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   if (!MAINTENANCE) return NextResponse.next();
 
   const { pathname } = request.nextUrl;
 
-  // Onderhoudspagina zelf doorlaten, anders loop
   if (pathname.startsWith("/maintenance")) return NextResponse.next();
 
-  // Statische bestanden en Next.js internals doorlaten
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
@@ -26,5 +24,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)"],
 };
